@@ -61,17 +61,17 @@ namespace hci
 
         public MainWindow()
         {
-            ConsoleAllocator.ShowConsoleWindow();
+            //ConsoleAllocator.ShowConsoleWindow();
             //upisi u mysql bazu
             var conn_string = "datasource=127.0.0.1;port=3306;username=root;password=gibanica;database=hci;";
             using (MySqlConnection conn = new MySqlConnection(conn_string)) { 
                 try
                 {
                     conn.Open();
-                    string query = "Insert into tabela (bleja) values (@bleja);";
-                    MySqlCommand commandDatabase = new MySqlCommand(query, conn);
-                    commandDatabase.Parameters.AddWithValue("@bleja", "ratko mladic");
-                    commandDatabase.ExecuteNonQuery();
+                    //string query = "Insert into tabela (bleja) values (@bleja);";
+                    //MySqlCommand commandDatabase = new MySqlCommand(query, conn);
+                    //commandDatabase.Parameters.AddWithValue("@bleja", "ratko mladic");
+                    //commandDatabase.ExecuteNonQuery();
 
                     MySqlDataReader reader;
                     string query2 = "Select * from tabela;";
@@ -101,6 +101,23 @@ namespace hci
             }
 
             InitializeComponent();
+        }
+
+        private void New_OnClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Not yet implemented");
+        }
+
+        // metode za komandu
+
+        private void ExitCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void ExitCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
         }
     }
 }

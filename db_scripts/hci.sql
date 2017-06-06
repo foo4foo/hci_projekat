@@ -1,14 +1,7 @@
 create database if not exists hci;
-create table if not exists hci.softwareInClassroom(
-	classroomId varchar(15) not null,
-	softwareId varchar(15) not null,
-	CONSTRAINT `classroomId_in_softclass`
-	FOREIGN KEY (classroomId) REFERENCES hci.classrooms (classroomId),
-	CONSTRAINT `softId_in_softclass`
-	FOREIGN KEY (softwareId) REFERENCES hci.softwares (softwareId)
-);
+
 create table if not exists hci.classrooms(
-	classroomId varchar(15) unique not null primary key,
+	classroomId varchar(15) not null primary key,
 	description varchar(60) not null,
 	size int(5) not null,
 	haveProjector boolean not null,
@@ -18,12 +11,11 @@ create table if not exists hci.classrooms(
 	softwareId varchar(15) not null,
 	CONSTRAINT `softId_in_classrooms`
 	FOREIGN KEY (softwareId) REFERENCES hci.softwares (softwareId)
-
 );
 
 
 create table if not exists hci.softwares(
-	softwareId varchar(15) unique not null primary key,
+	softwareId varchar(15) not null primary key,
 	name varchar(60) not null,
 	size int(5) not null,
 	operatingSys varchar(15) not null,
@@ -32,6 +24,15 @@ create table if not exists hci.softwares(
 	year int(5) not null,
 	price double not null,
 	description varchar(50) not null
+);
+
+create table if not exists hci.softwareInClassroom(
+	classroomId varchar(15) not null,
+	softwareId varchar(15) not null,
+	CONSTRAINT `classroomId_in_softclass`
+	FOREIGN KEY (classroomId) REFERENCES hci.classrooms (classroomId),
+	CONSTRAINT `softId_in_softclass`
+	FOREIGN KEY (softwareId) REFERENCES hci.softwares (softwareId)
 );
 
 create table if not exists hci.subjects(
@@ -56,9 +57,9 @@ create table if not exists hci.subjects(
 
 
 create table if not exists hci.courses(
-	courseId varchar(15) unique not null primary key,
+	courseId varchar(15) not null primary key,
 	name varchar(60) not null,
-	date varchar(15) not null,
+	date_ varchar(15) not null,
 	description varchar(50) not null
 );
 
