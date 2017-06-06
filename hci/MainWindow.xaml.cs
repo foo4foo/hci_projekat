@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using hci.Database_Manager;
 using MySql.Data.MySqlClient;
 
 namespace hci
@@ -63,8 +64,8 @@ namespace hci
         {
             //ConsoleAllocator.ShowConsoleWindow();
             //upisi u mysql bazu
-            var conn_string = "datasource=127.0.0.1;port=3306;username=root;password=gibanica;database=hci;";
-            using (MySqlConnection conn = new MySqlConnection(conn_string)) { 
+            /*var conn_string = "datasource=127.0.0.1;port=3306;username=root;password=gibanica;database=hci;";
+            using (MySqlConnection conn = new MySqlConnection(conn_string)) {
                 try
                 {
                     conn.Open();
@@ -98,7 +99,7 @@ namespace hci
                 {
                     MessageBox.Show(ex.ToString());
                 }
-            }
+            }*/
 
             InitializeComponent();
         }
@@ -116,6 +117,17 @@ namespace hci
         }
 
         private void ExitCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void DatabaseManagerCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            //var databaseManager = new DatabaseManager();
+            //databaseManager.Show();
+        }
+
+        private void DatabaseManagerCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
         }

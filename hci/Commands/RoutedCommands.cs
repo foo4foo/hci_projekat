@@ -19,5 +19,15 @@ namespace hci.Commands
             }
         );
 
+        public static readonly RoutedUICommand DatabaseManagerCommand = new RoutedUICommand(
+            "Database Manager",
+            "Database Manager",
+            typeof(RoutedCommands),
+            new InputGestureCollection()
+            {
+                new KeyGesture(Key.D, ModifierKeys.Control)
+            }
+        );
+
     }
 }

@@ -4,6 +4,7 @@
         xmlns:cmd="clr-namespace:hci.Commands"
         Title="MainWindow" Height="720" Width="1280">
     <Window.CommandBindings>
+        <CommandBinding Command="cmd:RoutedCommands.DatabaseManagerCommand" CanExecute="DatabaseManagerCommand_CanExecute" Executed="DatabaseManagerCommand_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.ExitCommand" CanExecute="ExitCommand_CanExecute" Executed="ExitCommand_Executed" />
     </Window.CommandBindings>
     <DockPanel>
@@ -15,7 +16,19 @@
                 <Separator />
                 <MenuItem Header="_Exit" Command="cmd:RoutedCommands.ExitCommand" />
             </MenuItem>
+            <MenuItem Header="_Tools">
+                <MenuItem Header="_Database Manager" ToolTip="Insert and edit data.">
+                    <Menu DockPanel.Dock="Bottom">
+                        <MenuItem Header="Add _Classroom" ToolTip="Add classroom"></MenuItem>
+                        <MenuItem Header="Add _Software" ToolTip="Add software"></MenuItem>
+                        <MenuItem Header="Add Cou_rse" ToolTip="Add course"></MenuItem>
+                        <MenuItem Header="Add _Subject" ToolTip="Add subject"></MenuItem>
+                    </Menu>
+                </MenuItem>
+            </MenuItem>
         </Menu>
-        <TextBox AcceptsReturn="True" />
+        <Grid DockPanel.Dock="Bottom" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            
+        </Grid>
     </DockPanel>
 </Window>
