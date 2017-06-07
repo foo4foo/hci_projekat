@@ -1,0 +1,99 @@
+﻿<Window x:Class="hci.Input_Forms.AddClassroom"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:hci.Input_Forms"
+        mc:Ignorable="d"
+        Title="AddClassroom" Height="400" Width="455" ResizeMode="CanMinimize">
+    <Grid DockPanel.Dock="Bottom" Margin="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ShowGridLines="False">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0">Classroom ID:</Label>
+            <Label Grid.Row="1">Description:</Label>
+            <Label Grid.Row="2">Size:</Label>
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBox Name="classroomID" Grid.Row="0" BorderBrush="Black"></TextBox>
+            <TextBox Name="description" Grid.Row="1" BorderBrush="Black"></TextBox>
+            <TextBox Name="size" Grid.Row="2" BorderBrush="Black"></TextBox>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0">Projector:</Label>
+            <Label Grid.Row="1">Board:</Label>
+            <Label Grid.Row="2">Smartboard:</Label>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <ComboBox Name="projector" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" SelectedIndex="0">
+                <ComboBoxItem>Yes</ComboBoxItem>
+                <ComboBoxItem>No</ComboBoxItem>
+            </ComboBox>
+            <ComboBox Name="board" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" SelectedIndex="0">
+                <ComboBoxItem>Yes</ComboBoxItem>
+                <ComboBoxItem>No</ComboBoxItem>
+            </ComboBox>
+            <ComboBox Name="smartboard" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" SelectedIndex="0">
+                <ComboBoxItem>Yes</ComboBoxItem>
+                <ComboBoxItem>No</ComboBoxItem>
+            </ComboBox>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0">Operating system:</Label>
+            <Label Grid.Row="1">Software:</Label>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <ComboBox Name="os" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" SelectedIndex="0">
+                <ComboBoxItem>Windows</ComboBoxItem>
+                <ComboBoxItem>Linux</ComboBoxItem>
+                <ComboBoxItem>All</ComboBoxItem>
+            </ComboBox>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" MaxHeight="20" MaxWidth="80" Name="Ok" ToolTip="Save current input" Content="Ok"  IsDefault="True" Width="60" Height="20"></Button>
+            <Button Grid.Column="1" MaxHeight="20" MaxWidth="80" Name="Cancel" ToolTip="Cancel operation" Content="Cancel" Width="60" Height="20"></Button>
+        </Grid>
+    </Grid>
+</Window>

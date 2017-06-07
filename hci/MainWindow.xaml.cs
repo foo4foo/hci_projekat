@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using hci.Database_Manager;
+using hci.Input_Forms;
 using MySql.Data.MySqlClient;
 
 namespace hci
@@ -121,13 +122,13 @@ namespace hci
             e.CanExecute = true;
         }
 
-        private void DatabaseManagerCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void AddClassroomCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            //var databaseManager = new DatabaseManager();
-            //databaseManager.Show();
+            var addClassroom = new AddClassroom();
+            addClassroom.Show();
         }
 
-        private void DatabaseManagerCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        private void AddClassroomCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
         }

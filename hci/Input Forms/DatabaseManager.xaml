@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:hci.Database_Manager"
         mc:Ignorable="d"
-        Title="DatabaseManager" Height="600" Width="800">
+        Title="DatabaseManager" Height="300" Width="300">
     <Grid DockPanel.Dock="Bottom" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ShowGridLines="True">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>

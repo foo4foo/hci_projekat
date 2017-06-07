@@ -19,13 +19,13 @@ namespace hci.Commands
             }
         );
 
-        public static readonly RoutedUICommand DatabaseManagerCommand = new RoutedUICommand(
-            "Database Manager",
-            "Database Manager",
+        public static readonly RoutedUICommand AddClassroomCommand = new RoutedUICommand(
+            "Add classroom",
+            "Add classroom",
             typeof(RoutedCommands),
             new InputGestureCollection()
             {
-                new KeyGesture(Key.D, ModifierKeys.Control)
+                new KeyGesture(Key.C, ModifierKeys.Alt)
             }
         );
 
