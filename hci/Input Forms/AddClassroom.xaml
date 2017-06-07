@@ -86,6 +86,11 @@
                 <ComboBoxItem>Linux</ComboBoxItem>
                 <ComboBoxItem>All</ComboBoxItem>
             </ComboBox>
+            <ComboBox Name="software" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                      IsReadOnly="True" SelectedIndex="0" ItemsSource="{Binding Path=SoftwaresCollection}" 
+                      DisplayMemberPath="Name">
+                
+            </ComboBox>
         </Grid>
         <Grid Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>

@@ -63,45 +63,7 @@ namespace hci
 
         public MainWindow()
         {
-            //ConsoleAllocator.ShowConsoleWindow();
-            //upisi u mysql bazu
-            /*var conn_string = "datasource=127.0.0.1;port=3306;username=root;password=gibanica;database=hci;";
-            using (MySqlConnection conn = new MySqlConnection(conn_string)) {
-                try
-                {
-                    conn.Open();
-                    //string query = "Insert into tabela (bleja) values (@bleja);";
-                    //MySqlCommand commandDatabase = new MySqlCommand(query, conn);
-                    //commandDatabase.Parameters.AddWithValue("@bleja", "ratko mladic");
-                    //commandDatabase.ExecuteNonQuery();
-
-                    MySqlDataReader reader;
-                    string query2 = "Select * from tabela;";
-                    MySqlCommand command = new MySqlCommand(query2, conn);
-
-                    reader = command.ExecuteReader();
-
-                    if (reader.HasRows)
-                    {
-                        while (reader.Read())
-                        {
-                            Console.WriteLine(reader.GetInt32(0) + " - " + reader.GetString(1));
-                        }
-                    }
-
-                    reader.Close();
-
-                }
-                catch (MySql.Data.MySqlClient.MySqlException ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
-                catch (System.InvalidOperationException ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
-            }*/
-
+           
             InitializeComponent();
         }
 
