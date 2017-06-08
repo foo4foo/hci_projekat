@@ -116,5 +116,16 @@ namespace hci
         {
             e.CanExecute = true;
         }
+
+        private void AddSubjectCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            var subject = new AddSubject();
+            subject.Show();
+        }
+
+        private void AddSubjectCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
     }
 }

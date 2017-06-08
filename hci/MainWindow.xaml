@@ -7,6 +7,7 @@
         <CommandBinding Command="cmd:RoutedCommands.AddClassroomCommand" CanExecute="AddClassroomCommand_CanExecute" Executed="AddClassroomCommand_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.AddSoftwareCommand" CanExecute="AddSoftwareCommand_CanExecute" Executed="AddSoftwareCommand_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.AddCourseCommand" CanExecute="AddCourseCommand_CanExecute" Executed="AddCourseCommand_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.AddSubjectCommand" CanExecute="AddSubjectCommand_CanExecute" Executed="AddSubjectCommand_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.ExitCommand" CanExecute="ExitCommand_CanExecute" Executed="ExitCommand_Executed" />
     </Window.CommandBindings>
     <DockPanel>
@@ -24,7 +25,7 @@
                         <MenuItem Header="Add _Classroom" Command="cmd:RoutedCommands.AddClassroomCommand" ToolTip="Add classroom"></MenuItem>
                         <MenuItem Header="Add _Software" Command="cmd:RoutedCommands.AddSoftwareCommand" ToolTip="Add software"></MenuItem>
                         <MenuItem Header="Add Cou_rse" Command="cmd:RoutedCommands.AddCourseCommand" ToolTip="Add course"></MenuItem>
-                        <MenuItem Header="Add _Subject" ToolTip="Add subject"></MenuItem>
+                        <MenuItem Header="Add _Subject" Command="cmd:RoutedCommands.AddSubjectCommand" ToolTip="Add subject"></MenuItem>
                     </Menu>
                 </MenuItem>
             </MenuItem>

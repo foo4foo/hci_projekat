@@ -1,9 +1,8 @@
 create database if not exists hci;
 
 create table if not exists hci.softwares(
-	softwareId int(15) not null auto_increment primary key,
+	softwareId varchar(15) not null primary key,
 	name varchar(60) not null,
-	size int(5) not null,
 	operatingSys varchar(15) not null,
 	developer varchar(30) not null,
 	site varchar(50) not null,
@@ -24,7 +23,7 @@ create table if not exists hci.classrooms(
 
 create table if not exists hci.softwareInClassroom(
 	classroomId varchar(15) not null,
-	softwareId int(15) not null,
+	softwareId varchar(15) not null,
 	CONSTRAINT `classroomId_in_softclass`
 	FOREIGN KEY (classroomId) REFERENCES hci.classrooms (classroomId),
 	CONSTRAINT `softId_in_softclass`
@@ -32,14 +31,14 @@ create table if not exists hci.softwareInClassroom(
 );
 
 create table if not exists hci.courses(
-	courseId int(15) not null auto_increment primary key,
+	courseId varchar(15) not null primary key,
 	name varchar(60) not null,
 	date_ varchar(15) not null,
 	description varchar(50) not null
 );
 
 create table if not exists hci.subjects(
-	subjectId int(15) not null auto_increment primary key,
+	subjectId varchar(15) not null primary key,
 	name varchar(60) not null,
 	description varchar(50) not null,
 	size int(5) not null,
@@ -49,13 +48,13 @@ create table if not exists hci.subjects(
 	needBoard boolean not null,
 	needSmartBoard boolean not null,
 	needOperatingSys varchar(15) not null,
-	needSoftware int(15) not null,
-	courseId int(15) not null,
+	needSoftware varchar(15) not null,
+	courseId varchar(15) not null,
 	CONSTRAINT `courseId_in_subjects`
 	FOREIGN KEY (courseId) REFERENCES hci.courses (courseId),
 	CONSTRAINT `softId_in_subjects`
 	FOREIGN KEY (needSoftware) REFERENCES hci.softwares (softwareId)
 );
 
-Insert into hci.softwares (name, size, operatingSys, developer, site, year, price, description) values
-("Visual Studio 2017", 15, "Windows 10", "Microsoft", "www.microsoft.com", 2017, 150.50, "IDE");
+Insert into hci.softwares (softwareId, name, operatingSys, developer, site, year, price, description) values
+("VS17","Visual Studio 2017", "Windows 10", "Microsoft", "www.microsoft.com", 2017, 150.50, "IDE");

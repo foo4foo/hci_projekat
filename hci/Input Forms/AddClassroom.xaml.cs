@@ -72,6 +72,7 @@ namespace hci.Input_Forms
             }
             // _-------------_______________----------------___________________
             /* PRODJI PONOVO KROZ OVU kolekciju SoftwaresSelectedCollection i gdeje IsSelected true, upisi u bazu */
+            // ok momak :D 
             // _-------------_______________----------------___________________
             this.Brojevi = new ObservableCollection<int>();
             for (int i = 1; i < 121; i++)
@@ -108,8 +109,17 @@ namespace hci.Input_Forms
             MySqlCommand cmd = new MySqlCommand("insert into hci.classrooms(classroomId,description,size,haveProjector,haveBoard,haveSmartBoard,operatingSys)" 
               +  "values ('" + _id + "','" + _desc + "'," + _size + "," + _projector + "," + _board + "," + _smartBoard + ",'" + _os + "');");
             DatabaseManager db = new DatabaseManager();
-            db.WriteClassroom(cmd);
+            db.ExecuteQuery(cmd);
 
+            foreach (SelectableObject<Software> sftwObject in SoftwaresSelectedCollection)
+                if (sftwObject.IsSelected)
+                {
+                    MySqlCommand cmd2 = new MySqlCommand("insert into hci.softwareInClassroom(classroomId, softwareId) values ('" + _id + "','" + sftwObject.ObjectData.Id + "');");
+                    db.ExecuteQuery(cmd2);
+                    
+                }
+
+            MessageBox.Show("Classroom successfully added!");
             this.Close();
 
         }

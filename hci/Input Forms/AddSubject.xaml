@@ -1,0 +1,149 @@
+﻿<Window x:Class="hci.Input_Forms.AddSubject"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:hci.Input_Forms"
+        xmlns:cmd="clr-namespace:hci.Commands"
+        mc:Ignorable="d"
+        Title="Add Subject" Height="500" Width="455">
+    <Window.CommandBindings>
+        <CommandBinding Command="cmd:RoutedCommands.SubjectAdded" CanExecute="SubjectAdded_CanExecute" Executed="SubjectAdded_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.SubjectClose" CanExecute="SubjectClose_CanExecute" Executed="SubjectClose_Executed"></CommandBinding>
+    </Window.CommandBindings>
+    <Grid DockPanel.Dock="Bottom" Margin="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ShowGridLines="False">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200*"></RowDefinition>
+            <RowDefinition Height="121*"></RowDefinition>
+            <RowDefinition Height="139*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.4*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="0.7*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0"  Height="30">Oznaka predmeta:</Label>
+            <Label Grid.Row="1"  Height="30">Naziv predmeta:</Label>
+            <Label Grid.Row="2"  Height="30">Smer predmeta:</Label>
+            <Label Grid.Row="3">Opis:</Label>
+            <Label Grid.Row="4" Margin="0,0,-70,0" >Veličina grupe za predmet:</Label>
+            <Label Grid.Row="5" Margin="0,0,-70,0" >Minimalna dužina termina:</Label>
+            <Label Grid.Row="6" Margin="0,0,-70,-10" >Broj potrebnih termina:</Label>
+
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBox Name="Id" Grid.Row="0" BorderBrush="Black" Height="20"></TextBox>
+            <TextBox Name="name" Grid.Row="1" BorderBrush="Black" Height="20"></TextBox>
+            <ComboBox Name="Course" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                       IsReadOnly="True" SelectedIndex="0" ItemsSource="{Binding Path=SoftwaresCollection}" 
+                       DisplayMemberPath="Name"/>
+            <TextBox Name="Description" Grid.Row="3" BorderBrush="Black"></TextBox>
+            <ComboBox Name="Size" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"  ItemsSource="{Binding Brojevi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedIndex="0"  >
+            </ComboBox>
+            <ComboBox Name="MinNo" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"  ItemsSource="{Binding Brojevi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedIndex="0"  >
+            </ComboBox>
+            <ComboBox Name="NoOfClasses" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"  ItemsSource="{Binding Brojevi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedIndex="0"  >
+            </ComboBox>
+
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="93*"/>
+                <ColumnDefinition Width="53*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Margin="0,10,0,27" Grid.ColumnSpan="2" Grid.RowSpan="2">Zahteva projektor:</Label>
+            <Label Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5">Zahteva tablu:</Label>
+            <Label Grid.Row="2" Grid.ColumnSpan="2">Zahteva pametnu tablu:</Label>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <ComboBox Name="projector" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" SelectedIndex="0">
+                <ComboBoxItem>Da</ComboBoxItem>
+                <ComboBoxItem>Ne</ComboBoxItem>
+            </ComboBox>
+            <ComboBox Name="board" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" SelectedIndex="0">
+                <ComboBoxItem>Da</ComboBoxItem>
+                <ComboBoxItem>Ne</ComboBoxItem>
+            </ComboBox>
+            <ComboBox Name="smartboard" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" SelectedIndex="0">
+                <ComboBoxItem>Da</ComboBoxItem>
+                <ComboBoxItem>Ne</ComboBoxItem>
+            </ComboBox>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0">Operativni sistem:</Label>
+            <Label Grid.Row="1">Potreban softver:</Label>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <ComboBox Name="os" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True" SelectedIndex="0">
+                <ComboBoxItem>Windows</ComboBoxItem>
+                <ComboBoxItem>Linux</ComboBoxItem>
+                <ComboBoxItem>All</ComboBoxItem>
+            </ComboBox>
+            <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <ComboBox Name="softwares" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                      IsReadOnly="True" Text="Select software" IsEditable="True" ItemsSource="{Binding Path=SoftwaresSelectedCollection}" 
+                      SelectionChanged="OnSftwObjectsSelectionChanged" Width="105">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding IsSelected}" Width="20" 
+                                 VerticalAlignment="Center"  
+                                 Unchecked="OnContentChanged" />
+                                <TextBlock Text="{Binding ObjectData.Name}" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </Grid>
+
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom" Height="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" MaxHeight="20" MaxWidth="80" Name="Ok" ToolTip="Save current input" Content="Ok"  IsDefault="True" Width="60" Height="20" Command="cmd:RoutedCommands.SubjectAdded"></Button>
+            <Button Grid.Column="1" MaxHeight="20" MaxWidth="80" Name="Cancel" ToolTip="Cancel operation" Content="Cancel" Width="60" Height="20"  Command="cmd:RoutedCommands.SubjectClose" ></Button>
+        </Grid>
+
+    </Grid>
+</Window>

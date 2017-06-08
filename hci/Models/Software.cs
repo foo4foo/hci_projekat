@@ -8,7 +8,7 @@ namespace hci.Models
 {
     public class Software
     {
-        public int Id
+        public string Id
         {
             get { return id; }
             set { id = value; }
@@ -26,11 +26,6 @@ namespace hci.Models
             set { developer = value; }
         }
 
-        public int Size
-        {
-            get { return size; }
-            set { size = value; }
-        }
 
         public string Site
         {
@@ -62,18 +57,17 @@ namespace hci.Models
             set { price = value; }
         }
 
-        private int id;
+        private string id;
         private string name;
         private string developer;
         private string site;
         private string description;
         private string os;
         private int year;
-        private int size;
         private double price;
 
-        public Software(int _id, string _name, string _developer, string _site, string _description,
-            string _os, int _year, int _size, double _price)
+        public Software(string _id, string _name, string _developer, string _site, string _description,
+            string _os, int _year, double _price)
         {
             this.id = _id;
             this.name = _name;
@@ -82,7 +76,6 @@ namespace hci.Models
             this.description = _description;
             this.os = _os;
             this.year = _year;
-            this.size = _size;
             this.price = _price;
         }
 
@@ -91,7 +84,7 @@ namespace hci.Models
         public override string ToString()
         {
             return Id + " " + Name + " " + Description + " " + Developer + " " + Os + " " + Year 
-                + " " + Site + " " + Size + " " + Price;
+                + " " + Site + " " + Price;
         }
     }
 }

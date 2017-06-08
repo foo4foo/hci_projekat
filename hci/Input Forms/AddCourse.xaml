@@ -4,8 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:hci.Input_Forms"
+        xmlns:cmd="clr-namespace:hci.Commands"
+        xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         mc:Ignorable="d"
         Title="Add Course" Height="420" Width="455" ResizeMode="CanMinimize">
+    <Window.CommandBindings>
+        <CommandBinding Command="cmd:RoutedCommands.CourseAdded" CanExecute="CourseAdded_CanExecute" Executed="CourseAdded_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.CourseClose" CanExecute="CourseClose_CanExecute" Executed="CourseClose_Executed"></CommandBinding>
+    </Window.CommandBindings>
     <Grid DockPanel.Dock="Bottom" Margin="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -22,20 +28,33 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0">Naziv smera:</Label>
-            <Label Grid.Row="1">Datum uvođenja:</Label>
-            <Label Grid.Row="2">Opis:</Label>
+            <Label Grid.Row="0">Oznaka smera:</Label>
+            <Label Grid.Row="1">Naziv smera:</Label>
+            <Label Grid.Row="2">Datum uvođenja:</Label>
+            <Label Grid.Row="3">Opis:</Label>
         </Grid>
         <Grid Grid.Row="0" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBox Name="name" Grid.Row="0" BorderBrush="Black" Height="20"></TextBox>
-            <TextBox Name="Date" Grid.Row="1" BorderBrush="Black" Height="20"></TextBox>
-            <TextBox Name="Description" Grid.Row="2" BorderBrush="Black"></TextBox>
+            <TextBox Name="Id" Grid.Row="0" BorderBrush="Black" Height="20"></TextBox>
+            <TextBox Name="name" Grid.Row="1" BorderBrush="Black" Height="20"></TextBox>
+            <DatePicker Name="Date" Grid.Row="2" Height="25">
+                <DatePicker.Resources>
+                    <Style TargetType="DatePickerTextBox">
+                        <Setter Property="IsReadOnly" Value="True"/>
+                    </Style>
+                    
+                </DatePicker.Resources>
+            </DatePicker>
+        
+            <TextBox Name="Description" Grid.Row="3" BorderBrush="Black"></TextBox>
+            
 
         </Grid>
         <Grid Grid.Row="1" Grid.Column="0">
@@ -71,8 +90,8 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" MaxHeight="20" MaxWidth="80" Name="Ok" ToolTip="Save current input" Content="Ok"  IsDefault="True" Width="60" Height="20" ></Button>
-            <Button Grid.Column="1" MaxHeight="20" MaxWidth="80" Name="Cancel" ToolTip="Cancel operation" Content="Cancel" Width="60" Height="20" ></Button>
+            <Button Grid.Column="0" MaxHeight="20" MaxWidth="80" Name="Ok" ToolTip="Save current input" Content="Ok"  IsDefault="True" Width="60" Height="20"  Command="cmd:RoutedCommands.CourseAdded"></Button>
+            <Button Grid.Column="1" MaxHeight="20" MaxWidth="80" Name="Cancel" ToolTip="Cancel operation" Content="Cancel" Width="60" Height="20"  Command="cmd:RoutedCommands.CourseAdded"></Button>
         </Grid>
 
     </Grid>

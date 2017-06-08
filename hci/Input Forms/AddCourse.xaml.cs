@@ -1,4 +1,7 @@
-﻿using System;
+﻿using hci.Database_Manager;
+using hci.Models;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,7 +24,43 @@ namespace hci.Input_Forms
     {
         public AddCourse()
         {
+            
             InitializeComponent();
+        }
+
+
+        private void CourseAdded_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            string _id = Id.Text;
+            string _name = name.Text;
+            string _date = Date.Text;
+            string _desc = Description.Text;
+
+            Course c = new Course(_id, _name, _date, _desc);
+
+
+            MySqlCommand cmd = new MySqlCommand("insert into hci.courses(courseId, name, date_, description)"
+              + "values ('" + _id + "','" + _name  + "','" + _date + "','" + _desc + "');");
+            DatabaseManager db = new DatabaseManager();
+            db.ExecuteQuery(cmd);
+            MessageBox.Show("Course successfully added!");
+            this.Close();
+        }
+
+        private void CourseAdded_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void CourseClose_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
+            this.Close();
+        }
+
+        private void CourseClose_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
         }
     }
 }
