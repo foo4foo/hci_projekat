@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:hci.Input_Forms"
         xmlns:cmd="clr-namespace:hci.Commands"
         mc:Ignorable="d"
-        Title="Add Classroom" Height="400" Width="455" ResizeMode="CanMinimize">
+        Title="Add Classroom" Height="420" Width="455" ResizeMode="CanMinimize">
     <Window.CommandBindings>
         <CommandBinding Command="cmd:RoutedCommands.ClassroomAdded" CanExecute="ClassroomAdded_CanExecute" Executed="ClassroomAdded_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.ClassroomClose" CanExecute="ClassroomClose_CanExecute" Executed="ClassroomClose_Executed"></CommandBinding>
@@ -93,11 +93,23 @@
                 <ComboBoxItem>Linux</ComboBoxItem>
                 <ComboBoxItem>All</ComboBoxItem>
             </ComboBox>
-            <ComboBox Name="software" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                      IsReadOnly="True" SelectedIndex="0" ItemsSource="{Binding Path=SoftwaresCollection}" 
-                      DisplayMemberPath="Name">
-                
-            </ComboBox>
+            <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <ComboBox Name="softwares" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                      IsReadOnly="True" ItemsSource="{Binding Path=SoftwaresSelectedCollection}" 
+                      SelectionChanged="OnSftwObjectsSelectionChanged" Width="80">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding IsSelected}" Width="20" 
+                                 VerticalAlignment="Center" Checked="OnSftwObjectCheckBoxChecked" 
+                                 Unchecked="OnContentChanged" />
+                                <TextBlock Text="{Binding ObjectData.Name}" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </Grid>
+            
         </Grid>
         <Grid Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>

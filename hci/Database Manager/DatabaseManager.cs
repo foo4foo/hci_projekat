@@ -19,22 +19,18 @@ namespace hci.Database_Manager
 
         public void WriteClassroom(MySqlCommand cmd)
         {
-            
-           
-
                 //upisi u mysql bazu
                 using (MySqlConnection conn = new MySqlConnection(this.connectionString))
                 {
                     try
                     {
-                    conn.Open();
-                    cmd.Connection = conn;
-                    MySqlDataReader reader;
-                    reader = cmd.ExecuteReader();    
+                        conn.Open();
+                        cmd.Connection = conn;
+                        cmd.ExecuteNonQuery();
 
-                    MessageBox.Show("Classroom successfully added!");
+                        MessageBox.Show("Classroom successfully added!");
 
-                    conn.Close();
+                        conn.Close();
                     }
                     catch (MySql.Data.MySqlClient.MySqlException ex)
                     {
@@ -45,14 +41,9 @@ namespace hci.Database_Manager
                         MessageBox.Show(ex.ToString());
                     }
                 }
-  
-            
         }
     
-
-
-
-public ObservableCollection<Software> GetCollectionSoftwares(MySqlCommand cmd)
+        public ObservableCollection<Software> GetCollectionSoftwares(MySqlCommand cmd)
         {
             var collection = new ObservableCollection<Software>();
 

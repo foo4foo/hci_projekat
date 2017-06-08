@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Classroom.cs" />
+    <Compile Include="Models\SelectableObject.cs" />
     <Compile Include="Models\Software.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
