@@ -49,12 +49,9 @@ namespace hci.Input_Forms
 
         private void OnSftwObjectCheckBoxChecked(object sender, RoutedEventArgs e)
         {
-
-            StringBuilder sb = new StringBuilder();
             foreach (SelectableObject<Software> sftwObject in SoftwaresSelectedCollection)
                 if (sftwObject.IsSelected)
                 {
-                    sb.AppendFormat("{0}, ", sftwObject.ObjectData.Name);
                     Console.WriteLine(sftwObject.ObjectData.Name);
                 }
         }
@@ -65,18 +62,17 @@ namespace hci.Input_Forms
             MainWindow.ConsoleAllocator.ShowConsoleWindow();
             DatabaseManager databaseManager = new DatabaseManager();
             MySqlCommand cmd = new MySqlCommand("Select * from softwares;");
-            //this.SoftwaresCollection = ;
+            this.SoftwaresCollection = databaseManager.GetCollectionSoftwares(cmd);
 
             this.SoftwaresSelectedCollection = new ObservableCollection<SelectableObject<Software>>();
 
-            for (int i = 0; i < databaseManager.GetCollectionSoftwares(cmd).Count; i++)
+            for (int i = 0; i < SoftwaresCollection.Count; i++)
             {
                 this.SoftwaresSelectedCollection.Add(new SelectableObject<Software>(SoftwaresCollection[i], false));
             }
             // _-------------_______________----------------___________________
             /* PRODJI PONOVO KROZ OVU kolekciju SoftwaresSelectedCollection i gdeje IsSelected true, upisi u bazu */
             // _-------------_______________----------------___________________
-
             this.Brojevi = new ObservableCollection<int>();
             for (int i = 1; i < 121; i++)
                 this.Brojevi.Add(i);
