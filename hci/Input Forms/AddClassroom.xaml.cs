@@ -103,7 +103,8 @@ namespace hci.Input_Forms
                 _smartBoard = true;
             else _smartBoard = false;
             ObservableCollection<Software> _software = new ObservableCollection<Software>();
-      
+       
+
             Classroom c = new Classroom(_id, _desc, _size, _projector, _board, _smartBoard, _os, _software);
 
             MySqlCommand cmd = new MySqlCommand("insert into hci.classrooms(classroomId,description,size,haveProjector,haveBoard,haveSmartBoard,operatingSys)" 

@@ -108,6 +108,7 @@
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\SelectableObject.cs" />
     <Compile Include="Models\Software.cs" />
+    <Compile Include="Models\Subject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -48,13 +48,21 @@ create table if not exists hci.subjects(
 	needBoard boolean not null,
 	needSmartBoard boolean not null,
 	needOperatingSys varchar(15) not null,
-	needSoftware varchar(15) not null,
 	courseId varchar(15) not null,
 	CONSTRAINT `courseId_in_subjects`
-	FOREIGN KEY (courseId) REFERENCES hci.courses (courseId),
-	CONSTRAINT `softId_in_subjects`
-	FOREIGN KEY (needSoftware) REFERENCES hci.softwares (softwareId)
+	FOREIGN KEY (courseId) REFERENCES hci.courses (courseId)
+	
 );
+
+create table if not exists hci.softwareInSubject(
+	subjectId varchar(15) not null,
+	softwareId varchar(15) not null,
+	CONSTRAINT `subjectId_in_softsubject`
+	FOREIGN KEY (subjectId) REFERENCES hci.subjects (subjectId),
+	CONSTRAINT `softId_in_softsubject`
+	FOREIGN KEY (softwareId) REFERENCES hci.softwares (softwareId)
+);
+
 
 Insert into hci.softwares (softwareId, name, operatingSys, developer, site, year, price, description) values
 ("VS17","Visual Studio 2017", "Windows 10", "Microsoft", "www.microsoft.com", 2017, 150.50, "IDE");

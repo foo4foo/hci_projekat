@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace hci.Models
 {
-    class Course
+    public class Course
     {
 
         private string id;

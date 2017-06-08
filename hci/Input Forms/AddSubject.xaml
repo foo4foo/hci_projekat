@@ -54,8 +54,8 @@
             <TextBox Name="Id" Grid.Row="0" BorderBrush="Black" Height="20"></TextBox>
             <TextBox Name="name" Grid.Row="1" BorderBrush="Black" Height="20"></TextBox>
             <ComboBox Name="Course" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                       IsReadOnly="True" SelectedIndex="0" ItemsSource="{Binding Path=SoftwaresCollection}" 
-                       DisplayMemberPath="Name"/>
+                       IsReadOnly="True" SelectedIndex="0" ItemsSource="{Binding Path=CourseCollection}" 
+                       DisplayMemberPath="Id"/>
             <TextBox Name="Description" Grid.Row="3" BorderBrush="Black"></TextBox>
             <ComboBox Name="Size" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"  ItemsSource="{Binding Brojevi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedIndex="0"  >
             </ComboBox>
