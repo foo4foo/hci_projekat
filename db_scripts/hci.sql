@@ -19,10 +19,7 @@ create table if not exists hci.classrooms(
 	haveProjector boolean not null,
 	haveBoard boolean not null,
 	haveSmartBoard boolean not null,
-	operatingSys varchar(15) not null,
-	softwareId int(15) not null,
-	CONSTRAINT `softId_in_classrooms`
-	FOREIGN KEY (softwareId) REFERENCES hci.softwares (softwareId)
+	operatingSys varchar(15) not null
 );
 
 create table if not exists hci.softwareInClassroom(
