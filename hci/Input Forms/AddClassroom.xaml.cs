@@ -65,11 +65,11 @@ namespace hci.Input_Forms
             MainWindow.ConsoleAllocator.ShowConsoleWindow();
             DatabaseManager databaseManager = new DatabaseManager();
             MySqlCommand cmd = new MySqlCommand("Select * from softwares;");
-            this.SoftwaresCollection = databaseManager.GetCollectionSoftwares(cmd);
+            //this.SoftwaresCollection = ;
 
             this.SoftwaresSelectedCollection = new ObservableCollection<SelectableObject<Software>>();
 
-            for (int i = 0; i < SoftwaresCollection.Count; i++)
+            for (int i = 0; i < databaseManager.GetCollectionSoftwares(cmd).Count; i++)
             {
                 this.SoftwaresSelectedCollection.Add(new SelectableObject<Software>(SoftwaresCollection[i], false));
             }

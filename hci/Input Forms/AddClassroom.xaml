@@ -95,8 +95,8 @@
             </ComboBox>
             <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <ComboBox Name="softwares" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                      IsReadOnly="True" ItemsSource="{Binding Path=SoftwaresSelectedCollection}" 
-                      SelectionChanged="OnSftwObjectsSelectionChanged" Width="80">
+                      IsReadOnly="True" Text="Select software" IsEditable="True" ItemsSource="{Binding Path=SoftwaresSelectedCollection}" 
+                      SelectionChanged="OnSftwObjectsSelectionChanged" Width="105">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
