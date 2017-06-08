@@ -5,6 +5,8 @@
         Title="MainWindow" Height="720" Width="1280">
     <Window.CommandBindings>
         <CommandBinding Command="cmd:RoutedCommands.AddClassroomCommand" CanExecute="AddClassroomCommand_CanExecute" Executed="AddClassroomCommand_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.AddSoftwareCommand" CanExecute="AddSoftwareCommand_CanExecute" Executed="AddSoftwareCommand_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.AddCourseCommand" CanExecute="AddCourseCommand_CanExecute" Executed="AddCourseCommand_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.ExitCommand" CanExecute="ExitCommand_CanExecute" Executed="ExitCommand_Executed" />
     </Window.CommandBindings>
     <DockPanel>
@@ -20,8 +22,8 @@
                 <MenuItem Header="_Database Manager" ToolTip="Insert and edit data.">
                     <Menu DockPanel.Dock="Bottom">
                         <MenuItem Header="Add _Classroom" Command="cmd:RoutedCommands.AddClassroomCommand" ToolTip="Add classroom"></MenuItem>
-                        <MenuItem Header="Add _Software" ToolTip="Add software"></MenuItem>
-                        <MenuItem Header="Add Cou_rse" ToolTip="Add course"></MenuItem>
+                        <MenuItem Header="Add _Software" Command="cmd:RoutedCommands.AddSoftwareCommand" ToolTip="Add software"></MenuItem>
+                        <MenuItem Header="Add Cou_rse" Command="cmd:RoutedCommands.AddCourseCommand" ToolTip="Add course"></MenuItem>
                         <MenuItem Header="Add _Subject" ToolTip="Add subject"></MenuItem>
                     </Menu>
                 </MenuItem>

@@ -39,8 +39,26 @@ namespace hci.Commands
         "Close add-classroom window",
         "Close add-classroom window",
         typeof(RoutedCommands)
-    );
+       );
 
+        public static readonly RoutedUICommand AddSoftwareCommand = new RoutedUICommand(
+             "Add software",
+             "Add software",
+             typeof(RoutedCommands),
+             new InputGestureCollection()
+             {
+                new KeyGesture(Key.S, ModifierKeys.Alt)
+             }
+         );
 
+        public static readonly RoutedUICommand AddCourseCommand = new RoutedUICommand(
+             "Add course",
+             "Add course",
+             typeof(RoutedCommands),
+             new InputGestureCollection()
+             {
+                new KeyGesture(Key.R, ModifierKeys.Alt)
+             }
+         );
     }
 }

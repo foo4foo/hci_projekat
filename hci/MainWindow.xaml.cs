@@ -94,5 +94,27 @@ namespace hci
         {
             e.CanExecute = true;
         }
+
+        private void AddSoftwareCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            var addSoftware = new AddSoftware();
+            addSoftware.Show();
+        }
+
+        private void AddSoftwareCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void AddCourseCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            var course = new AddCourse();
+            course.Show();
+        }
+
+        private void AddCourseCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
     }
 }

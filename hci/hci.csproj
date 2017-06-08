@@ -61,6 +61,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Input Forms\AddSoftware.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Input Forms\AddCourse.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -73,6 +81,12 @@
     <Compile Include="Database Manager\DatabaseManager.cs" />
     <Compile Include="Input Forms\AddClassroom.xaml.cs">
       <DependentUpon>AddClassroom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input Forms\AddSoftware.xaml.cs">
+      <DependentUpon>AddSoftware.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input Forms\AddCourse.xaml.cs">
+      <DependentUpon>AddCourse.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
