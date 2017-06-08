@@ -29,17 +29,78 @@ namespace hci.Input_Forms
             get;
             set;
         }
+        public ObservableCollection<int> Brojevi
+        {
+            get;
+            set;
+        } 
+    
+
 
         public AddClassroom()
         {
             this.DataContext = this;
-            // MainWindow.ConsoleAllocator.ShowConsoleWindow();
+            MainWindow.ConsoleAllocator.ShowConsoleWindow();
             DatabaseManager databaseManager = new DatabaseManager();
             MySqlCommand cmd = new MySqlCommand("Select * from softwares;");
             this.SoftwaresCollection = databaseManager.GetCollectionSoftwares(cmd);
-
+            this.Brojevi = new ObservableCollection<int>();
+            for (int i = 1; i < 121; i++)
+                this.Brojevi.Add(i);
+      
             InitializeComponent();
         }
+
+        private void ClassroomAdded_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            string _id = classroomID.Text;
+            string _desc = description.Text;
+            int _size = Int32.Parse(size.Text);
+            string _os = os.Text;
+
+            bool _projector;
+            if (projector.Text.Equals("Yes"))
+                _projector = true;
+            else _projector = false;
+
+            bool _board;
+            if (board.Text.Equals("Yes"))
+                _board = true;
+            else _board = false;
+
+            bool _smartBoard;
+            if (smartboard.Text.Equals("Yes"))
+                _smartBoard = true;
+            else _smartBoard = false;
+            ObservableCollection<Software> _software = new ObservableCollection<Software>();
+      
+            Classroom c = new Classroom(_id, _desc, _size, _projector, _board, _smartBoard, _os, _software);
+
+            MySqlCommand cmd = new MySqlCommand("insert into hci.classrooms(classroomId,description,size,haveProjector,haveBoard,haveSmartBoard,operatingSys)" 
+              +  "values ('" + _id + "','" + _desc + "'," + _size + "," + _projector + "," + _board + "," + _smartBoard + ",'" + _os + "');");
+            DatabaseManager db = new DatabaseManager();
+            db.WriteClassroom(cmd);
+
+            this.Close();
+
+        }
+
+        private void ClassroomAdded_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void ClassroomClose_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
+            this.Close();
+        }
+
+        private void ClassroomClose_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
 
         #region PropertyChangedNotifier
         protected virtual void OnPropertyChanged(string name)

@@ -17,7 +17,42 @@ namespace hci.Database_Manager
 
         public DatabaseManager() { }
 
-        public ObservableCollection<Software> GetCollectionSoftwares(MySqlCommand cmd)
+        public void WriteClassroom(MySqlCommand cmd)
+        {
+            
+           
+
+                //upisi u mysql bazu
+                using (MySqlConnection conn = new MySqlConnection(this.connectionString))
+                {
+                    try
+                    {
+                    conn.Open();
+                    cmd.Connection = conn;
+                    MySqlDataReader reader;
+                    reader = cmd.ExecuteReader();    
+
+                    MessageBox.Show("Classroom successfully added!");
+
+                    conn.Close();
+                    }
+                    catch (MySql.Data.MySqlClient.MySqlException ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                    catch (System.InvalidOperationException ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+                }
+  
+            
+        }
+    
+
+
+
+public ObservableCollection<Software> GetCollectionSoftwares(MySqlCommand cmd)
         {
             var collection = new ObservableCollection<Software>();
 

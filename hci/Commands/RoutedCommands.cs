@@ -29,5 +29,18 @@ namespace hci.Commands
             }
         );
 
+        public static readonly RoutedUICommand ClassroomAdded = new RoutedUICommand(
+           "Add classroom",
+           "Add classroom",
+           typeof(RoutedCommands)
+       );
+
+        public static readonly RoutedUICommand ClassroomClose = new RoutedUICommand(
+        "Close add-classroom window",
+        "Close add-classroom window",
+        typeof(RoutedCommands)
+    );
+
+
     }
 }

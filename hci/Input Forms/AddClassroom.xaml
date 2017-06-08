@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:hci.Input_Forms"
+        xmlns:cmd="clr-namespace:hci.Commands"
         mc:Ignorable="d"
-        Title="AddClassroom" Height="400" Width="455" ResizeMode="CanMinimize">
+        Title="Add Classroom" Height="400" Width="455" ResizeMode="CanMinimize">
+    <Window.CommandBindings>
+        <CommandBinding Command="cmd:RoutedCommands.ClassroomAdded" CanExecute="ClassroomAdded_CanExecute" Executed="ClassroomAdded_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.ClassroomClose" CanExecute="ClassroomClose_CanExecute" Executed="ClassroomClose_Executed"></CommandBinding>
+    </Window.CommandBindings>
     <Grid DockPanel.Dock="Bottom" Margin="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -13,9 +18,9 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1.4*"></ColumnDefinition>
             <ColumnDefinition Width="2*"></ColumnDefinition>
-            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="0.7*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" Grid.Column="0">
             <Grid.RowDefinitions>
@@ -23,9 +28,9 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0">Classroom ID:</Label>
+            <Label Grid.Row="0"  Height="30">Classroom ID:</Label>
             <Label Grid.Row="1">Description:</Label>
-            <Label Grid.Row="2">Size:</Label>
+            <Label Grid.Row="2"  Height="25" >Size (No. of computers):</Label>
         </Grid>
         <Grid Grid.Row="0" Grid.Column="1">
             <Grid.RowDefinitions>
@@ -33,9 +38,11 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBox Name="classroomID" Grid.Row="0" BorderBrush="Black"></TextBox>
+            <TextBox Name="classroomID" Grid.Row="0" BorderBrush="Black" Height="20"></TextBox>
             <TextBox Name="description" Grid.Row="1" BorderBrush="Black"></TextBox>
-            <TextBox Name="size" Grid.Row="2" BorderBrush="Black"></TextBox>
+            <ComboBox Name="size" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"  ItemsSource="{Binding Brojevi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedIndex="0"  >
+            </ComboBox>
+           
         </Grid>
         <Grid Grid.Row="1" Grid.Column="0">
             <Grid.RowDefinitions>
@@ -97,8 +104,9 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" MaxHeight="20" MaxWidth="80" Name="Ok" ToolTip="Save current input" Content="Ok"  IsDefault="True" Width="60" Height="20"></Button>
-            <Button Grid.Column="1" MaxHeight="20" MaxWidth="80" Name="Cancel" ToolTip="Cancel operation" Content="Cancel" Width="60" Height="20"></Button>
+            <Button Grid.Column="0" MaxHeight="20" MaxWidth="80" Name="Ok" ToolTip="Save current input" Content="Ok"  IsDefault="True" Width="60" Height="20" Command="cmd:RoutedCommands.ClassroomAdded"></Button>
+            <Button Grid.Column="1" MaxHeight="20" MaxWidth="80" Name="Cancel" ToolTip="Cancel operation" Content="Cancel" Width="60" Height="20"  Command="cmd:RoutedCommands.ClassroomClose" ></Button>
         </Grid>
+     
     </Grid>
 </Window>
