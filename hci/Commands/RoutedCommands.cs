@@ -111,7 +111,44 @@ namespace hci.Commands
          typeof(RoutedCommands)
      );
 
+        public static readonly RoutedUICommand ViewSoftwareCommand = new RoutedUICommand(
+                "View software",
+                "View software",
+                typeof(RoutedCommands),
+                new InputGestureCollection()
+                {
+                new KeyGesture(Key.W, ModifierKeys.Control)
+                }
+        );
 
+        public static readonly RoutedUICommand ViewCoursesCommand = new RoutedUICommand(
+                "View courses",
+                "View courses",
+                typeof(RoutedCommands),
+                new InputGestureCollection()
+                {
+                new KeyGesture(Key.E, ModifierKeys.Control)
+                }
+        );
 
+        public static readonly RoutedUICommand ViewSubjectsCommand = new RoutedUICommand(
+                "View subjects",
+                "View subjects",
+                typeof(RoutedCommands),
+                new InputGestureCollection()
+                {
+                new KeyGesture(Key.P, ModifierKeys.Control)
+                }
+        );
+
+        public static readonly RoutedUICommand ViewClassroomsCommand = new RoutedUICommand(
+                "View classrooms",
+                "View classrooms",
+                typeof(RoutedCommands),
+                new InputGestureCollection()
+                {
+                new KeyGesture(Key.U, ModifierKeys.Control)
+                }
+        );
     }
 }

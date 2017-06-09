@@ -2,6 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:cmd="clr-namespace:hci.Commands"
+        xmlns:data="clr-namespace:System.Data;assembly=System.Data"
         Title="HCI Projekat" Height="720" Width="1280">
     <Window.CommandBindings>
         <CommandBinding Command="cmd:RoutedCommands.AddClassroomCommand" CanExecute="AddClassroomCommand_CanExecute" Executed="AddClassroomCommand_Executed"></CommandBinding>
@@ -9,11 +10,15 @@
         <CommandBinding Command="cmd:RoutedCommands.AddCourseCommand" CanExecute="AddCourseCommand_CanExecute" Executed="AddCourseCommand_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.AddSubjectCommand" CanExecute="AddSubjectCommand_CanExecute" Executed="AddSubjectCommand_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.ExitCommand" CanExecute="ExitCommand_CanExecute" Executed="ExitCommand_Executed" />
+        <CommandBinding Command="cmd:RoutedCommands.ViewClassroomsCommand" CanExecute="ViewClassrooms_CanExecute" Executed="ViewClassroomsCommand_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.ViewCoursesCommand" CanExecute="ViewCourses_CanExecute" Executed="ViewCoursesCommand_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.ViewSoftwareCommand" CanExecute="ViewSoftware_CanExecute" Executed="ViewSoftwareCommand_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.ViewSubjectsCommand" CanExecute="ViewSubjects_CanExecute" Executed="ViewSubjectsCommand_Executed"></CommandBinding>
     </Window.CommandBindings>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Datoteka">
-                <MenuItem Header="_Dodaj" >
+                <MenuItem Header="_Dodaj">
                     <MenuItem Header="_Učionicu" Command="cmd:RoutedCommands.AddClassroomCommand" ToolTip="Dodaj novu učionicu"></MenuItem>
                         <MenuItem Header="_Softver" Command="cmd:RoutedCommands.AddSoftwareCommand" ToolTip="Dodaj novi softver"></MenuItem>
                         <MenuItem Header="_Smer" Command="cmd:RoutedCommands.AddCourseCommand" ToolTip="Dodaj novi smer"></MenuItem>
@@ -24,6 +29,12 @@
                 <Separator />
                 <MenuItem Header="_Napusti program" Command="cmd:RoutedCommands.ExitCommand" />
             </MenuItem>
+            <MenuItem Header="P_rikaz" ToolTip="Prikaz odabranog tipa podatka u tabeli">
+                <MenuItem Header="_Učionice" Command="cmd:RoutedCommands.ViewClassroomsCommand" ToolTip="Prikaz svih učionica"></MenuItem>
+                <MenuItem Header="_Predmeti" Command="cmd:RoutedCommands.ViewSubjectsCommand" ToolTip="Prikaz svih predmeta"></MenuItem>
+                <MenuItem Header="_Smerovi" Command="cmd:RoutedCommands.ViewCoursesCommand" ToolTip="Prikaz svih smerova"></MenuItem>
+                <MenuItem Header="S_oftver" Command="cmd:RoutedCommands.ViewSoftwareCommand" ToolTip="Prikaz dostupnog softvera"></MenuItem>
+            </MenuItem>
             <MenuItem Header="_Pomoć">
                 <MenuItem Header="_Demonstracioni mod" ToolTip="Pokreni demo mod"/>
                 <Separator />
@@ -32,11 +43,19 @@
         </Menu>
         <Grid DockPanel.Dock="Bottom" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*"/>
-                <ColumnDefinition Width="7*"/>
-                <ColumnDefinition Width="307*"/>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <DataGrid x:Name="dataGrid" Grid.Row="0" IsReadOnly="True">
+                    
+                </DataGrid>
+                
+            </Grid>
         </Grid>
     </DockPanel>
 </Window>

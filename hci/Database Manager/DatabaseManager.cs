@@ -43,6 +43,63 @@ namespace hci.Database_Manager
                 }
         }
 
+        public List<Dictionary<string, string>> GetClassroomsSoftware(MySqlCommand cmd)
+        {
+            var lista = new List<Dictionary<string, string>>();
+
+            using (MySqlConnection conn = new MySqlConnection(this.connectionString))
+            {
+                try
+                {
+                    conn.Open();
+
+
+                    MySqlDataReader reader;
+                    cmd.Connection = conn;
+
+                    reader = cmd.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            if (!reader.IsDBNull(0))
+                            {
+                                Dictionary<string, string> dict = new Dictionary<string, string>();
+                                dict["classroomId"] = reader.GetString(0);
+                                dict["softwareId"] = reader.GetString(1);
+                                dict["softwareName"] = reader.GetString(2);
+                                dict["softwareOs"] = reader.GetString(3);
+                                dict["softwareDeveloper"] = reader.GetString(4);
+                                dict["softwareSite"] = reader.GetString(5);
+                                dict["softwareYear"] = reader.GetString(6);
+                                dict["softwarePrice"] = reader.GetString(7);
+                                dict["softwareDescription"] = reader.GetString(8);
+
+                                lista.Add(dict);
+                            }
+                        }
+                    }
+
+                    reader.Close();
+
+                }
+                catch (MySql.Data.MySqlClient.MySqlException ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                catch (System.InvalidOperationException ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                catch (System.Data.SqlTypes.SqlNullValueException ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+
+            return lista;
+        }
 
         public ObservableCollection<Course> GetCollectionCourses(MySqlCommand cmd)
         {

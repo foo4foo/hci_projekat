@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:hci.Input_Forms"
         xmlns:cmd="clr-namespace:hci.Commands"
-        xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         mc:Ignorable="d"
         Title="Dodavanje smera" Height="420" Width="455" ResizeMode="CanMinimize">
     <Window.CommandBindings>
