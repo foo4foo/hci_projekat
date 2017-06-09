@@ -40,7 +40,7 @@
             </Grid.RowDefinitions>
             <TextBox Name="classroomID" Grid.Row="0" BorderBrush="Black" Height="20"></TextBox>
             <TextBox Name="description" Grid.Row="1" BorderBrush="Black"></TextBox>
-            <ComboBox Name="size" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"  ItemsSource="{Binding Brojevi, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  SelectedIndex="0"  >
+            <ComboBox Name="size" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" IsReadOnly="True"  ItemsSource="{Binding Path=Brojevi}"  SelectedIndex="15"  >
             </ComboBox>
            
         </Grid>

@@ -19,11 +19,7 @@ namespace hci.Models
         private string operatingSys;
         private ObservableCollection<string> testS = new ObservableCollection<string>();
 
-        public ObservableCollection<string> TestS
-        {
-            get { return testS; }
-            set { testS = value; }
-        }
+      
 
         private ObservableCollection<Software> softwares = new ObservableCollection<Software>();
 
@@ -40,7 +36,11 @@ namespace hci.Models
             }
         }
 
-      
+        public ObservableCollection<string> TestS
+        {
+            get { return testS; }
+            set { testS = value; }
+        }
 
         public string Description
         {

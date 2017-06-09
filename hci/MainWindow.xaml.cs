@@ -37,6 +37,9 @@ namespace hci
 
         private DatabaseManager db;
 
+        public ObservableCollection<string> Lista { get; set; }
+        
+        
         internal static class ConsoleAllocator
         {
             [DllImport(@"kernel32.dll", SetLastError = true)]
@@ -76,8 +79,14 @@ namespace hci
 
         public MainWindow()
         {
+            this.DataContext = this;
+            Lista = new ObservableCollection<string>();
+            Lista.Add("miso");
+            Lista.Add("pero");
+           
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             ConsoleAllocator.ShowConsoleWindow();
+         
             db = new DatabaseManager();
             InitializeComponent();
         }
@@ -121,6 +130,7 @@ namespace hci
             }
 
             dataGrid.ItemsSource = this.classrooms;
+           // lista.ItemsSource = 
         }
 
         private void ViewClassrooms_CanExecute(object sender, CanExecuteRoutedEventArgs e)
