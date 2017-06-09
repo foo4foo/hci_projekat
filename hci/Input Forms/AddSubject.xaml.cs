@@ -55,8 +55,9 @@ namespace hci.Input_Forms
 
         public AddSubject()
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             this.DataContext = this;
-            MainWindow.ConsoleAllocator.ShowConsoleWindow();
+           // MainWindow.ConsoleAllocator.ShowConsoleWindow();
             DatabaseManager databaseManager = new DatabaseManager();
             MySqlCommand allSoftware = new MySqlCommand("Select * from softwares;");
             MySqlCommand allCourses = new MySqlCommand("Select * from courses;");
@@ -80,6 +81,8 @@ namespace hci.Input_Forms
         {
 
 
+            DatabaseManager db = new DatabaseManager();
+
             string _id = Id.Text;
             string _name = name.Text;
             string _desc = Description.Text;
@@ -87,51 +90,76 @@ namespace hci.Input_Forms
             string _os = os.Text;
 
             bool _projector;
-            if (projector.Text.Equals("Yes"))
+            if (projector.Text.Equals("Da"))
                 _projector = true;
             else _projector = false;
 
             bool _board;
-            if (board.Text.Equals("Yes"))
+            if (board.Text.Equals("Da"))
                 _board = true;
             else _board = false;
 
             bool _smartBoard;
-            if (smartboard.Text.Equals("Yes"))
+            if (smartboard.Text.Equals("Da"))
                 _smartBoard = true;
             else _smartBoard = false;
 
             int minLength = Int32.Parse(MinNo.Text);
             int noOfClasses = Int32.Parse(NoOfClasses.Text);
-            Course c = new Course();
-            foreach(var kurs in CourseCollection)
+
+            bool ok = true;
+            ObservableCollection<Subject> subjects = db.GetCollectionSubjects(new MySqlCommand("Select * from subjects;"));
+            foreach(var subject in subjects)
             {
-                if (kurs.Id.Equals(Course.Text))
+                if (String.IsNullOrEmpty(_id) || String.IsNullOrEmpty(_desc) || String.IsNullOrEmpty(_name))
                 {
-                    c = kurs;
+                    MessageBox.Show("Greška u dodavanju! Popunite sva polja.");
+                    ok = false;
+                    break;
+                }
+
+                if (subject.Id.Equals(_id))
+                {
+                    MessageBox.Show("Greška! Uneta oznaka predmeta već postoji!");
+                    ok = false;
+                    break;
                 }
             }
-            ObservableCollection<Software> _softwares = new ObservableCollection<Software>();
 
-            Subject s = new Subject(_id, _name, _desc, _size, minLength, noOfClasses, _projector, _board, _smartBoard, _os, c, _softwares);
-
-            MySqlCommand cmd = new MySqlCommand("insert into hci.subjects(subjectId,name,description,size,minLength,noOfClasses,needProjector,needBoard,needSmartBoard,needOperatingSys, courseId)"
-              + "values ('" + _id + "','" + _name + "','" + _desc + "'," + _size + "," + minLength + "," + noOfClasses + "," + _projector + "," + _board + "," + _smartBoard + ",'" + _os +  "','" + Course.Text + "');");
-            DatabaseManager db = new DatabaseManager();
-            db.ExecuteQuery(cmd);
-
-            foreach (SelectableObject<Software> sftwObject in SoftwaresSelectedCollection)
-                if (sftwObject.IsSelected)
+            if (ok)
+            {
+               
+                Course c = new Course();
+                foreach (var kurs in CourseCollection)
                 {
-                    MySqlCommand cmd2 = new MySqlCommand("insert into hci.softwareInSubject(subjectId, softwareId) values ('" + _id + "','" + sftwObject.ObjectData.Id + "');");
-                    db.ExecuteQuery(cmd2);
-
+                    if (kurs.Name.Equals(Course.Text))
+                    {
+                        c = kurs;
+                    }
                 }
+                ObservableCollection<Software> _softwares = new ObservableCollection<Software>();
+
+                MySqlCommand cmd = new MySqlCommand("insert into hci.subjects(subjectId,name,description,size,minLength,noOfClasses,needProjector,needBoard,needSmartBoard,needOperatingSys, courseId)"
+                  + "values ('" + _id + "','" + _name + "','" + _desc + "'," + _size + "," + minLength + "," + noOfClasses + "," + _projector + "," + _board + "," + _smartBoard + ",'" + _os + "','" + c.Id + "');");
+
+                db.ExecuteQuery(cmd);
+
+                foreach (SelectableObject<Software> sftwObject in SoftwaresSelectedCollection)
+                    if (sftwObject.IsSelected)
+                    {
+                        _softwares.Add(sftwObject.ObjectData);
+                        Console.WriteLine(sftwObject.ObjectData.ToString());
+                        MySqlCommand cmd2 = new MySqlCommand("insert into hci.softwareInSubject(subjectId, softwareId) values ('" + _id + "','" + sftwObject.ObjectData.Id + "');");
+                        db.ExecuteQuery(cmd2);
+
+                    }
 
 
-            MessageBox.Show("Subject successfully added!");
-            this.Close();
+                Subject s = new Subject(_id, _name, _desc, _size, minLength, noOfClasses, _projector, _board, _smartBoard, _os, c, _softwares);
 
+                MessageBox.Show("Subject successfully added!");
+                this.Close();
+            }
         }
 
         private void SubjectAdded_CanExecute(object sender, CanExecuteRoutedEventArgs e)

@@ -194,5 +194,7 @@ namespace hci.Models
             this.Smer = smer;
             this.Softwares = softwares;
         }
+
+        public Subject() { }
     }  
 }   

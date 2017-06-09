@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace hci.Models
 {
-    class Classroom
+    public class Classroom
     {
     
         private string id;
@@ -133,7 +133,6 @@ namespace hci.Models
         public Classroom(string id, string description, int size, bool haveProjector, bool haveBoard, bool haveSmartBoard, string operatingSys, ObservableCollection<Software> softwares)
         {
             this.Id = id;
- 
             this.Description = description;
             this.Size = size;
             this.HaveProjector = haveProjector;
@@ -142,7 +141,8 @@ namespace hci.Models
             this.OperatingSys = operatingSys;
             this.Softwares = softwares;
         }
-
+           
+        public Classroom() { }
    
     }
 }

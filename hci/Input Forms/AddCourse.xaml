@@ -7,7 +7,7 @@
         xmlns:cmd="clr-namespace:hci.Commands"
         xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         mc:Ignorable="d"
-        Title="Add Course" Height="420" Width="455" ResizeMode="CanMinimize">
+        Title="Dodavanje smera" Height="420" Width="455" ResizeMode="CanMinimize">
     <Window.CommandBindings>
         <CommandBinding Command="cmd:RoutedCommands.CourseAdded" CanExecute="CourseAdded_CanExecute" Executed="CourseAdded_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.CourseClose" CanExecute="CourseClose_CanExecute" Executed="CourseClose_Executed"></CommandBinding>
@@ -44,13 +44,15 @@
             </Grid.RowDefinitions>
             <TextBox Name="Id" Grid.Row="0" BorderBrush="Black" Height="20"></TextBox>
             <TextBox Name="name" Grid.Row="1" BorderBrush="Black" Height="20"></TextBox>
-            <DatePicker Name="Date" Grid.Row="2" Height="25">
+            <DatePicker Name="Date" Grid.Row="2" Height="25"  >
                 <DatePicker.Resources>
-                    <Style TargetType="DatePickerTextBox">
+                    <Style TargetType="DatePickerTextBox" >
                         <Setter Property="IsReadOnly" Value="True"/>
+                        <Setter Property="Text" Value="Odaberite datum"/>
                     </Style>
                     
                 </DatePicker.Resources>
+                
             </DatePicker>
         
             <TextBox Name="Description" Grid.Row="3" BorderBrush="Black"></TextBox>
@@ -90,8 +92,8 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" MaxHeight="20" MaxWidth="80" Name="Ok" ToolTip="Save current input" Content="Ok"  IsDefault="True" Width="60" Height="20"  Command="cmd:RoutedCommands.CourseAdded"></Button>
-            <Button Grid.Column="1" MaxHeight="20" MaxWidth="80" Name="Cancel" ToolTip="Cancel operation" Content="Cancel" Width="60" Height="20"  Command="cmd:RoutedCommands.CourseAdded"></Button>
+            <Button Grid.Column="0" MaxHeight="20" MaxWidth="80" Name="Ok" ToolTip="Save current input" Content="Dodaj"  IsDefault="True" Width="60" Height="20"  Command="cmd:RoutedCommands.CourseAdded"></Button>
+            <Button Grid.Column="1" MaxHeight="20" MaxWidth="80" Name="Cancel" ToolTip="Cancel operation" Content="Izađi" Width="60" Height="20"  Command="cmd:RoutedCommands.CourseClose"></Button>
         </Grid>
 
     </Grid>

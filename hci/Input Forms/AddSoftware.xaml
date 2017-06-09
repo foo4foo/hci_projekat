@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:hci.Input_Forms"
         xmlns:cmd="clr-namespace:hci.Commands"
         mc:Ignorable="d"
-        Title="Add Software" Height="420" Width="455" ResizeMode="CanMinimize">
+        Title="Dodavanje softvera" Height="420" Width="455" ResizeMode="CanMinimize">
     <Window.CommandBindings>
         <CommandBinding Command="cmd:RoutedCommands.SoftwareAdded" CanExecute="SoftwareAdded_CanExecute" Executed="SoftwareAdded_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.SoftwareClose" CanExecute="SoftwareClose_CanExecute" Executed="SoftwareClose_Executed"></CommandBinding>
@@ -93,8 +93,8 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" MaxHeight="20" MaxWidth="80" Name="Ok" ToolTip="Save current input" Content="Ok"  IsDefault="True" Width="60" Height="20"  Command="cmd:RoutedCommands.SoftwareAdded" ></Button>
-            <Button Grid.Column="1" MaxHeight="20" MaxWidth="80" Name="Cancel" ToolTip="Cancel operation" Content="Cancel" Width="60" Height="20"  Command="cmd:RoutedCommands.SoftwareClose" ></Button>
+            <Button Grid.Column="0" MaxHeight="20" MaxWidth="80" Name="Ok" ToolTip="Save current input" Content="Dodaj"  IsDefault="True" Width="60" Height="20"  Command="cmd:RoutedCommands.SoftwareAdded" ></Button>
+            <Button Grid.Column="1" MaxHeight="20" MaxWidth="80" Name="Cancel" ToolTip="Cancel operation" Content="Izađi" Width="60" Height="20"  Command="cmd:RoutedCommands.SoftwareClose" ></Button>
         </Grid>
 
     </Grid>

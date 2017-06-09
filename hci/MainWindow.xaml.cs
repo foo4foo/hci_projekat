@@ -63,7 +63,7 @@ namespace hci
 
         public MainWindow()
         {
-           
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
         }
 
@@ -87,7 +87,8 @@ namespace hci
         private void AddClassroomCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var addClassroom = new AddClassroom();
-            addClassroom.Show();
+            addClassroom.ShowDialog();
+
         }
 
         private void AddClassroomCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -98,7 +99,7 @@ namespace hci
         private void AddSoftwareCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var addSoftware = new AddSoftware();
-            addSoftware.Show();
+            addSoftware.ShowDialog();
         }
 
         private void AddSoftwareCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -109,7 +110,7 @@ namespace hci
         private void AddCourseCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var course = new AddCourse();
-            course.Show();
+            course.ShowDialog();
         }
 
         private void AddCourseCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -120,7 +121,7 @@ namespace hci
         private void AddSubjectCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var subject = new AddSubject();
-            subject.Show();
+            subject.ShowDialog();
         }
 
         private void AddSubjectCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)

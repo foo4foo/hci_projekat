@@ -32,6 +32,7 @@ namespace hci.Input_Forms
 
         public AddSoftware()
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             this.DataContext = this;
             this.Godine = new ObservableCollection<int>();
             for (int i = 2017; i > 1944; i--)
@@ -43,24 +44,63 @@ namespace hci.Input_Forms
 
         private void SoftwareAdded_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            DatabaseManager db = new DatabaseManager();
+
             string _id = id.Text;
+            double _price = -1;
             string _name = name.Text;
             string _developer = Developer.Text;
             string _website = Website.Text;
             string _os = Os.Text;
             int _year = Int32.Parse(Year.Text);
-            double _price = Convert.ToDouble(Price.Text);
             string _desc = Description.Text;
 
-            Software s = new Software(_id, _name, _developer, _website, _desc, _os, _year, _price);
+            bool ok = true;
+            ObservableCollection<Software> softwares = db.GetCollectionSoftwares(new MySqlCommand("Select * from softwares;"));
+            foreach (var software in softwares)
+            {
+                if (String.IsNullOrEmpty(_id) || String.IsNullOrEmpty(Price.Text) || String.IsNullOrEmpty(_name) || String.IsNullOrEmpty(_developer)
+                    || String.IsNullOrEmpty(_website) || String.IsNullOrEmpty(_desc))
+                {
+                    MessageBox.Show("Greška u dodavanju! Popunite sva polja.");
+                    ok = false;
+                    break;
+                }
+                if (software.Id.Equals(_id))
+                {
+                    MessageBox.Show("Greška! Uneta oznaka softvera već postoji!");
+                    ok = false;
+                    break;
+                }
+                if (!(Double.TryParse(Price.Text, out _price)))
+                {
+                    MessageBox.Show("Greška prilikom unosa cene! Unesite validan broj.");
+                    ok = false;
+                    break;
+                }
+                else if (_price < 0)
+                   {
+                    MessageBox.Show("Greška! Cena ne može biti negativan broj.");
+                    ok = false;
+                    break;
+                }
+                   
+            }
+
+            if (ok)
+            {
+               
+
+                Software s = new Software(_id, _name, _developer, _website, _desc, _os, _year, _price);
 
 
-            MySqlCommand cmd = new MySqlCommand("insert into hci.softwares(softwareId,name,operatingSys,developer,site,year,price,description)"
-              + "values ('" + _id + "','" + _name + "','" + _os + "','" + _developer + "','" + _website + "'," + _year + "," + _price + ",'" + _desc + "');");
-            DatabaseManager db = new DatabaseManager();
-            db.ExecuteQuery(cmd);
-            MessageBox.Show("Software successfully added!");
-            this.Close();
+                MySqlCommand cmd = new MySqlCommand("insert into hci.softwares(softwareId,name,operatingSys,developer,site,year,price,description)"
+                  + "values ('" + _id + "','" + _name + "','" + _os + "','" + _developer + "','" + _website + "'," + _year + "," + _price + ",'" + _desc + "');");
+
+                db.ExecuteQuery(cmd);
+                MessageBox.Show("Software successfully added!");
+                this.Close();
+            }
         }
 
         private void SoftwareAdded_CanExecute(object sender, CanExecuteRoutedEventArgs e)

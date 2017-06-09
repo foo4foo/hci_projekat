@@ -3,6 +3,7 @@ using hci.Models;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,27 +25,68 @@ namespace hci.Input_Forms
     {
         public AddCourse()
         {
-            
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             InitializeComponent();
         }
 
 
         private void CourseAdded_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            DatabaseManager db = new DatabaseManager();
+
             string _id = Id.Text;
             string _name = name.Text;
             string _date = Date.Text;
             string _desc = Description.Text;
 
-            Course c = new Course(_id, _name, _date, _desc);
+            bool ok = true;
+            ObservableCollection<Course> courses = db.GetCollectionCourses(new MySqlCommand("Select * from courses;"));
+            foreach (var course in courses)
+            {
+                if (String.IsNullOrEmpty(_id) || String.IsNullOrEmpty(_name) || String.IsNullOrEmpty(_date) || String.IsNullOrEmpty(_desc))
+                {
+                    MessageBox.Show("Greška u dodavanju! Popunite sva polja.");
+                    ok = false;
+                    break;
+                }
+
+                DateTime temp;
+                if ((DateTime.TryParse(Date.Text, out temp)))
+                {
+                    if (temp > DateTime.Today)
+                    {
+                        MessageBox.Show("Greška! Datum uvođenja smera ne može biti u budućnosti.");
+                        ok = false;
+                        break;
+                    }
+                }
+                if (course.Id.Equals(_id))
+                {
+                    MessageBox.Show("Greška! Uneta oznaka smera već postoji!");
+                    ok = false;
+                    break;
+                }
+                if (course.Name.Equals(_name))
+                {
+                    MessageBox.Show("Greška! Uneti naziv smera već postoji!");
+                    ok = false;
+                    break;
+                }
+            }
+
+            if (ok)
+            {
+           
+                Course c = new Course(_id, _name, _date, _desc);
 
 
-            MySqlCommand cmd = new MySqlCommand("insert into hci.courses(courseId, name, date_, description)"
-              + "values ('" + _id + "','" + _name  + "','" + _date + "','" + _desc + "');");
-            DatabaseManager db = new DatabaseManager();
-            db.ExecuteQuery(cmd);
-            MessageBox.Show("Course successfully added!");
-            this.Close();
+                MySqlCommand cmd = new MySqlCommand("insert into hci.courses(courseId, name, date_, description)"
+                  + "values ('" + _id + "','" + _name + "','" + _date + "','" + _desc + "');");
+
+                db.ExecuteQuery(cmd);
+                MessageBox.Show("Course successfully added!");
+                this.Close();
+            }
         }
 
         private void CourseAdded_CanExecute(object sender, CanExecuteRoutedEventArgs e)

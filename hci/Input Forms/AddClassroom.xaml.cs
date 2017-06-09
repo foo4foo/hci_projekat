@@ -58,8 +58,9 @@ namespace hci.Input_Forms
 
         public AddClassroom()
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             this.DataContext = this;
-            MainWindow.ConsoleAllocator.ShowConsoleWindow();
+           // MainWindow.ConsoleAllocator.ShowConsoleWindow();
             DatabaseManager databaseManager = new DatabaseManager();
             MySqlCommand cmd = new MySqlCommand("Select * from softwares;");
             this.SoftwaresCollection = databaseManager.GetCollectionSoftwares(cmd);
@@ -83,46 +84,73 @@ namespace hci.Input_Forms
 
         private void ClassroomAdded_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+
+            DatabaseManager db = new DatabaseManager();
+
             string _id = classroomID.Text;
             string _desc = description.Text;
             int _size = Int32.Parse(size.Text);
             string _os = os.Text;
-
             bool _projector;
-            if (projector.Text.Equals("Yes"))
+            if (projector.Text.Equals("Da"))
                 _projector = true;
             else _projector = false;
 
             bool _board;
-            if (board.Text.Equals("Yes"))
+            if (board.Text.Equals("Da"))
                 _board = true;
             else _board = false;
 
             bool _smartBoard;
-            if (smartboard.Text.Equals("Yes"))
+            if (smartboard.Text.Equals("Da"))
                 _smartBoard = true;
             else _smartBoard = false;
-            ObservableCollection<Software> _software = new ObservableCollection<Software>();
-       
 
-            Classroom c = new Classroom(_id, _desc, _size, _projector, _board, _smartBoard, _os, _software);
-
-            MySqlCommand cmd = new MySqlCommand("insert into hci.classrooms(classroomId,description,size,haveProjector,haveBoard,haveSmartBoard,operatingSys)" 
-              +  "values ('" + _id + "','" + _desc + "'," + _size + "," + _projector + "," + _board + "," + _smartBoard + ",'" + _os + "');");
-            DatabaseManager db = new DatabaseManager();
-            db.ExecuteQuery(cmd);
-
-            foreach (SelectableObject<Software> sftwObject in SoftwaresSelectedCollection)
-                if (sftwObject.IsSelected)
+            bool ok = true;
+            ObservableCollection<Classroom> classrooms = db.GetCollectionClassrooms(new MySqlCommand("Select * from classrooms;"));
+            foreach (var classroom in classrooms)
+            {
+                if (String.IsNullOrEmpty(_id) || String.IsNullOrEmpty(_desc))
                 {
-                    MySqlCommand cmd2 = new MySqlCommand("insert into hci.softwareInClassroom(classroomId, softwareId) values ('" + _id + "','" + sftwObject.ObjectData.Id + "');");
-                    db.ExecuteQuery(cmd2);
-                    
+                    MessageBox.Show("Greška u dodavanju! Popunite sva polja.");
+                    ok = false;
+                    break;
                 }
 
-            MessageBox.Show("Classroom successfully added!");
-            this.Close();
+                if (classroom.Id.Equals(_id))
+                {
+                    MessageBox.Show("Greška! Uneta oznaka učionice već postoji!");
+                    ok = false;
+                    break;
+                }
+            }
 
+            if (ok)
+            {
+
+                ObservableCollection<Software> _software = new ObservableCollection<Software>();
+
+
+                MySqlCommand cmd = new MySqlCommand("insert into hci.classrooms(classroomId,description,size,haveProjector,haveBoard,haveSmartBoard,operatingSys)"
+                  + "values ('" + _id + "','" + _desc + "'," + _size + "," + _projector + "," + _board + "," + _smartBoard + ",'" + _os + "');");
+
+                db.ExecuteQuery(cmd);
+
+                foreach (SelectableObject<Software> sftwObject in SoftwaresSelectedCollection)
+                    if (sftwObject.IsSelected)
+                    {
+                        _software.Add(sftwObject.ObjectData);
+                        MySqlCommand cmd2 = new MySqlCommand("insert into hci.softwareInClassroom(classroomId, softwareId) values ('" + _id + "','" + sftwObject.ObjectData.Id + "');");
+                        db.ExecuteQuery(cmd2);
+                    }
+
+
+                Classroom c = new Classroom(_id, _desc, _size, _projector, _board, _smartBoard, _os, _software);
+
+
+                MessageBox.Show("Classroom successfully added!");
+                this.Close();
+            }
         }
 
         private void ClassroomAdded_CanExecute(object sender, CanExecuteRoutedEventArgs e)
