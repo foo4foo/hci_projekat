@@ -97,8 +97,8 @@ namespace hci
             showCourseTable();
             showSoftwareTable();
             showSubjectTable();
-           
-
+         
+   
         }
 
         private void New_OnClick(object sender, RoutedEventArgs e)
@@ -135,14 +135,14 @@ namespace hci
                         software.Price = Convert.ToDouble(cSoftware["softwarePrice"]);
 
                         classroom.TestS.Add(software.Name);
-
+                       
 
                     }
                 }
             }
 
             classroomTable.ItemsSource = this.classrooms;
-
+            Raspored.ItemsSource = new ObservableCollection<Classroom>();
         }
 
         private void showCourseTable()

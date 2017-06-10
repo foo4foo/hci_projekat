@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:cmd="clr-namespace:hci.Commands"
         xmlns:data="clr-namespace:System.Data;assembly=System.Data"
+        xmlns:dd="urn:gong-wpf-dragdrop"
         Title="HCI Projekat" Height="1080" Width="1920" MinHeight="700" MinWidth="1300" WindowState="Maximized" WindowStyle="None">
     <Window.CommandBindings>
         <CommandBinding Command="cmd:RoutedCommands.AddClassroomCommand" CanExecute="AddClassroomCommand_CanExecute" Executed="AddClassroomCommand_Executed"></CommandBinding>
@@ -34,7 +35,7 @@
                 <MenuItem Name="prikaziPredmete" Header="_Predmeti" Command="cmd:RoutedCommands.ViewSubjectsCommand"  IsCheckable = "True"  IsChecked = "True" ToolTip="Prikaz svih predmeta"></MenuItem>
                 <MenuItem Name="prikaziSmerove" Header="_Smerovi" Command="cmd:RoutedCommands.ViewCoursesCommand"  IsCheckable = "True"  IsChecked = "True" ToolTip="Prikaz svih smerova"></MenuItem>
                 <MenuItem Name="prikaziSoftver" Header="S_oftver" Command="cmd:RoutedCommands.ViewSoftwareCommand"  IsCheckable = "True"   IsChecked = "True" ToolTip="Prikaz dostupnog softvera"></MenuItem>
-                
+
             </MenuItem>
             <MenuItem Header="_Pomoć">
                 <MenuItem Header="_Demonstracioni mod" ToolTip="Pokreni demo mod"/>
@@ -50,13 +51,14 @@
                     <ColumnDefinition Width="49*"/>
                     <ColumnDefinition Width="1502*"/>
                 </Grid.ColumnDefinitions>
-                <Label Name="labelUcionice" Margin="301.277,0,240,10" Content="UČIONICE" FontSize="16" FontWeight="Bold" Grid.Column="1" />
-                <Label Name="labelPredmeti" Margin="301.277,250,240,10" Content="PREDMETI" FontSize="16" FontWeight="Bold" Grid.Column="1" />
-                <Label Name="labelSmerovi" Margin="81.277,520,240,10" Content="SMEROVI" FontSize="16" FontWeight="Bold" Grid.Column="1" />
-                <Label Name="labelSoftveri" Margin="491.277,520,240,10" Content="SOFTVER" FontSize="16" FontWeight="Bold" Grid.Column="1" />
+                <Label Name="labelUcionice" Width="100" Height="40" Margin="301,-4,1396,667" Content="UČIONICE" FontSize="16" FontWeight="Bold" Grid.Column="1" />
+                <Label Name="labelPredmeti" Width="100" Height="40" Margin="301,248,1396,415" Content="PREDMETI" FontSize="16" FontWeight="Bold" Grid.Column="1" />
+                <Label Name="labelSmerovi" Width="100" Height="40" Margin="63,517,1634,146" Content="SMEROVI" FontSize="16" FontWeight="Bold" Grid.Column="1" />
+                <Label Name="labelSoftveri" Width="100" Height="40" Margin="482,517,1215,146" Content="SOFTVER" FontSize="16" FontWeight="Bold" Grid.Column="1" />
                 <DataGrid x:Name="courseTable" Width="330"  IsReadOnly="True" Margin="0,557,0,10"   AutoGenerateColumns="False" HorizontalAlignment="Left" Grid.ColumnSpan="2">
+                    
                     <DataGrid.Columns>
-
+                        
                         <DataGridTemplateColumn Header="Oznaka smera" IsReadOnly="True">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -91,9 +93,49 @@
 
                     </DataGrid.Columns>
                 </DataGrid>
+                <DataGrid x:Name="Raspored"
+                         dd:DragDrop.IsDragSource="True"
+                         dd:DragDrop.IsDropTarget="True"
+                         dd:DragDrop.UseDefaultEffectDataTemplate="True" Grid.Column="1" Margin="921,36,240,387" >
+                    <DataGrid.LayoutTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="90"/>
+                            <MatrixTransform Matrix="-1,0,0,1,0,0"/>
+                        </TransformGroup>
+                    </DataGrid.LayoutTransform>
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                            <Setter Property="LayoutTransform">
+                                <Setter.Value>
+                                    <TransformGroup>
+                                        <RotateTransform Angle="-90"/>
+                                        <ScaleTransform ScaleX="1" ScaleY="-1" />
+                                    </TransformGroup>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
+                    <DataGrid.CellStyle>
+                        <Style  TargetType="DataGridCell">
+                            <Setter Property="LayoutTransform">
+                                <Setter.Value>
+                                    <TransformGroup>
+                                        <RotateTransform Angle="-90"/>
+                                        <ScaleTransform ScaleX="1" ScaleY="-1" />
+                                    </TransformGroup>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGrid.CellStyle>
 
 
-                <DataGrid x:Name="subjectTable" IsReadOnly="True" Margin="0,288,0,238"  AutoGenerateColumns="False" HorizontalAlignment="Left" Width="812" Grid.ColumnSpan="2" >
+                </DataGrid>
+
+                <DataGrid x:Name="subjectTable" IsReadOnly="True" Margin="0,288,0,238"  AutoGenerateColumns="False" HorizontalAlignment="Left" Width="812" Grid.ColumnSpan="2" 
+                          dd:DragDrop.IsDragSource="True"
+                          dd:DragDrop.IsDropTarget="True"
+                          dd:DragDrop.DropScrollingMode="VerticalOnly"
+                          dd:DragDrop.UseDefaultEffectDataTemplate="True">
                     <DataGrid.Columns>
 
                         <DataGridTemplateColumn Header="Oznaka predmeta" IsReadOnly="True">
@@ -275,7 +317,12 @@
                 </DataGrid>
 
 
-                <DataGrid x:Name="classroomTable" Width="620"  IsReadOnly="True" Margin="41.277,36,0,519" AutoGenerateColumns="False" HorizontalAlignment="Left" Grid.Column="1">
+                <DataGrid x:Name="classroomTable" Width="620"  IsReadOnly="True" Margin="41.277,36,0,519" AutoGenerateColumns="False" HorizontalAlignment="Left" Grid.Column="1" 
+                      dd:DragDrop.IsDragSource="True"
+                      dd:DragDrop.IsDropTarget="True"
+                      dd:DragDrop.DropScrollingMode="VerticalOnly"
+                      dd:DragDrop.UseDefaultEffectDataTemplate="True"
+                          dd:DragDrop.DragDropCopyKeyState="ControlKey" >
                     <DataGrid.Columns>
 
                         <DataGridTemplateColumn Header="Oznaka učionice" IsReadOnly="True">
