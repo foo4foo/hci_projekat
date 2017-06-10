@@ -24,6 +24,9 @@ namespace hci.Input_Forms
     public partial class AddSoftware : Window
     {
 
+        public delegate void DataChangedEventHandler(object sender, EventArgs e);
+
+        public event DataChangedEventHandler DataChanged;
         public ObservableCollection<int> Godine
         {
             get;
@@ -99,6 +102,13 @@ namespace hci.Input_Forms
 
                 db.ExecuteQuery(cmd);
                 MessageBox.Show("Software successfully added!");
+
+                DataChangedEventHandler handler = DataChanged;
+                if (handler != null)
+                {
+                    handler(this, new EventArgs());
+                }
+
                 this.Close();
             }
         }

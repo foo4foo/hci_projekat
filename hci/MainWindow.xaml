@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:cmd="clr-namespace:hci.Commands"
         xmlns:data="clr-namespace:System.Data;assembly=System.Data"
-        Title="HCI Projekat" Height="720" Width="1280">
+        Title="HCI Projekat" Height="830.925" Width="1614.79">
     <Window.CommandBindings>
         <CommandBinding Command="cmd:RoutedCommands.AddClassroomCommand" CanExecute="AddClassroomCommand_CanExecute" Executed="AddClassroomCommand_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.AddSoftwareCommand" CanExecute="AddSoftwareCommand_CanExecute" Executed="AddSoftwareCommand_Executed"></CommandBinding>
@@ -15,13 +15,13 @@
         <CommandBinding Command="cmd:RoutedCommands.ViewSoftwareCommand" CanExecute="ViewSoftware_CanExecute" Executed="ViewSoftwareCommand_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.ViewSubjectsCommand" CanExecute="ViewSubjects_CanExecute" Executed="ViewSubjectsCommand_Executed"></CommandBinding>
     </Window.CommandBindings>
-    <DockPanel>
+    <DockPanel Margin="0,0,2,0">
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_Datoteka">
+            <MenuItem Header="_Datoteka" Name="MenuItemDatoteka">
                 <MenuItem Header="_Dodaj">
                     <MenuItem Header="_Učionicu" Command="cmd:RoutedCommands.AddClassroomCommand" ToolTip="Dodaj novu učionicu"></MenuItem>
-                        <MenuItem Header="_Softver" Command="cmd:RoutedCommands.AddSoftwareCommand" ToolTip="Dodaj novi softver"></MenuItem>
-                        <MenuItem Header="_Smer" Command="cmd:RoutedCommands.AddCourseCommand" ToolTip="Dodaj novi smer"></MenuItem>
+                    <MenuItem Header="_Softver" Command="cmd:RoutedCommands.AddSoftwareCommand" ToolTip="Dodaj novi softver"></MenuItem>
+                    <MenuItem Header="_Smer" Command="cmd:RoutedCommands.AddCourseCommand" ToolTip="Dodaj novi smer"></MenuItem>
                     <MenuItem Header="_Predmet" Command="cmd:RoutedCommands.AddSubjectCommand" ToolTip="Dodaj novi predmet"></MenuItem>
                 </MenuItem>
 
@@ -30,10 +30,11 @@
                 <MenuItem Header="_Napusti program" Command="cmd:RoutedCommands.ExitCommand" />
             </MenuItem>
             <MenuItem Header="P_rikaz" ToolTip="Prikaz odabranog tipa podatka u tabeli">
-                <MenuItem Header="_Učionice" Command="cmd:RoutedCommands.ViewClassroomsCommand" ToolTip="Prikaz svih učionica"></MenuItem>
-                <MenuItem Header="_Predmeti" Command="cmd:RoutedCommands.ViewSubjectsCommand" ToolTip="Prikaz svih predmeta"></MenuItem>
-                <MenuItem Header="_Smerovi" Command="cmd:RoutedCommands.ViewCoursesCommand" ToolTip="Prikaz svih smerova"></MenuItem>
-                <MenuItem Header="S_oftver" Command="cmd:RoutedCommands.ViewSoftwareCommand" ToolTip="Prikaz dostupnog softvera"></MenuItem>
+                <MenuItem Name="prikaziUcionice" Header="_Učionice" Command="cmd:RoutedCommands.ViewClassroomsCommand" IsCheckable = "True"  IsChecked = "True" ToolTip="Prikaz svih učionica"></MenuItem>
+                <MenuItem Name="prikaziPredmete" Header="_Predmeti" Command="cmd:RoutedCommands.ViewSubjectsCommand"  IsCheckable = "True"  IsChecked = "True" ToolTip="Prikaz svih predmeta"></MenuItem>
+                <MenuItem Name="prikaziSmerove" Header="_Smerovi" Command="cmd:RoutedCommands.ViewCoursesCommand"  IsCheckable = "True"  IsChecked = "True" ToolTip="Prikaz svih smerova"></MenuItem>
+                <MenuItem Name="prikaziSoftver" Header="S_oftver" Command="cmd:RoutedCommands.ViewSoftwareCommand"  IsCheckable = "True"   IsChecked = "True" ToolTip="Prikaz dostupnog softvera"></MenuItem>
+                
             </MenuItem>
             <MenuItem Header="_Pomoć">
                 <MenuItem Header="_Demonstracioni mod" ToolTip="Pokreni demo mod"/>
@@ -41,31 +42,312 @@
                 <MenuItem Header="_O nama" ToolTip="O timu" />
             </MenuItem>
         </Menu>
-        <Grid DockPanel.Dock="Bottom" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="542" Margin="34,0,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"></RowDefinition>
-                    <RowDefinition Height="1*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <DataGrid x:Name="dataGrid" Grid.Row="0" IsReadOnly="True" Margin="0,0,-119,0">
+
+        <Grid DockPanel.Dock="Bottom" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="542" Margin="34,0,10,0">
+
+            <Grid Grid.Column="0" Margin="0,-100,10,-61">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="49*"/>
+                    <ColumnDefinition Width="1502*"/>
+                </Grid.ColumnDefinitions>
+                <Label Name="labelUcionice" Margin="301.277,0,240,10" Content="UČIONICE" FontSize="16" FontWeight="Bold" Grid.Column="1" />
+                <Label Name="labelPredmeti" Margin="301.277,250,240,10" Content="PREDMETI" FontSize="16" FontWeight="Bold" Grid.Column="1" />
+                <Label Name="labelSmerovi" Margin="81.277,520,240,10" Content="SMEROVI" FontSize="16" FontWeight="Bold" Grid.Column="1" />
+                <Label Name="labelSoftveri" Margin="491.277,520,240,10" Content="SOFTVERI" FontSize="16" FontWeight="Bold" Grid.Column="1" />
+                <DataGrid x:Name="courseTable" Width="330"  IsReadOnly="True" Margin="0,557,0,10"   AutoGenerateColumns="False" HorizontalAlignment="Left" Grid.ColumnSpan="2">
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Oznaka smera" IsReadOnly="True">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <ComboBox ItemsSource="{Binding Lista, Mode=TwoWay, 
-           RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, UpdateSourceTrigger=PropertyChanged}">
-                                       
+                                    <TextBlock Text="{Binding Id}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Naziv smera" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Datum uvođenja" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Date}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Opis smera" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Description}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+
+
+                <DataGrid x:Name="subjectTable" IsReadOnly="True" Margin="0,288,0,238"  AutoGenerateColumns="False" HorizontalAlignment="Left" Width="812" Grid.ColumnSpan="2" >
+                    <DataGrid.Columns>
+
+                        <DataGridTemplateColumn Header="Oznaka predmeta" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Id}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Naziv predmeta" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Opis predmeta" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Description}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Veličina grupe" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Size}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Min. dužina termina" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Size}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Broj termina" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Size}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Projektor" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsHitTestVisible="False" IsChecked="{Binding NeedProjector}"></CheckBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Tabla" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsHitTestVisible="False" IsChecked="{Binding NeedBoard}"></CheckBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Pametna tabla" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsHitTestVisible="False" IsChecked="{Binding NeedSmartBoard}"></CheckBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Potreban OS" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Os}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Smer" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Smer.Name }"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Softver">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate  >
+                                    <ComboBox ItemsSource="{Binding TestS}" SelectedIndex="0">
                                     </ComboBox>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
+
+
+
+
+
+                    </DataGrid.Columns>
+
+                </DataGrid>
+
+
+                <DataGrid x:Name="softwareTable" Width="450" IsReadOnly="True" Margin="313.277,557,0,10"  AutoGenerateColumns="False" HorizontalAlignment="Left" Grid.Column="1">
+                    <DataGrid.Columns>
+
+                        <DataGridTemplateColumn Header="Oznaka softvera" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Id}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Naziv softvera" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Operativni sistem" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Os}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Proizvođač" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Developer}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+
+                        <DataGridTemplateColumn Header="Sajt" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Site}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Godina proizvodnje" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Year}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Cena" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Price}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Opis softvera" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Description}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+
                     </DataGrid.Columns>
                 </DataGrid>
-                
+
+
+                <DataGrid x:Name="classroomTable" Width="620"  IsReadOnly="True" Margin="41.277,36,0,519" AutoGenerateColumns="False" HorizontalAlignment="Left" Grid.Column="1">
+                    <DataGrid.Columns>
+
+                        <DataGridTemplateColumn Header="Oznaka učionice" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Id}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Opis učionice" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Description}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Broj radnih mesta" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Size}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Projektor" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsHitTestVisible="False" IsChecked="{Binding HaveProjector}"></CheckBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Tabla" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsHitTestVisible="False" IsChecked="{Binding HaveBoard}"></CheckBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Pametna tabla" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsHitTestVisible="False" IsChecked="{Binding HaveSmartBoard}"></CheckBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Operativni sistem" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding OperatingSys}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Softver">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate  >
+                                    <ComboBox ItemsSource="{Binding TestS}" SelectedIndex="0">
+                                    </ComboBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+
+
+                    </DataGrid.Columns>
+                </DataGrid>
+
             </Grid>
         </Grid>
     </DockPanel>

@@ -24,6 +24,11 @@ namespace hci.Input_Forms
     /// </summary>
     public partial class AddClassroom : Window, INotifyPropertyChanged
     {
+
+        public delegate void DataChangedEventHandler(object sender, EventArgs e);
+
+        public event DataChangedEventHandler DataChanged;
+
         public ObservableCollection<Software> SoftwaresCollection
         {
             get;
@@ -84,7 +89,7 @@ namespace hci.Input_Forms
 
         private void ClassroomAdded_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-
+            
             DatabaseManager db = new DatabaseManager();
 
             string _id = classroomID.Text;
@@ -149,6 +154,12 @@ namespace hci.Input_Forms
 
 
                 MessageBox.Show("Classroom successfully added!");
+
+                DataChangedEventHandler handler = DataChanged;
+                if (handler != null)
+                {
+                    handler(this, new EventArgs());
+                }
                 this.Close();
             }
         }

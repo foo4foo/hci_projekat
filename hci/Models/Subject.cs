@@ -22,6 +22,17 @@ namespace hci.Models
         private string os;
         private Course smer;
         private ObservableCollection<Software> softwares = new ObservableCollection<Software>();
+        private ObservableCollection<string> testS = new ObservableCollection<string>();
+
+
+
+        
+
+        public ObservableCollection<string> TestS
+        {
+            get { return testS; }
+            set { testS = value; }
+        }
 
         public string Id
         {

@@ -23,6 +23,9 @@ namespace hci.Input_Forms
     /// </summary>
     public partial class AddSubject : Window
     {
+        public delegate void DataChangedEventHandler(object sender, EventArgs e);
+
+        public event DataChangedEventHandler DataChanged;
 
         public ObservableCollection<Software> SoftwaresCollection
         {
@@ -158,6 +161,13 @@ namespace hci.Input_Forms
                 Subject s = new Subject(_id, _name, _desc, _size, minLength, noOfClasses, _projector, _board, _smartBoard, _os, c, _softwares);
 
                 MessageBox.Show("Subject successfully added!");
+
+                DataChangedEventHandler handler = DataChanged;
+                if (handler != null)
+                {
+                    handler(this, new EventArgs());
+                }
+
                 this.Close();
             }
         }

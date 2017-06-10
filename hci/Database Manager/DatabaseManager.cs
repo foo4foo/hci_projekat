@@ -43,7 +43,7 @@ namespace hci.Database_Manager
                 }
         }
 
-        public List<Dictionary<string, string>> GetClassroomsSoftware(MySqlCommand cmd)
+        public List<Dictionary<string, string>> GetSoftwareList(MySqlCommand cmd)
         {
             var lista = new List<Dictionary<string, string>>();
 
@@ -66,7 +66,7 @@ namespace hci.Database_Manager
                             if (!reader.IsDBNull(0))
                             {
                                 Dictionary<string, string> dict = new Dictionary<string, string>();
-                                dict["classroomId"] = reader.GetString(0);
+                                dict["constraintId"] = reader.GetString(0);
                                 dict["softwareId"] = reader.GetString(1);
                                 dict["softwareName"] = reader.GetString(2);
                                 dict["softwareOs"] = reader.GetString(3);

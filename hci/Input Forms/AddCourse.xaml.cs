@@ -22,7 +22,14 @@ namespace hci.Input_Forms
     /// Interaction logic for Course.xaml
     /// </summary>
     public partial class AddCourse : Window
+
+
     {
+
+        public delegate void DataChangedEventHandler(object sender, EventArgs e);
+
+        public event DataChangedEventHandler DataChanged;
+
         public AddCourse()
         {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
@@ -85,6 +92,13 @@ namespace hci.Input_Forms
 
                 db.ExecuteQuery(cmd);
                 MessageBox.Show("Course successfully added!");
+
+                DataChangedEventHandler handler = DataChanged;
+                if (handler != null)
+                {
+                    handler(this, new EventArgs());
+                }
+
                 this.Close();
             }
         }
