@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:cmd="clr-namespace:hci.Commands"
         xmlns:data="clr-namespace:System.Data;assembly=System.Data"
-        Title="HCI Projekat" Height="830.925" Width="1614.79">
+        Title="HCI Projekat" Height="1080" Width="1920" MinHeight="700" MinWidth="1300" WindowState="Maximized" WindowStyle="None">
     <Window.CommandBindings>
         <CommandBinding Command="cmd:RoutedCommands.AddClassroomCommand" CanExecute="AddClassroomCommand_CanExecute" Executed="AddClassroomCommand_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.AddSoftwareCommand" CanExecute="AddSoftwareCommand_CanExecute" Executed="AddSoftwareCommand_Executed"></CommandBinding>
@@ -53,7 +53,7 @@
                 <Label Name="labelUcionice" Margin="301.277,0,240,10" Content="UČIONICE" FontSize="16" FontWeight="Bold" Grid.Column="1" />
                 <Label Name="labelPredmeti" Margin="301.277,250,240,10" Content="PREDMETI" FontSize="16" FontWeight="Bold" Grid.Column="1" />
                 <Label Name="labelSmerovi" Margin="81.277,520,240,10" Content="SMEROVI" FontSize="16" FontWeight="Bold" Grid.Column="1" />
-                <Label Name="labelSoftveri" Margin="491.277,520,240,10" Content="SOFTVERI" FontSize="16" FontWeight="Bold" Grid.Column="1" />
+                <Label Name="labelSoftveri" Margin="491.277,520,240,10" Content="SOFTVER" FontSize="16" FontWeight="Bold" Grid.Column="1" />
                 <DataGrid x:Name="courseTable" Width="330"  IsReadOnly="True" Margin="0,557,0,10"   AutoGenerateColumns="False" HorizontalAlignment="Left" Grid.ColumnSpan="2">
                     <DataGrid.Columns>
 

@@ -56,6 +56,7 @@ namespace hci
             const int SwHide = 0;
             const int SwShow = 5;
 
+        
 
             public static void ShowConsoleWindow()
             {
