@@ -16,7 +16,7 @@
         <CommandBinding Command="cmd:RoutedCommands.ViewSoftwareCommand" CanExecute="ViewSoftware_CanExecute" Executed="ViewSoftwareCommand_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.ViewSubjectsCommand" CanExecute="ViewSubjects_CanExecute" Executed="ViewSubjectsCommand_Executed"></CommandBinding>
     </Window.CommandBindings>
-    <DockPanel Margin="0,0,2,0">
+    <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Datoteka" Name="MenuItemDatoteka">
                 <MenuItem Header="_Dodaj">
@@ -43,360 +43,400 @@
                 <MenuItem Header="_O nama" ToolTip="O timu" />
             </MenuItem>
         </Menu>
+        <Grid DockPanel.Dock="Bottom" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Label Name="labelUcionice" Width="100" Height="40" Margin="240,78,264.765,585" Content="UČIONICE" FontSize="16" FontWeight="Bold"/>
+                    <Label Name="labelPredmeti" Width="100" Height="40" Margin="240,78,264.765,585" Content="PREDMETI" FontSize="16" FontWeight="Bold"/>
+                    <Label Name="labelSmerovi" Width="100" Height="40" Margin="240,78,264.765,585" Content="SMEROVI" FontSize="16" FontWeight="Bold"/>
+                    <Label Name="labelSoftveri" Width="100" Height="40" Margin="240,78,264.765,585" Content="SOFTVER" FontSize="16" FontWeight="Bold"/>
 
-        <Grid DockPanel.Dock="Bottom" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="542" Margin="34,0,10,0">
+                    <DataGrid x:Name="courseTable" CanUserAddRows="False" IsReadOnly="False" AutoGenerateColumns="False" HorizontalAlignment="Left">
 
-            <Grid Grid.Column="0" Margin="0,-77,0,-84" HorizontalAlignment="Left" Width="1236">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="39*"/>
-                    <ColumnDefinition Width="605*"/>
-                    <ColumnDefinition Width="592*"/>
-                </Grid.ColumnDefinitions>
-                <Label Name="labelUcionice" Width="100" Height="40" Margin="240,78,264.765,585" Content="UČIONICE" FontSize="16" FontWeight="Bold" Grid.Column="1" />
-                <Label Name="labelPredmeti" Width="100" Height="40" Margin="240,78,264.765,585" Content="PREDMETI" FontSize="16" FontWeight="Bold" Grid.Column="1" />
-                <Label Name="labelSmerovi" Width="100" Height="40" Margin="240,78,264.765,585" Content="SMEROVI" FontSize="16" FontWeight="Bold" Grid.Column="1" />
-                <Label Name="labelSoftveri" Width="100" Height="40" Margin="240,78,264.765,585" Content="SOFTVER" FontSize="16" FontWeight="Bold" Grid.Column="1" />
-                <DataGrid x:Name="courseTable" Width="359"  IsReadOnly="True" Margin="106,164,0,403"   AutoGenerateColumns="False" HorizontalAlignment="Left" Grid.Column="1">
+                        <DataGrid.Columns>
 
-                    <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Oznaka smera" IsReadOnly="False">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Id}" FocusManager.FocusedElement="{Binding RelativeSource={RelativeSource Self}}"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Oznaka smera" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Id}"></TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Naziv smera">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Naziv smera" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Name}"></TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Datum uvođenja">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Date}"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Datum uvođenja" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Date}"></TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Opis smera">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Description}"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Opis smera" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Description}"></TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
 
-                    </DataGrid.Columns>
-                </DataGrid>
-                <DataGrid x:Name="Raspored"
-                         dd:DragDrop.IsDragSource="True"
-                         dd:DragDrop.IsDropTarget="True"
-                         dd:DragDrop.UseDefaultEffectDataTemplate="True" Grid.Column="2" Margin="229.235,111,115,221" >
-                    <DataGrid.LayoutTransform>
-                        <TransformGroup>
-                            <RotateTransform Angle="90"/>
-                            <MatrixTransform Matrix="-1,0,0,1,0,0"/>
-                        </TransformGroup>
-                    </DataGrid.LayoutTransform>
-                    <DataGrid.ColumnHeaderStyle>
-                        <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
-                            <Setter Property="LayoutTransform">
-                                <Setter.Value>
-                                    <TransformGroup>
-                                        <RotateTransform Angle="-90"/>
-                                        <ScaleTransform ScaleX="1" ScaleY="-1" />
-                                    </TransformGroup>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </DataGrid.ColumnHeaderStyle>
-                    <DataGrid.CellStyle>
-                        <Style  TargetType="DataGridCell">
-                            <Setter Property="LayoutTransform">
-                                <Setter.Value>
-                                    <TransformGroup>
-                                        <RotateTransform Angle="-90"/>
-                                        <ScaleTransform ScaleX="1" ScaleY="-1" />
-                                    </TransformGroup>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </DataGrid.CellStyle>
+                    <DataGrid x:Name="subjectTable" IsReadOnly="True" 
+                              AutoGenerateColumns="False" 
+                              HorizontalAlignment="Right" 
+                              dd:DragDrop.IsDragSource="True"
+                              dd:DragDrop.IsDropTarget="True"
+                              dd:DragDrop.DropScrollingMode="VerticalOnly"
+                              dd:DragDrop.UseDefaultEffectDataTemplate="True">
+                        <DataGrid.Columns>
 
+                            <DataGridTemplateColumn Header="Oznaka predmeta" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Id}"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                </DataGrid>
+                            <DataGridTemplateColumn Header="Naziv predmeta" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                <DataGrid x:Name="subjectTable" IsReadOnly="True" Margin="10,134,0,392"  AutoGenerateColumns="False" HorizontalAlignment="Left" Width="673" Grid.ColumnSpan="3" 
-                          dd:DragDrop.IsDragSource="True"
-                          dd:DragDrop.IsDropTarget="True"
-                          dd:DragDrop.DropScrollingMode="VerticalOnly"
-                          dd:DragDrop.UseDefaultEffectDataTemplate="True">
-                    <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Opis predmeta" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Description}"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Oznaka predmeta" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Id}"></TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Veličina grupe" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Size}"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Naziv predmeta" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Name}"></TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Min. dužina termina" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Size}"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Opis predmeta" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Description}"></TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Broj termina" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Size}"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Veličina grupe" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Size}"></TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Projektor" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsHitTestVisible="False" IsChecked="{Binding NeedProjector}"></CheckBox>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Min. dužina termina" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Size}"></TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Tabla" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsHitTestVisible="False" IsChecked="{Binding NeedBoard}"></CheckBox>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Broj termina" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Size}"></TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Pametna tabla" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsHitTestVisible="False" IsChecked="{Binding NeedSmartBoard}"></CheckBox>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Projektor" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <CheckBox IsHitTestVisible="False" IsChecked="{Binding NeedProjector}"></CheckBox>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Potreban OS" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Os}"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Tabla" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <CheckBox IsHitTestVisible="False" IsChecked="{Binding NeedBoard}"></CheckBox>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Smer" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Smer.Name }"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Pametna tabla" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <CheckBox IsHitTestVisible="False" IsChecked="{Binding NeedSmartBoard}"></CheckBox>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Softver">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate  >
+                                        <ComboBox ItemsSource="{Binding TestS}" SelectedIndex="0">
+                                        </ComboBox>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
 
-                        <DataGridTemplateColumn Header="Potreban OS" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Os}"></TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                    <DataGrid x:Name="softwareTable" 
+                              IsReadOnly="True"
+                              AutoGenerateColumns="False" 
+                              HorizontalAlignment="Left">
+                        <DataGrid.Columns>
 
-                        <DataGridTemplateColumn Header="Smer" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Smer.Name }"></TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Oznaka softvera" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Id}"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Softver">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate  >
-                                    <ComboBox ItemsSource="{Binding TestS}" SelectedIndex="0">
-                                    </ComboBox>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Naziv softvera" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
+                            <DataGridTemplateColumn Header="Operativni sistem" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Os}"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-
-
-
-                    </DataGrid.Columns>
-
-                </DataGrid>
-
-
-                <DataGrid x:Name="softwareTable" Width="450" IsReadOnly="True" Margin="63,152,0,415"  AutoGenerateColumns="False" HorizontalAlignment="Left" Grid.Column="1">
-                    <DataGrid.Columns>
-
-                        <DataGridTemplateColumn Header="Oznaka softvera" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Id}"></TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <DataGridTemplateColumn Header="Naziv softvera" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Name}"></TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <DataGridTemplateColumn Header="Operativni sistem" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Os}"></TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <DataGridTemplateColumn Header="Proizvođač" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Developer}"></TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Proizvođač" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Developer}"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
 
-                        <DataGridTemplateColumn Header="Sajt" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Site}"></TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Sajt" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Site}"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Godina proizvodnje" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Year}"></TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Godina proizvodnje" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Year}"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Cena" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Price}"></TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Cena" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Price}"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Opis softvera" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Description}"></TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-
-                    </DataGrid.Columns>
-                </DataGrid>
+                            <DataGridTemplateColumn Header="Opis softvera" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Description}"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
 
-                <DataGrid x:Name="classroomTable" Width="450"  IsReadOnly="True" Margin="63,152,0,403" AutoGenerateColumns="False" HorizontalAlignment="Left" Grid.Column="1" 
-                      dd:DragDrop.IsDragSource="True"
-                      dd:DragDrop.IsDropTarget="True"
-                      dd:DragDrop.DropScrollingMode="VerticalOnly"
-                      dd:DragDrop.UseDefaultEffectDataTemplate="True"
-                          dd:DragDrop.DragDropCopyKeyState="ControlKey" >
-                    <DataGrid.Columns>
+                        </DataGrid.Columns>
+                    </DataGrid>
 
-                        <DataGridTemplateColumn Header="Oznaka učionice" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Id}"></TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                    <DataGrid x:Name="classroomTable" 
+                              IsReadOnly="True"
+                              AutoGenerateColumns="False" 
+                              HorizontalAlignment="Left" 
+                              dd:DragDrop.IsDragSource="True"
+                              dd:DragDrop.IsDropTarget="True"
+                              dd:DragDrop.DropScrollingMode="VerticalOnly"
+                              dd:DragDrop.UseDefaultEffectDataTemplate="True"
+                              dd:DragDrop.DragDropCopyKeyState="ControlKey" >
+                        <DataGrid.Columns>
 
-                        <DataGridTemplateColumn Header="Opis učionice" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Description}"></TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Oznaka učionice" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Id}"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Broj radnih mesta" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Size}"></TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Opis učionice" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Description}"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Projektor" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <CheckBox IsHitTestVisible="False" IsChecked="{Binding HaveProjector}"></CheckBox>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Broj radnih mesta" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Size}"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Tabla" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <CheckBox IsHitTestVisible="False" IsChecked="{Binding HaveBoard}"></CheckBox>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Projektor" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsHitTestVisible="False" IsChecked="{Binding HaveProjector}"></CheckBox>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Pametna tabla" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <CheckBox IsHitTestVisible="False" IsChecked="{Binding HaveSmartBoard}"></CheckBox>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Tabla" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsHitTestVisible="False" IsChecked="{Binding HaveBoard}"></CheckBox>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Operativni sistem" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding OperatingSys}"></TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Pametna tabla" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsHitTestVisible="False" IsChecked="{Binding HaveSmartBoard}"></CheckBox>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Softver">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate  >
-                                    <ComboBox ItemsSource="{Binding TestS}" SelectedIndex="0">
-                                    </ComboBox>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Operativni sistem" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding OperatingSys}"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTemplateColumn Header="Softver">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate  >
+                                        <ComboBox ItemsSource="{Binding TestS}" SelectedIndex="0">
+                                        </ComboBox>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
 
 
-                    </DataGrid.Columns>
-                </DataGrid>
+                        </DataGrid.Columns>
+                    </DataGrid>
 
+                </Grid>
+
+                <Grid Grid.Row="1" DataContext="{Binding ElementName=xnameiztabele,Path=SelectedItem}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Grid.Row="0">Labela1:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="1">Labela2:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="2">Labela3:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="3">Labela3:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="4">Labela4:</TextBlock>
+
+                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=path1}"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=path2}"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=path3}"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=path4}"></TextBox>
+                    <CheckBox Grid.Column="1" Grid.Row="4" IsChecked="{Binding Path=path5}"/>
+
+                    <CheckBox DataContext="{Binding ElementName=winTable, Path=DataContext}" Grid.Column="1" Grid.Row="5" Name="nesto" HorizontalAlignment="Right" IsChecked="{Binding Path=GroupView}">Grupisanje</CheckBox>
+                </Grid>
             </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <DataGrid x:Name="Raspored"
+                              CanUserAddRows="False"
+                              CanUserDeleteRows="False"
+                              CanUserResizeColumns="False"
+                              CanUserResizeRows="False"
+                              IsReadOnly="True"
+                              dd:DragDrop.IsDragSource="True"
+                              dd:DragDrop.IsDropTarget="True"
+                              dd:DragDrop.UseDefaultEffectDataTemplate="True" >
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+                                <Setter Property="LayoutTransform">
+                                    <Setter.Value>
+                                        <TransformGroup>
+                                            <RotateTransform Angle="-90"/>
+                                            <ScaleTransform ScaleX="1" ScaleY="-1" />
+                                        </TransformGroup>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
+                        <DataGrid.CellStyle>
+                            <Style  TargetType="DataGridCell">
+                                <Setter Property="LayoutTransform">
+                                    <Setter.Value>
+                                        <TransformGroup>
+                                            <RotateTransform Angle="-90"/>
+                                            <ScaleTransform ScaleX="1" ScaleY="-1" />
+                                        </TransformGroup>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DataGrid.CellStyle>
+
+
+                    </DataGrid>
+                </Grid>
+            </Grid>
+            
         </Grid>
     </DockPanel>
 </Window>
