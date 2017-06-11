@@ -29,18 +29,18 @@ namespace hci
     public partial class MainWindow : Window
     {
         private ObservableCollection<Course> courses;
+      
 
         private ObservableCollection<Subject> subjects;
 
         private ObservableCollection<Classroom> classrooms;
 
         private ObservableCollection<Software> software;
-
+    
         private DatabaseManager db;
 
         private bool demo = false;
 
-        private ObservableCollection<string> courses_names;
 
         public ObservableCollection<SelectableObject<Software>> SoftwaresSelectedCollection
         {
@@ -90,38 +90,36 @@ namespace hci
         {
             this.DataContext = this;
 
-            DatabaseManager databaseManager = new DatabaseManager();
+            db = new DatabaseManager();
+            ConsoleAllocator.ShowConsoleWindow();
             MySqlCommand cmd = new MySqlCommand("Select * from softwares;");
-            var sc = databaseManager.GetCollectionSoftwares(cmd);
+            var sc = db.GetCollectionSoftwares(cmd);
 
             this.SoftwaresSelectedCollection = new ObservableCollection<SelectableObject<Software>>();
-
+           
             for (int i = 0; i < sc.Count; i++)
             {
                 this.SoftwaresSelectedCollection.Add(new SelectableObject<Software>(sc[i], false));
+                
             }
 
-            courses_names = new ObservableCollection<string>();
-
-            MySqlCommand cmd2 = new MySqlCommand("Select * from courses;");
-            var cc = databaseManager.GetCollectionCourses(cmd2);
-            foreach (var el in cc)
-            {
-                courses_names.Add(el.Name);
-                Console.WriteLine(el.Name);
-            }
+           
 
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-            ConsoleAllocator.ShowConsoleWindow();
+          
             Console.WriteLine(this.SoftwaresSelectedCollection[0].ObjectData.Name);
-            db = new DatabaseManager();
+          
+        
             InitializeComponent();
-
+     
             showClassroomTable();
             showCourseTable();
             showSoftwareTable();
             showSubjectTable();
-
+     
+            editSmerovi.ItemsSource = courses;
+            editSoftverZaPredmet.ItemsSource = SoftwaresSelectedCollection;
+            editSoftverZaUcionicu.ItemsSource = SoftwaresSelectedCollection;
             softwareTable.Visibility = Visibility.Collapsed;
             labelSoftveri.Visibility = Visibility.Collapsed;
             subjectTable.Visibility = Visibility.Collapsed;
@@ -180,6 +178,7 @@ namespace hci
 
         private void showCourseTable()
         {
+  
             this.courses = db.GetCollectionCourses(new MySqlCommand("Select * from courses;"));
             courseTable.ItemsSource = this.courses;
         }

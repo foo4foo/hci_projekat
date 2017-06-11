@@ -404,7 +404,7 @@
                         <ComboBoxItem>Oboje</ComboBoxItem>
                     </ComboBox>
                     <Grid Grid.Column="1" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <ComboBox Name="softwares" HorizontalAlignment="Left" VerticalAlignment="Center" 
+                        <ComboBox Name="editSoftverZaUcionicu" HorizontalAlignment="Left" VerticalAlignment="Center" 
                                   IsReadOnly="True" Text="Lista softvera" IsEditable="True" ItemsSource="{Binding Path=SoftwaresSelectedCollection}" 
                                   Width="305">
                             <ComboBox.ItemTemplate>
@@ -504,11 +504,11 @@
                         <ComboBoxItem>Linux</ComboBoxItem>
                         <ComboBoxItem>Oboje</ComboBoxItem>
                     </ComboBox>
-                    <ComboBox Grid.Column="1" Grid.Row="10" 
-                              ItemsSource="{Binding Path=courses_names}"
-                              Text="{Binding Path=Smer.Name}">
+                    <ComboBox Name="editSmerovi" Grid.Column="1" Grid.Row="10" 
+                               IsReadOnly="True" SelectedIndex="0"
+                              DisplayMemberPath="Name">
                     </ComboBox>
-                    <ComboBox Grid.Column="1" Grid.Row="11" 
+                    <ComboBox Name="editSoftverZaPredmet" Grid.Column="1" Grid.Row="11" 
                               HorizontalAlignment="Left" 
                               VerticalAlignment="Center" 
                               IsReadOnly="True" Text="Lista softvera"
