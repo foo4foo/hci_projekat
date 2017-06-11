@@ -13,6 +13,13 @@ namespace hci.Models
         private string name;
         private string date;
         private string description;
+        private bool deleted = false;
+
+        public bool Deleted
+        {
+            get { return deleted; }
+            set { deleted = value; }
+        }
 
         public string Id
         {

@@ -24,9 +24,15 @@ namespace hci.Models
         private ObservableCollection<Software> softwares = new ObservableCollection<Software>();
         private ObservableCollection<string> testS = new ObservableCollection<string>();
 
+        private bool deleted = false;
+
+        public bool Deleted
+        {
+            get { return deleted; }
+            set { deleted = value; }
+        }
 
 
-        
 
         public ObservableCollection<string> TestS
         {

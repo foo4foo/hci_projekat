@@ -19,9 +19,15 @@ namespace hci.Models
         private string operatingSys;
         private ObservableCollection<string> testS = new ObservableCollection<string>();
 
-      
+        private bool deleted = false;
 
         private ObservableCollection<Software> softwares = new ObservableCollection<Software>();
+
+        public bool Deleted
+        {
+            get { return deleted; }
+            set { deleted = value; }
+        }
 
         public string Id
         {

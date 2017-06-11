@@ -93,7 +93,6 @@ namespace hci
             db = new DatabaseManager();
             InitializeComponent();
 
-
             showClassroomTable();
             showCourseTable();
             showSoftwareTable();
@@ -105,7 +104,9 @@ namespace hci
             labelPredmeti.Visibility = Visibility.Collapsed;
             courseTable.Visibility = Visibility.Collapsed;
             labelSmerovi.Visibility = Visibility.Collapsed;
-
+            editSoftware.Visibility = Visibility.Collapsed;
+            editCourses.Visibility = Visibility.Collapsed;
+            editSubjects.Visibility = Visibility.Collapsed;
 
         }
 
@@ -224,6 +225,7 @@ namespace hci
         {
             classroomTable.Visibility = Visibility.Visible;
             labelUcionice.Visibility = Visibility.Visible;
+            editClassrooms.Visibility = Visibility.Visible;
 
             softwareTable.Visibility = Visibility.Collapsed;
             labelSoftveri.Visibility = Visibility.Collapsed;
@@ -231,6 +233,9 @@ namespace hci
             labelPredmeti.Visibility = Visibility.Collapsed;
             courseTable.Visibility = Visibility.Collapsed;
             labelSmerovi.Visibility = Visibility.Collapsed;
+            editSoftware.Visibility = Visibility.Collapsed;
+            editCourses.Visibility = Visibility.Collapsed;
+            editSubjects.Visibility = Visibility.Collapsed;
 
             prikaziPredmete.IsChecked = false;
             prikaziSoftver.IsChecked = false;
@@ -260,6 +265,7 @@ namespace hci
         {
             softwareTable.Visibility = Visibility.Visible;
             labelSoftveri.Visibility = Visibility.Visible;
+            editSoftware.Visibility = Visibility.Visible;
 
             classroomTable.Visibility = Visibility.Collapsed;
             labelUcionice.Visibility = Visibility.Collapsed;
@@ -267,6 +273,9 @@ namespace hci
             labelPredmeti.Visibility = Visibility.Collapsed;
             courseTable.Visibility = Visibility.Collapsed;
             labelSmerovi.Visibility = Visibility.Collapsed;
+            editClassrooms.Visibility = Visibility.Collapsed;
+            editCourses.Visibility = Visibility.Collapsed;
+            editSubjects.Visibility = Visibility.Collapsed;
 
             prikaziPredmete.IsChecked = false;
             prikaziUcionice.IsChecked = false;
@@ -296,6 +305,7 @@ namespace hci
         {
             subjectTable.Visibility = Visibility.Visible;
             labelPredmeti.Visibility = Visibility.Visible;
+            editSubjects.Visibility = Visibility.Visible;
 
             softwareTable.Visibility = Visibility.Collapsed;
             labelSoftveri.Visibility = Visibility.Collapsed;
@@ -303,6 +313,9 @@ namespace hci
             labelUcionice.Visibility = Visibility.Collapsed;
             courseTable.Visibility = Visibility.Collapsed;
             labelSmerovi.Visibility = Visibility.Collapsed;
+            editSoftware.Visibility = Visibility.Collapsed;
+            editClassrooms.Visibility = Visibility.Collapsed;
+            editCourses.Visibility = Visibility.Collapsed;
 
             prikaziUcionice.IsChecked = false;
             prikaziSoftver.IsChecked = false;
@@ -331,6 +344,7 @@ namespace hci
         {
             courseTable.Visibility = Visibility.Visible;
             labelSmerovi.Visibility = Visibility.Visible;
+            editCourses.Visibility = Visibility.Visible;
 
             softwareTable.Visibility = Visibility.Collapsed;
             labelSoftveri.Visibility = Visibility.Collapsed;
@@ -338,6 +352,9 @@ namespace hci
             labelPredmeti.Visibility = Visibility.Collapsed;
             classroomTable.Visibility = Visibility.Collapsed;
             labelUcionice.Visibility = Visibility.Collapsed;
+            editSoftware.Visibility = Visibility.Collapsed;
+            editSubjects.Visibility = Visibility.Collapsed;
+            editClassrooms.Visibility = Visibility.Collapsed;
 
             prikaziPredmete.IsChecked = false;
             prikaziSoftver.IsChecked = false;

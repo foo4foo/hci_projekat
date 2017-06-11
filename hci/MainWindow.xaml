@@ -364,9 +364,13 @@
                     </DataGrid>
 
                 </Grid>
-
-                <Grid Grid.Row="1" DataContext="{Binding ElementName=xnameiztabele,Path=SelectedItem}">
+                <Grid Grid.Row="1"
+                      DataContext="{Binding ElementName=classroomTable, Path=SelectedItem}"
+                      Name="editClassrooms">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -378,19 +382,171 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Grid.Row="0">Labela1:</TextBlock>
-                    <TextBlock Grid.Column="0" Grid.Row="1">Labela2:</TextBlock>
-                    <TextBlock Grid.Column="0" Grid.Row="2">Labela3:</TextBlock>
-                    <TextBlock Grid.Column="0" Grid.Row="3">Labela3:</TextBlock>
-                    <TextBlock Grid.Column="0" Grid.Row="4">Labela4:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="0">Oznaka:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="1">Opis:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="2">Broj radnih mesta:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="3">Projektor:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="4">Tabla:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="5">Pametna tabla:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="6">Operativni sistem:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="7">Softver:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="8">Obriši:</TextBlock>
 
-                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=path1}"></TextBox>
-                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=path2}"></TextBox>
-                    <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=path3}"></TextBox>
-                    <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=path4}"></TextBox>
-                    <CheckBox Grid.Column="1" Grid.Row="4" IsChecked="{Binding Path=path5}"/>
+                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=Id}"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=Description}"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=Size}"></TextBox>
+                    <CheckBox Grid.Column="1" Grid.Row="3" IsChecked="{Binding Path=HaveProjector}"></CheckBox>
+                    <CheckBox Grid.Column="1" Grid.Row="4" IsChecked="{Binding Path=HaveBoard}"></CheckBox>
+                    <CheckBox Grid.Column="1" Grid.Row="5" IsChecked="{Binding Path=HaveSmartBoard}"></CheckBox>
+                    <ComboBox Grid.Column="1" Grid.Row="6" SelectedItem="{Binding Path=OperatingSys}">
+                        <ComboBoxItem>Windows</ComboBoxItem>
+                        <ComboBoxItem>Linux</ComboBoxItem>
+                        <ComboBoxItem>Oboje</ComboBoxItem>
+                    </ComboBox>
+                    <Grid Grid.Column="1" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <ComboBox Name="softwares" HorizontalAlignment="Left" VerticalAlignment="Center" 
+                                  IsReadOnly="True" Text="Lista softvera" IsEditable="True" ItemsSource="{Binding Path=SoftwaresSelectedCollection}" 
+                                  Width="305">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox IsChecked="{Binding IsSelected}" Width="20" 
+                                                  VerticalAlignment="Center"
+                                                  Unchecked="OnContentChanged" />
+                                        <TextBlock Text="{Binding ObjectData.Name}" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </Grid>
+                    <CheckBox Grid.Column="1" Grid.Row="8" IsChecked="{Binding Path=deleted}"/>
+                </Grid>
 
-                    <CheckBox DataContext="{Binding ElementName=winTable, Path=DataContext}" Grid.Column="1" Grid.Row="5" Name="nesto" HorizontalAlignment="Right" IsChecked="{Binding Path=GroupView}">Grupisanje</CheckBox>
+                <Grid Grid.Row="1"
+                      DataContext="{Binding ElementName=courseTable, Path=SelectedItem}"
+                      Name="editCourses">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Grid.Row="0">Oznaka:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="1">Naziv:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="2">Opis:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="3">Datum uvođenja:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="4">Obriši:</TextBlock>
+
+                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=Id}"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=Name}"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=Description}"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=Date}"></TextBox>
+                    <CheckBox Grid.Column="1" Grid.Row="4" IsChecked="{Binding Path=deleted}"/>
+                </Grid>
+
+                <Grid Grid.Row="1"
+                      DataContext="{Binding ElementName=subjectTable, Path=SelectedItem}"
+                      Name="editSubjects">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Grid.Row="0">Oznaka:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="1">Naziv:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="2">Opis:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="3">Veličina grupe:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="4">Min. dužina termina:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="5">Broj termina:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="6">Projektor:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="7">Tabla:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="8">Pametna tabla:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="9">Potreban OS:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="10">Smer:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="11">Softver:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="12">Obriši:</TextBlock>
+
+                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=Id}"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=Name}"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=Description}"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=Size}"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=Size}"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=Size}"></TextBox>
+                    <CheckBox Grid.Column="1" Grid.Row="6" IsChecked="{Binding Path=NeedProjector}"></CheckBox>
+                    <CheckBox Grid.Column="1" Grid.Row="7" IsChecked="{Binding Path=NeedBoard}"></CheckBox>
+                    <CheckBox Grid.Column="1" Grid.Row="8" IsChecked="{Binding Path=NeedSmartBoard}"></CheckBox>
+                    <ComboBox Grid.Column="1" Grid.Row="9" SelectedItem="{Binding Path=Os}">
+                        <ComboBoxItem>Windows</ComboBoxItem>
+                        <ComboBoxItem>Linux</ComboBoxItem>
+                        <ComboBoxItem>Oboje</ComboBoxItem>
+                    </ComboBox>
+                    <TextBox Grid.Column="1" Grid.Row="10" Text="{Binding Path=Smer.Name}"></TextBox>
+                    <ComboBox Grid.Column="1" Grid.Row="11" ItemsSource="{Binding TestS}" SelectedIndex="0">
+                    </ComboBox>
+                    <CheckBox Grid.Column="1" Grid.Row="12" IsChecked="{Binding Path=deleted}"/>
+                </Grid>
+
+                <Grid Grid.Row="1" 
+                      DataContext="{Binding ElementName=softwareTable,Path=SelectedItem}"
+                      Name="editSoftware">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Grid.Row="0">Oznaka:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="1">Naziv:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="2">Operativni sistem:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="3">Proizvođač:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="4">Veb sajt:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="5">Opis:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="6">Godina izdavanja:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="7">Cena:</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="8">Obriši:</TextBlock>
+
+                    <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=Id}"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=Name}"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=Os}"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=Developer}"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=Site}"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=Description}"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Path=Year}"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding Path=Price}"></TextBox>
+                    <CheckBox Grid.Column="1" Grid.Row="8" IsChecked="{Binding Path=deleted}"/>
                 </Grid>
             </Grid>
             <Grid Grid.Column="1">

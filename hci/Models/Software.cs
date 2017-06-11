@@ -8,6 +8,14 @@ namespace hci.Models
 {
     public class Software
     {
+        private bool deleted = false;
+
+        public bool Deleted
+        {
+            get { return deleted; }
+            set { deleted = value; }
+        }
+
         public string Id
         {
             get { return id; }
