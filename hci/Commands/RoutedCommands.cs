@@ -150,5 +150,15 @@ namespace hci.Commands
                 new KeyGesture(Key.U, ModifierKeys.Control)
                 }
         );
+
+        public static readonly RoutedUICommand DemoModeCommand = new RoutedUICommand(
+         "Start demo mode",
+         "Start demo mode",
+         typeof(RoutedCommands),
+         new InputGestureCollection()
+         {
+                new KeyGesture(Key.D, ModifierKeys.Control)
+         }
+ );
     }
 }

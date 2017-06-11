@@ -19,6 +19,7 @@ using hci.Database_Manager;
 using hci.Input_Forms;
 using hci.Models;
 using MySql.Data.MySqlClient;
+using System.Timers;
 
 namespace hci
 {
@@ -37,11 +38,11 @@ namespace hci
 
         private DatabaseManager db;
 
+        private bool demo = false;
 
 
 
-        
-        
+
         internal static class ConsoleAllocator
         {
             [DllImport(@"kernel32.dll", SetLastError = true)]
@@ -56,7 +57,7 @@ namespace hci
             const int SwHide = 0;
             const int SwShow = 5;
 
-        
+
 
             public static void ShowConsoleWindow()
             {
@@ -83,12 +84,12 @@ namespace hci
         public MainWindow()
         {
             this.DataContext = this;
-           
-           
+
+
 
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             ConsoleAllocator.ShowConsoleWindow();
-         
+
             db = new DatabaseManager();
             InitializeComponent();
 
@@ -115,7 +116,7 @@ namespace hci
 
         // metode za komandu
 
-            private void showClassroomTable()
+        private void showClassroomTable()
         {
             classrooms = db.GetCollectionClassrooms(new MySqlCommand("Select * from classrooms;"));
 
@@ -142,7 +143,7 @@ namespace hci
                         software.Price = Convert.ToDouble(cSoftware["softwarePrice"]);
 
                         classroom.TestS.Add(software.Name);
-                       
+
 
                     }
                 }
@@ -205,37 +206,35 @@ namespace hci
         {
             if (prikaziUcionice.IsChecked)
             {
-                classroomTable.Visibility = Visibility.Visible;
-                labelUcionice.Visibility = Visibility.Visible;
 
-                softwareTable.Visibility = Visibility.Collapsed;
-                labelSoftveri.Visibility = Visibility.Collapsed;
-                subjectTable.Visibility = Visibility.Collapsed;
-                labelPredmeti.Visibility = Visibility.Collapsed;
-                courseTable.Visibility = Visibility.Collapsed;
-                labelSmerovi.Visibility = Visibility.Collapsed;
-
-                prikaziPredmete.IsChecked = false;
-                prikaziSoftver.IsChecked = false;
-                prikaziSmerove.IsChecked = false;
-                // MenuItemDatoteka.Foreground = Brushes.White;
-                // MenuItemDatoteka.Background = Brushes.Black;
+                visibleClassroomsTable();
             }
             else
             {
                 classroomTable.Visibility = Visibility.Collapsed;
                 labelUcionice.Visibility = Visibility.Collapsed;
 
-                // ZA DEMO
-                // ----- menjanje boje
-                // SolidColorBrush sivaBoja = new SolidColorBrush(Color.FromRgb(240, 240, 240));
-                // MenuItemDatoteka.Background = sivaBoja;
-                // ---- otvaranje submenua
-               // MenuItemDatoteka.IsSubmenuOpen = true;
 
             }
 
 
+        }
+
+        private void visibleClassroomsTable()
+        {
+            classroomTable.Visibility = Visibility.Visible;
+            labelUcionice.Visibility = Visibility.Visible;
+
+            softwareTable.Visibility = Visibility.Collapsed;
+            labelSoftveri.Visibility = Visibility.Collapsed;
+            subjectTable.Visibility = Visibility.Collapsed;
+            labelPredmeti.Visibility = Visibility.Collapsed;
+            courseTable.Visibility = Visibility.Collapsed;
+            labelSmerovi.Visibility = Visibility.Collapsed;
+
+            prikaziPredmete.IsChecked = false;
+            prikaziSoftver.IsChecked = false;
+            prikaziSmerove.IsChecked = false;
         }
 
 
@@ -245,19 +244,7 @@ namespace hci
 
             if (prikaziSoftver.IsChecked)
             {
-                softwareTable.Visibility = Visibility.Visible;
-                labelSoftveri.Visibility = Visibility.Visible;
-
-                classroomTable.Visibility = Visibility.Collapsed;
-                labelUcionice.Visibility = Visibility.Collapsed;
-                subjectTable.Visibility = Visibility.Collapsed;
-                labelPredmeti.Visibility = Visibility.Collapsed;
-                courseTable.Visibility = Visibility.Collapsed;
-                labelSmerovi.Visibility = Visibility.Collapsed;
-
-                prikaziPredmete.IsChecked = false;
-                prikaziUcionice.IsChecked = false;
-                prikaziSmerove.IsChecked = false;
+                visibleSoftwareTable();
             }
             else
             {
@@ -267,6 +254,23 @@ namespace hci
             }
 
 
+        }
+
+        private void visibleSoftwareTable()
+        {
+            softwareTable.Visibility = Visibility.Visible;
+            labelSoftveri.Visibility = Visibility.Visible;
+
+            classroomTable.Visibility = Visibility.Collapsed;
+            labelUcionice.Visibility = Visibility.Collapsed;
+            subjectTable.Visibility = Visibility.Collapsed;
+            labelPredmeti.Visibility = Visibility.Collapsed;
+            courseTable.Visibility = Visibility.Collapsed;
+            labelSmerovi.Visibility = Visibility.Collapsed;
+
+            prikaziPredmete.IsChecked = false;
+            prikaziUcionice.IsChecked = false;
+            prikaziSmerove.IsChecked = false;
         }
 
 
@@ -276,19 +280,7 @@ namespace hci
 
             if (prikaziPredmete.IsChecked)
             {
-                subjectTable.Visibility = Visibility.Visible;
-                labelPredmeti.Visibility = Visibility.Visible;
-
-                softwareTable.Visibility = Visibility.Collapsed;
-                labelSoftveri.Visibility = Visibility.Collapsed;
-                classroomTable.Visibility = Visibility.Collapsed;
-                labelUcionice.Visibility = Visibility.Collapsed;
-                courseTable.Visibility = Visibility.Collapsed;
-                labelSmerovi.Visibility = Visibility.Collapsed;
-
-                prikaziUcionice.IsChecked = false;
-                prikaziSoftver.IsChecked = false;
-                prikaziSmerove.IsChecked = false;
+                visibleSubjectsTable();
             }
             else
             {
@@ -300,25 +292,31 @@ namespace hci
 
         }
 
+        private void visibleSubjectsTable()
+        {
+            subjectTable.Visibility = Visibility.Visible;
+            labelPredmeti.Visibility = Visibility.Visible;
+
+            softwareTable.Visibility = Visibility.Collapsed;
+            labelSoftveri.Visibility = Visibility.Collapsed;
+            classroomTable.Visibility = Visibility.Collapsed;
+            labelUcionice.Visibility = Visibility.Collapsed;
+            courseTable.Visibility = Visibility.Collapsed;
+            labelSmerovi.Visibility = Visibility.Collapsed;
+
+            prikaziUcionice.IsChecked = false;
+            prikaziSoftver.IsChecked = false;
+            prikaziSmerove.IsChecked = false;
+        }
+
 
 
         private void ViewCoursesCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             if (prikaziSmerove.IsChecked)
             {
-                courseTable.Visibility = Visibility.Visible;
-                labelSmerovi.Visibility = Visibility.Visible;
+                visibleCoursesTable();
 
-                softwareTable.Visibility = Visibility.Collapsed;
-                labelSoftveri.Visibility = Visibility.Collapsed;
-                subjectTable.Visibility = Visibility.Collapsed;
-                labelPredmeti.Visibility = Visibility.Collapsed;
-                classroomTable.Visibility = Visibility.Collapsed;
-                labelUcionice.Visibility = Visibility.Collapsed;
-
-                prikaziPredmete.IsChecked = false;
-                prikaziSoftver.IsChecked = false;
-                prikaziUcionice.IsChecked = false;
             }
             else
             {
@@ -327,6 +325,23 @@ namespace hci
 
             }
 
+        }
+
+        private void visibleCoursesTable()
+        {
+            courseTable.Visibility = Visibility.Visible;
+            labelSmerovi.Visibility = Visibility.Visible;
+
+            softwareTable.Visibility = Visibility.Collapsed;
+            labelSoftveri.Visibility = Visibility.Collapsed;
+            subjectTable.Visibility = Visibility.Collapsed;
+            labelPredmeti.Visibility = Visibility.Collapsed;
+            classroomTable.Visibility = Visibility.Collapsed;
+            labelUcionice.Visibility = Visibility.Collapsed;
+
+            prikaziPredmete.IsChecked = false;
+            prikaziSoftver.IsChecked = false;
+            prikaziUcionice.IsChecked = false;
         }
 
         private void ViewSoftware_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -388,7 +403,7 @@ namespace hci
             addSoftware.DataChanged += DataChanged;
             addSoftware.ShowDialog();
         }
-     
+
         private void AddSoftwareCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
@@ -416,6 +431,100 @@ namespace hci
         private void AddSubjectCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
+        }
+
+        private async void DemoMode_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (!demo)
+            {
+                demo = true;
+                DemoLabel.Visibility = Visibility.Visible;
+                DemoButton.Visibility = Visibility.Visible;
+                while (demo)
+                {
+                    var addClassroom = new AddClassroom();
+
+                    await Task.Delay(1300);
+
+                    blinkMenuItem(MenuItemDatoteka, 3);
+                    if (!demo) break;
+                    await Task.Delay(1800);
+                    MenuItemDatoteka.IsSubmenuOpen = true;
+                    blinkMenuItem(MenuItemDodaj, 2);
+                    if (!demo) break;
+                    await Task.Delay(1200);
+                    MenuItemDodaj.IsSubmenuOpen = true;
+                    blinkMenuItem(MenuItemDodajUcionicu, 3);
+                    if (!demo) break;
+                    await Task.Delay(1800);
+                    MenuItemDatoteka.IsSubmenuOpen = false;
+
+
+                    addClassroom.Show();
+                    if (!demo) { addClassroom.Close(); break; }
+                    await Task.Delay(700);
+                    addClassroom.classroomID.Text = "OZN1";
+                    await Task.Delay(700);
+                    if (!demo) { addClassroom.Close(); break; }
+                    addClassroom.description.Text = "Opis za demonstraciju";
+                    await Task.Delay(700);
+                    if (!demo) { addClassroom.Close(); break; }
+                    addClassroom.softwares.IsDropDownOpen = true;
+                    await Task.Delay(1000);
+                    if (!demo) { addClassroom.Close(); break; }
+                    addClassroom.softwares.IsDropDownOpen = false;
+                    await Task.Delay(1300);
+                    addClassroom.Close();
+
+                    blinkMenuItem(Prikaz, 3);
+                    if (!demo) break;
+                    await Task.Delay(1800);
+                    Prikaz.IsSubmenuOpen = true;
+                    blinkMenuItem(prikaziPredmete, 2);
+                    if (!demo) break;
+                    await Task.Delay(1200);
+                    prikaziPredmete.IsChecked = true;
+                    visibleSubjectsTable();
+                    if (!demo) break;
+                    await Task.Delay(1300);
+                    prikaziSoftver.IsChecked = true;
+                    visibleSoftwareTable();
+                    if (!demo) break;
+                    await Task.Delay(1300);
+                    prikaziUcionice.IsChecked = true;
+                    visibleClassroomsTable();
+                    if (!demo) break;
+                    await Task.Delay(1000);
+                    Prikaz.IsSubmenuOpen = false;
+                }
+            }
+        }
+
+        private void DemoMode_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+
+        private async void blinkMenuItem(MenuItem mi, int blinks)
+        {
+            SolidColorBrush sivaBoja = new SolidColorBrush(Color.FromRgb(240, 240, 240));
+            for (int i = 0; i < blinks; i++)
+            {
+                mi.Background = Brushes.Black;
+                mi.Foreground = Brushes.White;
+                await Task.Delay(300);
+                mi.Foreground = Brushes.Black;
+                mi.Background = sivaBoja;
+                await Task.Delay(300);
+            }
+        }
+
+        private void DemoButton_Click(object sender, RoutedEventArgs e)
+        {
+            demo = false;
+            DemoLabel.Visibility = Visibility.Hidden;
+            DemoButton.Visibility = Visibility.Hidden;
         }
     }
 }

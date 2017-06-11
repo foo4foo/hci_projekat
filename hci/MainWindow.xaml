@@ -15,12 +15,13 @@
         <CommandBinding Command="cmd:RoutedCommands.ViewCoursesCommand" CanExecute="ViewCourses_CanExecute" Executed="ViewCoursesCommand_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.ViewSoftwareCommand" CanExecute="ViewSoftware_CanExecute" Executed="ViewSoftwareCommand_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.ViewSubjectsCommand" CanExecute="ViewSubjects_CanExecute" Executed="ViewSubjectsCommand_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.DemoModeCommand" CanExecute="DemoMode_CanExecute" Executed="DemoMode_Executed"></CommandBinding>
     </Window.CommandBindings>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Datoteka" Name="MenuItemDatoteka">
-                <MenuItem Header="_Dodaj">
-                    <MenuItem Header="_Učionicu" Command="cmd:RoutedCommands.AddClassroomCommand" ToolTip="Dodaj novu učionicu"></MenuItem>
+                <MenuItem Name="MenuItemDodaj" Header="_Dodaj">
+                    <MenuItem Name="MenuItemDodajUcionicu" Header="_Učionicu" Command="cmd:RoutedCommands.AddClassroomCommand" ToolTip="Dodaj novu učionicu"></MenuItem>
                     <MenuItem Header="_Softver" Command="cmd:RoutedCommands.AddSoftwareCommand" ToolTip="Dodaj novi softver"></MenuItem>
                     <MenuItem Header="_Smer" Command="cmd:RoutedCommands.AddCourseCommand" ToolTip="Dodaj novi smer"></MenuItem>
                     <MenuItem Header="_Predmet" Command="cmd:RoutedCommands.AddSubjectCommand" ToolTip="Dodaj novi predmet"></MenuItem>
@@ -30,7 +31,7 @@
                 <Separator />
                 <MenuItem Header="_Napusti program" Command="cmd:RoutedCommands.ExitCommand" />
             </MenuItem>
-            <MenuItem Header="P_rikaz" ToolTip="Prikaz odabranog tipa podatka u tabeli">
+            <MenuItem Name="Prikaz" Header="P_rikaz" ToolTip="Prikaz odabranog tipa podatka u tabeli">
                 <MenuItem Name="prikaziUcionice" Header="_Učionice" Command="cmd:RoutedCommands.ViewClassroomsCommand" IsCheckable = "True"  IsChecked = "True" ToolTip="Prikaz svih učionica"></MenuItem>
                 <MenuItem Name="prikaziPredmete" Header="_Predmeti" Command="cmd:RoutedCommands.ViewSubjectsCommand"  IsCheckable = "True"  IsChecked = "False" ToolTip="Prikaz svih predmeta"></MenuItem>
                 <MenuItem Name="prikaziSmerove" Header="_Smerovi" Command="cmd:RoutedCommands.ViewCoursesCommand"  IsCheckable = "True"  IsChecked = "False" ToolTip="Prikaz svih smerova"></MenuItem>
@@ -38,7 +39,7 @@
 
             </MenuItem>
             <MenuItem Header="_Pomoć">
-                <MenuItem Header="_Demonstracioni mod" ToolTip="Pokreni demo mod"/>
+                 <MenuItem Name="DemoMod" Header="_Demonstracioni mod" ToolTip="Pokreni demo mod" Command="cmd:RoutedCommands.DemoModeCommand" />
                 <Separator />
                 <MenuItem Header="_O nama" ToolTip="O timu" />
             </MenuItem>
@@ -434,6 +435,10 @@
 
 
                     </DataGrid>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Label Name="DemoLabel" Visibility="Collapsed" Content="Demonstracioni mod" FontSize="20" Margin="406,245,10,45"/>
+                    <Button Name="DemoButton" Visibility="Collapsed" Margin="436,295,58,10"  Click="DemoButton_Click"> STOP DEMO</Button>
                 </Grid>
             </Grid>
             
