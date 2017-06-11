@@ -97,8 +97,15 @@ namespace hci
             showCourseTable();
             showSoftwareTable();
             showSubjectTable();
-         
-   
+
+            softwareTable.Visibility = Visibility.Collapsed;
+            labelSoftveri.Visibility = Visibility.Collapsed;
+            subjectTable.Visibility = Visibility.Collapsed;
+            labelPredmeti.Visibility = Visibility.Collapsed;
+            courseTable.Visibility = Visibility.Collapsed;
+            labelSmerovi.Visibility = Visibility.Collapsed;
+
+
         }
 
         private void New_OnClick(object sender, RoutedEventArgs e)
@@ -200,8 +207,19 @@ namespace hci
             {
                 classroomTable.Visibility = Visibility.Visible;
                 labelUcionice.Visibility = Visibility.Visible;
-               // MenuItemDatoteka.Foreground = Brushes.White;
-               // MenuItemDatoteka.Background = Brushes.Black;
+
+                softwareTable.Visibility = Visibility.Collapsed;
+                labelSoftveri.Visibility = Visibility.Collapsed;
+                subjectTable.Visibility = Visibility.Collapsed;
+                labelPredmeti.Visibility = Visibility.Collapsed;
+                courseTable.Visibility = Visibility.Collapsed;
+                labelSmerovi.Visibility = Visibility.Collapsed;
+
+                prikaziPredmete.IsChecked = false;
+                prikaziSoftver.IsChecked = false;
+                prikaziSmerove.IsChecked = false;
+                // MenuItemDatoteka.Foreground = Brushes.White;
+                // MenuItemDatoteka.Background = Brushes.Black;
             }
             else
             {
@@ -229,6 +247,17 @@ namespace hci
             {
                 softwareTable.Visibility = Visibility.Visible;
                 labelSoftveri.Visibility = Visibility.Visible;
+
+                classroomTable.Visibility = Visibility.Collapsed;
+                labelUcionice.Visibility = Visibility.Collapsed;
+                subjectTable.Visibility = Visibility.Collapsed;
+                labelPredmeti.Visibility = Visibility.Collapsed;
+                courseTable.Visibility = Visibility.Collapsed;
+                labelSmerovi.Visibility = Visibility.Collapsed;
+
+                prikaziPredmete.IsChecked = false;
+                prikaziUcionice.IsChecked = false;
+                prikaziSmerove.IsChecked = false;
             }
             else
             {
@@ -249,6 +278,17 @@ namespace hci
             {
                 subjectTable.Visibility = Visibility.Visible;
                 labelPredmeti.Visibility = Visibility.Visible;
+
+                softwareTable.Visibility = Visibility.Collapsed;
+                labelSoftveri.Visibility = Visibility.Collapsed;
+                classroomTable.Visibility = Visibility.Collapsed;
+                labelUcionice.Visibility = Visibility.Collapsed;
+                courseTable.Visibility = Visibility.Collapsed;
+                labelSmerovi.Visibility = Visibility.Collapsed;
+
+                prikaziUcionice.IsChecked = false;
+                prikaziSoftver.IsChecked = false;
+                prikaziSmerove.IsChecked = false;
             }
             else
             {
@@ -268,6 +308,17 @@ namespace hci
             {
                 courseTable.Visibility = Visibility.Visible;
                 labelSmerovi.Visibility = Visibility.Visible;
+
+                softwareTable.Visibility = Visibility.Collapsed;
+                labelSoftveri.Visibility = Visibility.Collapsed;
+                subjectTable.Visibility = Visibility.Collapsed;
+                labelPredmeti.Visibility = Visibility.Collapsed;
+                classroomTable.Visibility = Visibility.Collapsed;
+                labelUcionice.Visibility = Visibility.Collapsed;
+
+                prikaziPredmete.IsChecked = false;
+                prikaziSoftver.IsChecked = false;
+                prikaziUcionice.IsChecked = false;
             }
             else
             {

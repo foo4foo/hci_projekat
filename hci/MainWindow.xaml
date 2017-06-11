@@ -4,7 +4,7 @@
         xmlns:cmd="clr-namespace:hci.Commands"
         xmlns:data="clr-namespace:System.Data;assembly=System.Data"
         xmlns:dd="urn:gong-wpf-dragdrop"
-        Title="HCI Projekat" Height="1080" Width="1920" MinHeight="700" MinWidth="1300" WindowState="Maximized" WindowStyle="None">
+        Title="HCI Projekat" Height="720" Width="1280" MinHeight="720" MinWidth="1280"  >
     <Window.CommandBindings>
         <CommandBinding Command="cmd:RoutedCommands.AddClassroomCommand" CanExecute="AddClassroomCommand_CanExecute" Executed="AddClassroomCommand_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.AddSoftwareCommand" CanExecute="AddSoftwareCommand_CanExecute" Executed="AddSoftwareCommand_Executed"></CommandBinding>
@@ -32,9 +32,9 @@
             </MenuItem>
             <MenuItem Header="P_rikaz" ToolTip="Prikaz odabranog tipa podatka u tabeli">
                 <MenuItem Name="prikaziUcionice" Header="_Učionice" Command="cmd:RoutedCommands.ViewClassroomsCommand" IsCheckable = "True"  IsChecked = "True" ToolTip="Prikaz svih učionica"></MenuItem>
-                <MenuItem Name="prikaziPredmete" Header="_Predmeti" Command="cmd:RoutedCommands.ViewSubjectsCommand"  IsCheckable = "True"  IsChecked = "True" ToolTip="Prikaz svih predmeta"></MenuItem>
-                <MenuItem Name="prikaziSmerove" Header="_Smerovi" Command="cmd:RoutedCommands.ViewCoursesCommand"  IsCheckable = "True"  IsChecked = "True" ToolTip="Prikaz svih smerova"></MenuItem>
-                <MenuItem Name="prikaziSoftver" Header="S_oftver" Command="cmd:RoutedCommands.ViewSoftwareCommand"  IsCheckable = "True"   IsChecked = "True" ToolTip="Prikaz dostupnog softvera"></MenuItem>
+                <MenuItem Name="prikaziPredmete" Header="_Predmeti" Command="cmd:RoutedCommands.ViewSubjectsCommand"  IsCheckable = "True"  IsChecked = "False" ToolTip="Prikaz svih predmeta"></MenuItem>
+                <MenuItem Name="prikaziSmerove" Header="_Smerovi" Command="cmd:RoutedCommands.ViewCoursesCommand"  IsCheckable = "True"  IsChecked = "False" ToolTip="Prikaz svih smerova"></MenuItem>
+                <MenuItem Name="prikaziSoftver" Header="S_oftver" Command="cmd:RoutedCommands.ViewSoftwareCommand"  IsCheckable = "True"   IsChecked = "False" ToolTip="Prikaz dostupnog softvera"></MenuItem>
 
             </MenuItem>
             <MenuItem Header="_Pomoć">
@@ -46,19 +46,20 @@
 
         <Grid DockPanel.Dock="Bottom" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="542" Margin="34,0,10,0">
 
-            <Grid Grid.Column="0" Margin="0,-100,10,-61">
+            <Grid Grid.Column="0" Margin="0,-77,0,-84" HorizontalAlignment="Left" Width="1236">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="49*"/>
-                    <ColumnDefinition Width="1502*"/>
+                    <ColumnDefinition Width="39*"/>
+                    <ColumnDefinition Width="605*"/>
+                    <ColumnDefinition Width="592*"/>
                 </Grid.ColumnDefinitions>
-                <Label Name="labelUcionice" Width="100" Height="40" Margin="301,-4,1396,667" Content="UČIONICE" FontSize="16" FontWeight="Bold" Grid.Column="1" />
-                <Label Name="labelPredmeti" Width="100" Height="40" Margin="301,248,1396,415" Content="PREDMETI" FontSize="16" FontWeight="Bold" Grid.Column="1" />
-                <Label Name="labelSmerovi" Width="100" Height="40" Margin="63,517,1634,146" Content="SMEROVI" FontSize="16" FontWeight="Bold" Grid.Column="1" />
-                <Label Name="labelSoftveri" Width="100" Height="40" Margin="482,517,1215,146" Content="SOFTVER" FontSize="16" FontWeight="Bold" Grid.Column="1" />
-                <DataGrid x:Name="courseTable" Width="330"  IsReadOnly="True" Margin="0,557,0,10"   AutoGenerateColumns="False" HorizontalAlignment="Left" Grid.ColumnSpan="2">
-                    
+                <Label Name="labelUcionice" Width="100" Height="40" Margin="240,78,264.765,585" Content="UČIONICE" FontSize="16" FontWeight="Bold" Grid.Column="1" />
+                <Label Name="labelPredmeti" Width="100" Height="40" Margin="240,78,264.765,585" Content="PREDMETI" FontSize="16" FontWeight="Bold" Grid.Column="1" />
+                <Label Name="labelSmerovi" Width="100" Height="40" Margin="240,78,264.765,585" Content="SMEROVI" FontSize="16" FontWeight="Bold" Grid.Column="1" />
+                <Label Name="labelSoftveri" Width="100" Height="40" Margin="240,78,264.765,585" Content="SOFTVER" FontSize="16" FontWeight="Bold" Grid.Column="1" />
+                <DataGrid x:Name="courseTable" Width="359"  IsReadOnly="True" Margin="106,164,0,403"   AutoGenerateColumns="False" HorizontalAlignment="Left" Grid.Column="1">
+
                     <DataGrid.Columns>
-                        
+
                         <DataGridTemplateColumn Header="Oznaka smera" IsReadOnly="True">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -96,7 +97,7 @@
                 <DataGrid x:Name="Raspored"
                          dd:DragDrop.IsDragSource="True"
                          dd:DragDrop.IsDropTarget="True"
-                         dd:DragDrop.UseDefaultEffectDataTemplate="True" Grid.Column="1" Margin="921,36,240,387" >
+                         dd:DragDrop.UseDefaultEffectDataTemplate="True" Grid.Column="2" Margin="229.235,111,115,221" >
                     <DataGrid.LayoutTransform>
                         <TransformGroup>
                             <RotateTransform Angle="90"/>
@@ -131,7 +132,7 @@
 
                 </DataGrid>
 
-                <DataGrid x:Name="subjectTable" IsReadOnly="True" Margin="0,288,0,238"  AutoGenerateColumns="False" HorizontalAlignment="Left" Width="812" Grid.ColumnSpan="2" 
+                <DataGrid x:Name="subjectTable" IsReadOnly="True" Margin="10,134,0,392"  AutoGenerateColumns="False" HorizontalAlignment="Left" Width="673" Grid.ColumnSpan="3" 
                           dd:DragDrop.IsDragSource="True"
                           dd:DragDrop.IsDropTarget="True"
                           dd:DragDrop.DropScrollingMode="VerticalOnly"
@@ -244,7 +245,7 @@
                 </DataGrid>
 
 
-                <DataGrid x:Name="softwareTable" Width="450" IsReadOnly="True" Margin="313.277,557,0,10"  AutoGenerateColumns="False" HorizontalAlignment="Left" Grid.Column="1">
+                <DataGrid x:Name="softwareTable" Width="450" IsReadOnly="True" Margin="63,152,0,415"  AutoGenerateColumns="False" HorizontalAlignment="Left" Grid.Column="1">
                     <DataGrid.Columns>
 
                         <DataGridTemplateColumn Header="Oznaka softvera" IsReadOnly="True">
@@ -317,7 +318,7 @@
                 </DataGrid>
 
 
-                <DataGrid x:Name="classroomTable" Width="620"  IsReadOnly="True" Margin="41.277,36,0,519" AutoGenerateColumns="False" HorizontalAlignment="Left" Grid.Column="1" 
+                <DataGrid x:Name="classroomTable" Width="450"  IsReadOnly="True" Margin="63,152,0,403" AutoGenerateColumns="False" HorizontalAlignment="Left" Grid.Column="1" 
                       dd:DragDrop.IsDragSource="True"
                       dd:DragDrop.IsDropTarget="True"
                       dd:DragDrop.DropScrollingMode="VerticalOnly"
