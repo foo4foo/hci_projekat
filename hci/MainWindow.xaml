@@ -398,7 +398,7 @@
                     <CheckBox Grid.Column="1" Grid.Row="3" IsChecked="{Binding Path=HaveProjector}"></CheckBox>
                     <CheckBox Grid.Column="1" Grid.Row="4" IsChecked="{Binding Path=HaveBoard}"></CheckBox>
                     <CheckBox Grid.Column="1" Grid.Row="5" IsChecked="{Binding Path=HaveSmartBoard}"></CheckBox>
-                    <ComboBox Grid.Column="1" Grid.Row="6" SelectedItem="{Binding Path=OperatingSys}">
+                    <ComboBox Grid.Column="1" Grid.Row="6" Text="{Binding Path=OperatingSys}">
                         <ComboBoxItem>Windows</ComboBoxItem>
                         <ComboBoxItem>Linux</ComboBoxItem>
                         <ComboBoxItem>Oboje</ComboBoxItem>
@@ -499,13 +499,32 @@
                     <CheckBox Grid.Column="1" Grid.Row="6" IsChecked="{Binding Path=NeedProjector}"></CheckBox>
                     <CheckBox Grid.Column="1" Grid.Row="7" IsChecked="{Binding Path=NeedBoard}"></CheckBox>
                     <CheckBox Grid.Column="1" Grid.Row="8" IsChecked="{Binding Path=NeedSmartBoard}"></CheckBox>
-                    <ComboBox Grid.Column="1" Grid.Row="9" SelectedItem="{Binding Path=Os}">
+                    <ComboBox Grid.Column="1" Grid.Row="9" Text="{Binding Path=Os}">
                         <ComboBoxItem>Windows</ComboBoxItem>
                         <ComboBoxItem>Linux</ComboBoxItem>
                         <ComboBoxItem>Oboje</ComboBoxItem>
                     </ComboBox>
-                    <TextBox Grid.Column="1" Grid.Row="10" Text="{Binding Path=Smer.Name}"></TextBox>
-                    <ComboBox Grid.Column="1" Grid.Row="11" ItemsSource="{Binding TestS}" SelectedIndex="0">
+                    <ComboBox Grid.Column="1" Grid.Row="10" 
+                              ItemsSource="{Binding Path=courses_names}"
+                              Text="{Binding Path=Smer.Name}">
+                    </ComboBox>
+                    <ComboBox Grid.Column="1" Grid.Row="11" 
+                              HorizontalAlignment="Left" 
+                              VerticalAlignment="Center" 
+                              IsReadOnly="True" Text="Lista softvera"
+                              IsEditable="True"
+                              ItemsSource="{Binding Path=SoftwaresSelectedCollection}" 
+                              >
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox IsChecked="{Binding IsSelected}" Width="20" 
+                                              VerticalAlignment="Center"
+                                              Unchecked="OnContentChanged" />
+                                    <TextBlock Text="{Binding ObjectData.Name}" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
                     </ComboBox>
                     <CheckBox Grid.Column="1" Grid.Row="12" IsChecked="{Binding Path=deleted}"/>
                 </Grid>
@@ -564,31 +583,6 @@
                               dd:DragDrop.IsDragSource="True"
                               dd:DragDrop.IsDropTarget="True"
                               dd:DragDrop.UseDefaultEffectDataTemplate="True" >
-                        <DataGrid.ColumnHeaderStyle>
-                            <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
-                                <Setter Property="LayoutTransform">
-                                    <Setter.Value>
-                                        <TransformGroup>
-                                            <RotateTransform Angle="-90"/>
-                                            <ScaleTransform ScaleX="1" ScaleY="-1" />
-                                        </TransformGroup>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </DataGrid.ColumnHeaderStyle>
-                        <DataGrid.CellStyle>
-                            <Style  TargetType="DataGridCell">
-                                <Setter Property="LayoutTransform">
-                                    <Setter.Value>
-                                        <TransformGroup>
-                                            <RotateTransform Angle="-90"/>
-                                            <ScaleTransform ScaleX="1" ScaleY="-1" />
-                                        </TransformGroup>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </DataGrid.CellStyle>
-
 
                     </DataGrid>
                 </Grid>

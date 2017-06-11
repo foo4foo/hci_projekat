@@ -40,8 +40,13 @@ namespace hci
 
         private bool demo = false;
 
+        private ObservableCollection<string> courses_names;
 
-
+        public ObservableCollection<SelectableObject<Software>> SoftwaresSelectedCollection
+        {
+            get;
+            set;
+        }
 
         internal static class ConsoleAllocator
         {
@@ -85,11 +90,30 @@ namespace hci
         {
             this.DataContext = this;
 
+            DatabaseManager databaseManager = new DatabaseManager();
+            MySqlCommand cmd = new MySqlCommand("Select * from softwares;");
+            var sc = databaseManager.GetCollectionSoftwares(cmd);
 
+            this.SoftwaresSelectedCollection = new ObservableCollection<SelectableObject<Software>>();
+
+            for (int i = 0; i < sc.Count; i++)
+            {
+                this.SoftwaresSelectedCollection.Add(new SelectableObject<Software>(sc[i], false));
+            }
+
+            courses_names = new ObservableCollection<string>();
+
+            MySqlCommand cmd2 = new MySqlCommand("Select * from courses;");
+            var cc = databaseManager.GetCollectionCourses(cmd2);
+            foreach (var el in cc)
+            {
+                courses_names.Add(el.Name);
+                Console.WriteLine(el.Name);
+            }
 
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             ConsoleAllocator.ShowConsoleWindow();
-
+            Console.WriteLine(this.SoftwaresSelectedCollection[0].ObjectData.Name);
             db = new DatabaseManager();
             InitializeComponent();
 
