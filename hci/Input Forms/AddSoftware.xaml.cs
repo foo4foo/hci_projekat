@@ -101,7 +101,7 @@ namespace hci.Input_Forms
                   + "values ('" + _id + "','" + _name + "','" + _os + "','" + _developer + "','" + _website + "'," + _year + "," + _price + ",'" + _desc + "'," + false + ");");
 
                 db.ExecuteQuery(cmd);
-                MessageBox.Show("Software successfully added!");
+                MessageBox.Show("Softver uspešno dodat!");
 
                 DataChangedEventHandler handler = DataChanged;
                 if (handler != null)

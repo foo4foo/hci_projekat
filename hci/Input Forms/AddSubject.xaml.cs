@@ -164,7 +164,7 @@ namespace hci.Input_Forms
 
                 Subject s = new Subject(_id, _name, _desc, _size, minLength, noOfClasses, _projector, _board, _smartBoard, _os, c, _softwares, false);
 
-                MessageBox.Show("Subject successfully added!");
+                MessageBox.Show("Predmet uspešno dodat!");
 
                 DataChangedEventHandler handler = DataChanged;
                 if (handler != null)

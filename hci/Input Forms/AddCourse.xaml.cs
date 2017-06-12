@@ -91,7 +91,7 @@ namespace hci.Input_Forms
                   + "values ('" + _id + "','" + _name + "','" + _date + "','" + _desc + "', " + false + ");");
 
                 db.ExecuteQuery(cmd);
-                MessageBox.Show("Course successfully added!");
+                MessageBox.Show("Smer uspešno dodat!");
 
                 DataChangedEventHandler handler = DataChanged;
                 if (handler != null)

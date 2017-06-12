@@ -66,7 +66,7 @@
 
                         <DataGrid.Columns>
 
-                            <DataGridTemplateColumn Header="Oznaka smera" IsReadOnly="False">
+                            <DataGridTemplateColumn  SortMemberPath="Id" Header="Oznaka smera" IsReadOnly="False">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Id}" FocusManager.FocusedElement="{Binding RelativeSource={RelativeSource Self}}"></TextBlock>
@@ -74,7 +74,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Naziv smera">
+                            <DataGridTemplateColumn  SortMemberPath="Name" Header="Naziv smera">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Name}"></TextBlock>
@@ -82,7 +82,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Datum uvođenja">
+                            <DataGridTemplateColumn  SortMemberPath="Date" Header="Datum uvođenja">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Date}"></TextBlock>
@@ -90,7 +90,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Opis smera">
+                            <DataGridTemplateColumn  SortMemberPath="Description" Header="Opis smera">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Description}"></TextBlock>
@@ -110,7 +110,7 @@
                               dd:DragDrop.UseDefaultEffectDataTemplate="True" Margin="10,50,10,20">
                         <DataGrid.Columns>
 
-                            <DataGridTemplateColumn Header="Oznaka predmeta" IsReadOnly="True">
+                            <DataGridTemplateColumn  SortMemberPath="Id" Header="Oznaka predmeta" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Id}"></TextBlock>
@@ -118,7 +118,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Naziv predmeta" IsReadOnly="True">
+                            <DataGridTemplateColumn  SortMemberPath="Name" Header="Naziv predmeta" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Name}"></TextBlock>
@@ -126,7 +126,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Opis predmeta" IsReadOnly="True">
+                            <DataGridTemplateColumn  SortMemberPath="Description" Header="Opis predmeta" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Description}"></TextBlock>
@@ -134,31 +134,31 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Veličina grupe" IsReadOnly="True">
+                            <DataGridTemplateColumn  SortMemberPath="Size" Header="Veličina grupe" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Size}"></TextBlock>
+                                        <TextBlock Text="{Binding Size }"></TextBlock>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Min. dužina termina" IsReadOnly="True">
+                            <DataGridTemplateColumn  SortMemberPath="MinLength" Header="Min. dužina termina" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Size}"></TextBlock>
+                                        <TextBlock Text="{Binding MinLength}"></TextBlock>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Broj termina" IsReadOnly="True">
+                            <DataGridTemplateColumn SortMemberPath="NoOfClasses" Header="Broj termina" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Size}"></TextBlock>
+                                        <TextBlock Text="{Binding NoOfClasses}"></TextBlock>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Projektor" IsReadOnly="True">
+                            <DataGridTemplateColumn SortMemberPath="NeedProjector" Header="Projektor" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <CheckBox IsHitTestVisible="False" IsChecked="{Binding NeedProjector}"></CheckBox>
@@ -166,7 +166,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Tabla" IsReadOnly="True">
+                            <DataGridTemplateColumn SortMemberPath="NeedBoard" Header="Tabla" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <CheckBox IsHitTestVisible="False" IsChecked="{Binding NeedBoard}"></CheckBox>
@@ -174,7 +174,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Pametna tabla" IsReadOnly="True">
+                            <DataGridTemplateColumn SortMemberPath="NeedSmartBoard" Header="Pametna tabla" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <CheckBox IsHitTestVisible="False" IsChecked="{Binding NeedSmartBoard}"></CheckBox>
@@ -182,7 +182,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Potreban OS" IsReadOnly="True">
+                            <DataGridTemplateColumn SortMemberPath="Os" Header="Potreban OS" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Os}"></TextBlock>
@@ -190,7 +190,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Smer" IsReadOnly="True">
+                            <DataGridTemplateColumn SortMemberPath="Smer.Name" Header="Smer" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Smer.Name }"></TextBlock>
@@ -198,7 +198,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Softver">
+                            <DataGridTemplateColumn SortMemberPath="TestS" Header="Softver">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate  >
                                         <ComboBox ItemsSource="{Binding TestS}" SelectedIndex="0">
@@ -215,15 +215,15 @@
                               HorizontalAlignment="Left" Margin="10,50,10,20">
                         <DataGrid.Columns>
 
-                            <DataGridTemplateColumn Header="Oznaka softvera" IsReadOnly="True">
+                            <DataGridTemplateColumn SortMemberPath="Id" Header="Oznaka softvera" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Id}"></TextBlock>
+                                        <TextBlock  Text="{Binding Id}"></TextBlock>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Naziv softvera" IsReadOnly="True">
+                            <DataGridTemplateColumn SortMemberPath="Name" Header="Naziv softvera" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Name}"></TextBlock>
@@ -231,7 +231,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Operativni sistem" IsReadOnly="True">
+                            <DataGridTemplateColumn SortMemberPath="Os" Header="Operativni sistem" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Os}"></TextBlock>
@@ -239,7 +239,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Proizvođač" IsReadOnly="True">
+                            <DataGridTemplateColumn SortMemberPath="Developer" Header="Proizvođač" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Developer}"></TextBlock>
@@ -248,7 +248,7 @@
                             </DataGridTemplateColumn>
 
 
-                            <DataGridTemplateColumn Header="Sajt" IsReadOnly="True">
+                            <DataGridTemplateColumn SortMemberPath="Site" Header="Sajt" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Site}"></TextBlock>
@@ -256,7 +256,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Godina proizvodnje" IsReadOnly="True">
+                            <DataGridTemplateColumn SortMemberPath="Year" Header="Godina proizvodnje" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Year}"></TextBlock>
@@ -264,7 +264,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Cena" IsReadOnly="True">
+                            <DataGridTemplateColumn SortMemberPath="Price" Header="Cena" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Price}"></TextBlock>
@@ -272,7 +272,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Opis softvera" IsReadOnly="True">
+                            <DataGridTemplateColumn SortMemberPath="Description" Header="Opis softvera" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Description}"></TextBlock>
@@ -295,7 +295,7 @@
                               dd:DragDrop.DragDropCopyKeyState="ControlKey" Margin="10,50,10,20" >
                         <DataGrid.Columns>
 
-                            <DataGridTemplateColumn SortMemberPath="{Binding Id}"  CanUserSort="true" Header="Oznaka učionice" IsReadOnly="True">
+                            <DataGridTemplateColumn x:Name="idKol"  SortMemberPath="Id"  CanUserSort="true" Header="Oznaka učionice" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Id}"></TextBlock>
@@ -303,7 +303,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Opis učionice" IsReadOnly="True">
+                            <DataGridTemplateColumn  SortMemberPath="Description" Header="Opis učionice" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Description}"></TextBlock>
@@ -311,15 +311,15 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Broj radnih mesta" IsReadOnly="True">
+                            <DataGridTemplateColumn  SortMemberPath="Size" Header="Broj radnih mesta" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Size}"></TextBlock>
+                                        <TextBlock  Text="{Binding Size}"></TextBlock>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Projektor" IsReadOnly="True">
+                            <DataGridTemplateColumn  SortMemberPath="HaveProjector" Header="Projektor" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <CheckBox IsHitTestVisible="False" IsChecked="{Binding HaveProjector}"></CheckBox>
@@ -327,7 +327,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Tabla" IsReadOnly="True">
+                            <DataGridTemplateColumn  SortMemberPath="HaveBoard" Header="Tabla" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <CheckBox IsHitTestVisible="False" IsChecked="{Binding HaveBoard}"></CheckBox>
@@ -335,7 +335,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Pametna tabla" IsReadOnly="True">
+                            <DataGridTemplateColumn  SortMemberPath="HaveSmartBoard" Header="Pametna tabla" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <CheckBox IsHitTestVisible="False" IsChecked="{Binding HaveSmartBoard}"></CheckBox>
@@ -343,7 +343,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Operativni sistem" IsReadOnly="True">
+                            <DataGridTemplateColumn  SortMemberPath="OperatingSys" Header="Operativni sistem" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding OperatingSys}"></TextBlock>
@@ -351,7 +351,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Softver">
+                            <DataGridTemplateColumn  SortMemberPath="TestS" Header="Softver">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate  >
                                         <ComboBox ItemsSource="{Binding TestS}" SelectedIndex="0">

@@ -118,6 +118,7 @@ namespace hci
             string s = TableValue(0, 0, classrooms.Count + 1);  //read string from coordinates
                                                                 //Console.Write(s);
 
+            
             editSmerovi.ItemsSource = courses;
             editSoftverZaPredmet.ItemsSource = SoftwaresSelectedCollection;
             editSoftverZaUcionicu.ItemsSource = SoftwaresSelectedCollection;

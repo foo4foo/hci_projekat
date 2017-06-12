@@ -157,7 +157,7 @@ namespace hci.Input_Forms
                 Classroom c = new Classroom(_id, _desc, _size, _projector, _board, _smartBoard, _os, _software, false);
 
 
-                MessageBox.Show("Classroom successfully added!");
+                MessageBox.Show("Učionica uspešno dodata!");
 
                 DataChangedEventHandler handler = DataChanged;
                 if (handler != null)
