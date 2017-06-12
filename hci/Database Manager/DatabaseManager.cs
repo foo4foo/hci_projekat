@@ -107,6 +107,7 @@ namespace hci.Database_Manager
                                 dict["softwareYear"] = reader.GetString(6);
                                 dict["softwarePrice"] = reader.GetString(7);
                                 dict["softwareDescription"] = reader.GetString(8);
+                                dict["deleted"] = reader.GetString(9);
 
                                 lista.Add(dict);
                             }

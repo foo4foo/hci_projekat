@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -38,6 +39,18 @@ namespace hci
         private ObservableCollection<Software> software;
     
         private DatabaseManager db;
+
+        public ObservableCollection<int> Brojevi
+        {
+            get;
+            set;
+        }
+
+        public ObservableCollection<int> Godine
+        {
+            get;
+            set;
+        }
 
         private bool demo = false;
 
@@ -103,11 +116,31 @@ namespace hci
                 
             }
 
+            this.Brojevi = new ObservableCollection<int>();
+            for (int i = 1; i < 121; i++)
+                this.Brojevi.Add(i);
+
+            this.Godine = new ObservableCollection<int>();
+            for (int i = 2017; i > 1944; i--)
+                this.Godine.Add(i);
+
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
           
         
             InitializeComponent();
-     
+
+            /*____________-----------------------___________________*/
+            // Ovde su dodavani podaci za comboboxove (velicine itd) jer
+            // iz xaml-a nece da radi
+            cb1Sub.ItemsSource = this.Brojevi; // for subject
+            cb2Sub.ItemsSource = this.Brojevi; // --||--
+            cb3Sub.ItemsSource = this.Brojevi; // --||--
+
+            cbSoftware.ItemsSource = this.Godine; // for software
+
+            cbClassroom.ItemsSource = this.Brojevi; // for classroom
+
+            /*____________-----------------------___________________*/
             showClassroomTable();
             showCourseTable();
             showSoftwareTable();
@@ -295,7 +328,7 @@ namespace hci
             var classroomSoftware = db.GetSoftwareList(new MySqlCommand(
                 "select sc.classroomId, s.softwareId, s.name, s.operatingSys, s.developer, s.site, s.year, s.price, "
                 +
-                "s.description from softwares as s left join softwareInClassroom as sc on sc.softwareId = s.ID;"
+                "s.description, s.deleted from softwares as s left join softwareInClassroom as sc on sc.softwareId = s.ID;"
             ));
 
             foreach (var classroom in classrooms)
@@ -304,6 +337,8 @@ namespace hci
                 {
                     foreach (var cSoftware in classroomSoftware)
                     {
+                        if (cSoftware["deleted"].Equals("True"))
+                            continue;
                         if (classroom.DbId.Equals(cSoftware["ID"]))
                         {
                             var software = new Software();
@@ -382,13 +417,15 @@ namespace hci
             var subjectSoftware = db.GetSoftwareList(new MySqlCommand(
             "select ss.subjectId, s.softwareId, s.name, s.operatingSys, s.developer, s.site, s.year, s.price, "
             +
-            "s.description from softwares as s left join softwareInSubject as ss on ss.softwareId = s.ID;"
+            "s.description, s.deleted from softwares as s left join softwareInSubject as ss on ss.softwareId = s.ID;"
         ));
 
             foreach (var subject in subjects)
             {
                 foreach (var cSoftware in subjectSoftware)
                 {
+                    if (cSoftware["deleted"].Equals("True"))
+                        continue;
                     if (subject.DbId.Equals(cSoftware["ID"]))
                     {
                         var software = new Software();
@@ -858,6 +895,18 @@ namespace hci
             demo = false;
             DemoLabel.Visibility = Visibility.Hidden;
             DemoButton.Visibility = Visibility.Hidden;
+        }
+
+        private bool KeyEnteredIsValid(string key)
+        {
+            Regex regex;
+            regex = new Regex("[^0-9]+\\.?[0-9]+"); //regex that matches disallowed text
+            return regex.IsMatch(key);
+        }
+
+        private void Price_OnPreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = KeyEnteredIsValid(e.Text);
         }
     }
 }
