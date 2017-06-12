@@ -4,7 +4,7 @@
         xmlns:cmd="clr-namespace:hci.Commands"
         xmlns:data="clr-namespace:System.Data;assembly=System.Data"
         xmlns:dd="urn:gong-wpf-dragdrop"
-        Title="HCI Projekat" Height="720" Width="1280" MinHeight="720" MinWidth="1280"  >
+        Title="HCI Projekat" Height="720" Width="1280" MinHeight="720" MinWidth="1280"  ResizeMode="CanMinimize"  >
     <Window.CommandBindings>
         <CommandBinding Command="cmd:RoutedCommands.AddClassroomCommand" CanExecute="AddClassroomCommand_CanExecute" Executed="AddClassroomCommand_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.AddSoftwareCommand" CanExecute="AddSoftwareCommand_CanExecute" Executed="AddSoftwareCommand_Executed"></CommandBinding>
@@ -28,7 +28,7 @@
                     <MenuItem Header="_Predmet" Command="cmd:RoutedCommands.AddSubjectCommand" ToolTip="Dodaj novi predmet"></MenuItem>
                 </MenuItem>
 
-                <MenuItem Header="_Sačuvaj" Command="cmd:RoutedCommands.SaveAllCommand" ToolTip="Sačuvajte izmene"/>
+                <MenuItem Name="SacuvajMenuItem" Header="_Sačuvaj" Command="cmd:RoutedCommands.SaveAllCommand" ToolTip="Sačuvajte izmene"/>
                 <Separator />
                 <MenuItem Header="_Napusti program" Command="cmd:RoutedCommands.ExitCommand" />
             </MenuItem>
@@ -57,12 +57,12 @@
                     <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <Label Name="labelUcionice" Width="100" Height="40" Margin="240,78,264.765,585" Content="UČIONICE" FontSize="16" FontWeight="Bold"/>
-                    <Label Name="labelPredmeti" Width="100" Height="40" Margin="240,78,264.765,585" Content="PREDMETI" FontSize="16" FontWeight="Bold"/>
-                    <Label Name="labelSmerovi" Width="100" Height="40" Margin="240,78,264.765,585" Content="SMEROVI" FontSize="16" FontWeight="Bold"/>
-                    <Label Name="labelSoftveri" Width="100" Height="40" Margin="240,78,264.765,585" Content="SOFTVER" FontSize="16" FontWeight="Bold"/>
+                    <Label Name="labelUcionice" Width="100" Height="40" Margin="256,21,281,275" Content="UČIONICE" FontSize="16" FontWeight="Bold"/>
+                    <Label Name="labelPredmeti" Width="100" Height="40" Margin="256,21,281,275" Content="PREDMETI" FontSize="16" FontWeight="Bold"/>
+                    <Label Name="labelSmerovi" Width="100" Height="40" Margin="256,21,281,275" Content="SMEROVI" FontSize="16" FontWeight="Bold"/>
+                    <Label Name="labelSoftveri" Width="100" Height="40" Margin="256,21,281,275" Content="SOFTVER" FontSize="16" FontWeight="Bold"/>
 
-                    <DataGrid x:Name="courseTable" CanUserAddRows="False" IsReadOnly="False" AutoGenerateColumns="False" HorizontalAlignment="Left">
+                    <DataGrid x:Name="courseTable" CanUserAddRows="False" IsReadOnly="False" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="141,50,10,20">
 
                         <DataGrid.Columns>
 
@@ -107,7 +107,7 @@
                               dd:DragDrop.IsDragSource="True"
                               dd:DragDrop.IsDropTarget="True"
                               dd:DragDrop.DropScrollingMode="VerticalOnly"
-                              dd:DragDrop.UseDefaultEffectDataTemplate="True">
+                              dd:DragDrop.UseDefaultEffectDataTemplate="True" Margin="10,50,10,20">
                         <DataGrid.Columns>
 
                             <DataGridTemplateColumn Header="Oznaka predmeta" IsReadOnly="True">
@@ -212,7 +212,7 @@
                     <DataGrid x:Name="softwareTable" 
                               IsReadOnly="True"
                               AutoGenerateColumns="False" 
-                              HorizontalAlignment="Left">
+                              HorizontalAlignment="Left" Margin="10,50,10,20">
                         <DataGrid.Columns>
 
                             <DataGridTemplateColumn Header="Oznaka softvera" IsReadOnly="True">
@@ -292,10 +292,10 @@
                               dd:DragDrop.IsDropTarget="True"
                               dd:DragDrop.DropScrollingMode="VerticalOnly"
                               dd:DragDrop.UseDefaultEffectDataTemplate="True"
-                              dd:DragDrop.DragDropCopyKeyState="ControlKey" >
+                              dd:DragDrop.DragDropCopyKeyState="ControlKey" Margin="10,50,10,20" >
                         <DataGrid.Columns>
 
-                            <DataGridTemplateColumn Header="Oznaka učionice" IsReadOnly="True">
+                            <DataGridTemplateColumn SortMemberPath="{Binding Id}"  CanUserSort="true" Header="Oznaka učionice" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Id}"></TextBlock>
@@ -365,7 +365,7 @@
                 </Grid>
                 <Grid Grid.Row="1"
                       DataContext="{Binding ElementName=classroomTable, Path=SelectedItem}"
-                      Name="editClassrooms">
+                      Name="editClassrooms" Margin="10,0,10,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -423,7 +423,7 @@
 
                 <Grid Grid.Row="1"
                       DataContext="{Binding ElementName=courseTable, Path=SelectedItem}"
-                      Name="editCourses">
+                      Name="editCourses" Margin="10,0,10,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -455,7 +455,7 @@
 
                 <Grid Grid.Row="1"
                       DataContext="{Binding ElementName=subjectTable, Path=SelectedItem}"
-                      Name="editSubjects">
+                      Name="editSubjects" Margin="10,0,10,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -530,7 +530,7 @@
 
                 <Grid Grid.Row="1" 
                       DataContext="{Binding ElementName=softwareTable,Path=SelectedItem}"
-                      Name="editSoftware" Margin="0,0,0,72">
+                      Name="editSoftware" Margin="10,0,10,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -569,26 +569,39 @@
 
                 </Grid>
                 <Grid Grid.Row="2">
-                    <Button Margin="28,10,514,44" Background="White" Command="cmd:RoutedCommands.SaveAllCommand" ToolTip="Sačuvajte izmene">Sačuvaj izmene</Button>
-                    <Label Name="DemoLabel" Visibility="Collapsed" Content="Demonstracioni mod" FontSize="20" Margin="28,35,408,9" />
-                    <Button Name="DemoButton" Visibility="Collapsed" Click="DemoButton_Click" Background="White" Margin="256,40,236,10">STOP DEMO</Button>
+                    <Button Name="SacuvajButton" Margin="28,10,514,44" Width="90" Background="White" Command="cmd:RoutedCommands.SaveAllCommand" ToolTip="Sačuvajte izmene">Sačuvaj izmene</Button>
+                    <Label Name="DemoLabel" Visibility="Collapsed" Content="Demonstracioni mod" FontWeight="Bold" FontSize="20" Margin="394,3,25,41" />
+                    <Button Name="DemoButton" Visibility="Collapsed" Click="DemoButton_Click" Background="Black" Foreground="White" FontWeight="Bold" Margin="422,40,71,10">STOP DEMO</Button>
                 </Grid>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="2.5*"></RowDefinition>
+                    <RowDefinition Height="0.5*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="4*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-
+                    <Label Name="prevuciteLabel" Content="(mišem prevucite željeni predmet u raspored)" FontSize="12" Margin="195,186,103,-5"/>
+                    <Label Content="PREDMETI" FontSize="14" FontWeight="Bold" Margin="274,168,275,13"/>
                 </Grid>
                 <Grid Grid.Row="1">
                     <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                        <Grid     dd:DragDrop.IsDragSource="True"
-                              dd:DragDrop.IsDropTarget="True"
-                              dd:DragDrop.DropScrollingMode="VerticalOnly"
-                              dd:DragDrop.UseDefaultEffectDataTemplate="True"
-                              dd:DragDrop.DragDropCopyKeyState="ControlKey" Name="MyGrid" Grid.Row="1" >
+                        <Grid    
+                              
+                               Name="PredmetiZaDrop" Grid.Row="1"  >
+
+                        </Grid>
+                    </ScrollViewer>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Label Content="RASPORED" FontSize="20" FontWeight="Bold" Margin="253,38,262,10"/>
+                </Grid>
+                <Grid Grid.Row="3">
+                    <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                        <Grid    
+                              
+                               Name="MyGrid" Grid.Row="3" >
 
                         </Grid>
                     </ScrollViewer>

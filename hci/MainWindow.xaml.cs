@@ -137,9 +137,52 @@ namespace hci
         {
             MessageBox.Show("Not yet implemented");
         }
-
+   
         public void MakeRaspored()
         {
+            for (int p = 0; p < subjects.Count + 1; p++)
+                PredmetiZaDrop.ColumnDefinitions.Add(new ColumnDefinition());
+            for (int z = 0; z < 2; z++)
+            {
+                RowDefinition r = new RowDefinition();
+                if (z == 0)
+                    r.Height = new GridLength(2, GridUnitType.Star);
+                else r.Height = new GridLength(5, GridUnitType.Star);
+                PredmetiZaDrop.RowDefinitions.Add(r);
+            }
+
+
+            for (int x = 1; x < subjects.Count + 1; x++)
+            {
+                for (int z = 1; z < 2; z++)
+                {
+                    TextBox tb = new TextBox();
+                   // tb.AllowDrop = true;
+                   
+
+                   // tb.PreviewDragEnter += TextBox_DragEnter;
+                  //  tb.PreviewDrop += TextBox_Drop;
+
+                     tb.IsReadOnly = true;
+                    if (z == 1)
+                    {
+                        tb.Text = subjects[x - 1].Name;
+                    }
+                    else
+                    {
+                        //tb.Text = "xxx";
+                       
+                    }
+                    Grid.SetColumn(tb, x);
+                    Grid.SetRow(tb, z);
+                  
+                    string name = "cell_" + x + "_" + z;
+                    tb.Name = name;
+                    PredmetiZaDrop.Children.Add(tb);
+                }
+            }
+
+
 
             for (int x = 0; x < classrooms.Count + 1; x++)
                 MyGrid.ColumnDefinitions.Add(new ColumnDefinition());
@@ -161,8 +204,11 @@ namespace hci
             {
                 TextBox tb = new TextBox();
                 tb.FontWeight = FontWeights.Bold;
+
                 tb.IsReadOnly = true;
-                if (y == 0) { tb.Text = "Vreme / Učionice"; }
+                
+              
+                if (y == 0) { tb.Text = "Vreme / Učionice"; Grid.SetRow(tb, 3); }
 
 
                 else
@@ -183,13 +229,14 @@ namespace hci
 
                 }
                 y++;
-                if (i == 22) { tb.Text = i + ".00 h"; Grid.SetRow(tb, y); MyGrid.Children.Add(tb); break; }
+                if (i == 22) { tb.Text = i + ".00 h"; Grid.SetRow(tb, y);  MyGrid.Children.Add(tb); break; }
                 if (j == 4)
                 {
                     j = 0;
                     i += 1;
                 }
                 Grid.SetColumn(tb, 0);
+              
                 Grid.SetRow(tb, y);
                 MyGrid.Children.Add(tb);
             }
@@ -204,19 +251,30 @@ namespace hci
                 {
                     TextBox tb = new TextBox();
                     tb.FontWeight = FontWeights.Bold;
-                    tb.IsReadOnly = true;
-                    if (z == 1) tb.Text = classrooms[x - 1].Id;
+                  //  tb.IsReadOnly = true;
+                    if (z == 1) {
+                        tb.Text = classrooms[x - 1].Id;
+                        tb.IsReadOnly = true;
+                    }
                     else
                     {
+                        tb.AllowDrop = true;
+                        tb.PreviewDragEnter += TextBox_DragEnter;
+                        tb.PreviewDrop += TextBox_Drop;
+                        tb.PreviewDragLeave += TextBox_DragLeave;
                         //tb.Text = "";
                     }
                     Grid.SetColumn(tb, x);
                     Grid.SetRow(tb, z);
                     string name = "cell_" + x + "_" + z;
                     tb.Name = name;
+                    MyGrid.RegisterName(tb.Name, tb);
+                   
                     MyGrid.Children.Add(tb);
                 }
             }
+         
+         
 
         }
 
@@ -267,6 +325,40 @@ namespace hci
 
             classroomTable.ItemsSource = this.classrooms;
            
+        }
+
+        private void TextBox_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effects = DragDropEffects.Copy;
+            var tb = e.Source as TextBox;
+         
+        }
+
+
+        private void TextBox_DragLeave(object sender, DragEventArgs e)
+        {
+            e.Effects = DragDropEffects.Copy;
+            var tb = e.Source as TextBox;
+            int f = Grid.GetRowSpan(tb);
+            string ff = tb.Text;
+            if (f == 3 && ff.Equals("")) Grid.SetRowSpan(tb, 1);
+        }
+
+        private void TextBox_Drop(object sender, DragEventArgs e)
+        {
+
+            var tb = e.Source as TextBox;
+            string reg_name = tb.Name;
+            string[] tokens = reg_name.Split('_');
+            int row = Int32.Parse(tokens[2]);
+                       
+            Grid.SetRow(tb, row-2);
+            Grid.SetRowSpan(tb, 3);
+          /*  int row2 = row + 2;
+            Console.Write(tokens[0] + "_" + tokens[1] + "_" + row2);
+             TextBox tb2 = (TextBox)this.MyGrid.FindName(tokens[0] + "_" + tokens[1] + "_" + row2);
+            Grid.SetRow(tb2, row2 - 2);
+            Grid.SetRowSpan(tb2, 3); */
         }
 
         private void showCourseTable()
@@ -707,6 +799,35 @@ namespace hci
                     if (!demo) break;
                     await Task.Delay(1000);
                     Prikaz.IsSubmenuOpen = false;
+                    await Task.Delay(1000);
+                    MenuItemDatoteka.IsSubmenuOpen = true;
+                    blinkMenuItem(SacuvajMenuItem, 3);
+                    for (int i = 0; i < 3; i++)
+                    {
+                        SacuvajButton.Background = Brushes.Black;
+                        SacuvajButton.Foreground = Brushes.White;
+                        await Task.Delay(300);
+                        SacuvajButton.Foreground = Brushes.Black;
+                        SacuvajButton.Background = Brushes.White;
+                        await Task.Delay(300);
+                    }
+                    if (!demo) break;
+                    await Task.Delay(1800);
+                    if (!demo) break;
+                    MenuItemDatoteka.IsSubmenuOpen = false;
+                    for (int i = 0; i < 5; i++)
+                    {
+                        prevuciteLabel.FontWeight = FontWeights.Bold;
+                        prevuciteLabel.FontSize = 14;
+                        prevuciteLabel.Visibility = Visibility.Collapsed;
+                        await Task.Delay(300);
+                        prevuciteLabel.Visibility = Visibility.Visible;
+                        await Task.Delay(300);
+                    }
+                    prevuciteLabel.FontSize = 12;
+                    prevuciteLabel.FontWeight = FontWeights.Normal;
+                    if (!demo) break;
+
                 }
             }
         }
