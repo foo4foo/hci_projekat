@@ -145,7 +145,11 @@ namespace hci.Input_Forms
                     if (sftwObject.IsSelected)
                     {
                         _software.Add(sftwObject.ObjectData);
-                        MySqlCommand cmd2 = new MySqlCommand("insert into hci.softwareInClassroom(classroomId, softwareId) values ('" + _id + "','" + sftwObject.ObjectData.Id + "');");
+                        var classroom_db_id = db.get_id(new MySqlCommand("Select ID from classrooms where classroomId=\"" + _id + "\";"));
+                        var software_db_id = db.get_id(
+                            new MySqlCommand("Select ID from softwares where softwareId=\"" + sftwObject.ObjectData.Id + "\";"));
+                        MySqlCommand cmd2 = new MySqlCommand("insert into hci.softwareInClassroom(classroomId, softwareId) values ('" + 
+                            classroom_db_id + "','" + software_db_id + "');");
                         db.ExecuteQuery(cmd2);
                     }
 

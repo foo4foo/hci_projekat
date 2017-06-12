@@ -142,8 +142,9 @@ namespace hci.Input_Forms
                 }
                 ObservableCollection<Software> _softwares = new ObservableCollection<Software>();
 
+                var course_db_id = db.get_id(new MySqlCommand("Select ID from courses where courseId=\"" + c.Id + "\";"));
                 MySqlCommand cmd = new MySqlCommand("insert into hci.subjects(subjectId,name,description,size,minLength,noOfClasses,needProjector,needBoard,needSmartBoard,needOperatingSys, courseId)"
-                  + "values ('" + _id + "','" + _name + "','" + _desc + "'," + _size + "," + minLength + "," + noOfClasses + "," + _projector + "," + _board + "," + _smartBoard + ",'" + _os + "','" + c.Id + "');");
+                  + "values ('" + _id + "','" + _name + "','" + _desc + "'," + _size + "," + minLength + "," + noOfClasses + "," + _projector + "," + _board + "," + _smartBoard + ",'" + _os + "','" + course_db_id + "');");
 
                 db.ExecuteQuery(cmd);
 
@@ -152,7 +153,9 @@ namespace hci.Input_Forms
                     {
                         _softwares.Add(sftwObject.ObjectData);
                         Console.WriteLine(sftwObject.ObjectData.ToString());
-                        MySqlCommand cmd2 = new MySqlCommand("insert into hci.softwareInSubject(subjectId, softwareId) values ('" + _id + "','" + sftwObject.ObjectData.Id + "');");
+                        var software_db_id = db.get_id(new MySqlCommand("Select ID from softwares where softwareId=\"" + sftwObject.ObjectData.Id + "\";"));
+                        var subject_db_id = db.get_id(new MySqlCommand("Select ID from subjects where subjectId=\"" + _id + "\";"));
+                        MySqlCommand cmd2 = new MySqlCommand("insert into hci.softwareInSubject(subjectId, softwareId) values ('" + subject_db_id + "','" + software_db_id + "');");
                         db.ExecuteQuery(cmd2);
 
                     }

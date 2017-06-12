@@ -103,11 +103,7 @@ namespace hci
                 
             }
 
-           
-
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-          
-            Console.WriteLine(this.SoftwaresSelectedCollection[0].ObjectData.Name);
           
         
             InitializeComponent();
@@ -146,14 +142,14 @@ namespace hci
             var classroomSoftware = db.GetSoftwareList(new MySqlCommand(
                 "select sc.classroomId, s.softwareId, s.name, s.operatingSys, s.developer, s.site, s.year, s.price, "
                 +
-                "s.description from softwares as s left join softwareInClassroom as sc on sc.softwareId = s.softwareId;"
+                "s.description from softwares as s left join softwareInClassroom as sc on sc.softwareId = s.ID;"
             ));
 
             foreach (var classroom in classrooms)
             {
                 foreach (var cSoftware in classroomSoftware)
                 {
-                    if (classroom.Id.Equals(cSoftware["constraintId"]))
+                    if (classroom.DbId.Equals(cSoftware["ID"]))
                     {
                         var software = new Software();
                         software.Id = cSoftware["softwareId"];
@@ -196,14 +192,14 @@ namespace hci
             var subjectSoftware = db.GetSoftwareList(new MySqlCommand(
             "select ss.subjectId, s.softwareId, s.name, s.operatingSys, s.developer, s.site, s.year, s.price, "
             +
-            "s.description from softwares as s left join softwareInSubject as ss on ss.softwareId = s.softwareId;"
+            "s.description from softwares as s left join softwareInSubject as ss on ss.softwareId = s.ID;"
         ));
 
             foreach (var subject in subjects)
             {
                 foreach (var cSoftware in subjectSoftware)
                 {
-                    if (subject.Id.Equals(cSoftware["constraintId"]))
+                    if (subject.DbId.Equals(cSoftware["ID"]))
                     {
                         var software = new Software();
                         software.Id = cSoftware["softwareId"];
@@ -431,6 +427,76 @@ namespace hci
 
         }
 
+        private void SaveAllCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void SaveAllCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            // prodji kroz sve 4 kolekcije i uradi update u bazi
+            var db = new DatabaseManager();
+            foreach (var course in this.courses)
+            {
+                if (course.Deleted)
+                {
+                    Console.WriteLine(course.Name);
+                    string stmt = "Delete from courses where courseId=\"" + course.Id + "\";";
+                    MySqlCommand cmd = new MySqlCommand(stmt);
+                    db.ExecuteQuery(cmd);
+                    this.courses.Remove(course);
+
+                    continue;
+                }
+
+                string stmt_upd = "Update courses set courseId=\""+ course.Id + 
+                    "\", name=\"" + course.Name + "\", date_=\"" + course.Date + 
+                    "\", description=\"" + course.Description +
+                    "\" where courseId=\"" + course.Id + "\"";
+                Console.WriteLine(stmt_upd);
+                MySqlCommand cmd_upd = new MySqlCommand(stmt_upd);
+                db.ExecuteQuery(cmd_upd);
+            }
+
+            foreach (var software in this.software)
+            {
+                if (software.Deleted)
+                {
+                    string stmt = "Delete from softwares where softwareId=\"" + software.Id + "\";";
+                    MySqlCommand cmd = new MySqlCommand(stmt);
+                    db.ExecuteQuery(cmd);
+                    this.software.Remove(software);
+
+                    continue;
+                }
+            }
+
+            foreach (var classroom in this.classrooms)
+            {
+                if (classroom.Deleted)
+                {
+                    string stmt = "Delete from softwares where classroomId=\"" + classroom.Id + "\";";
+                    MySqlCommand cmd = new MySqlCommand(stmt);
+                    db.ExecuteQuery(cmd);
+                    this.classrooms.Remove(classroom);
+
+                    continue;
+                }
+            }
+
+            foreach (var subject in this.subjects)
+            {
+                if (subject.Deleted)
+                {
+                    string stmt = "Delete from subjects where subjectId=\"" + subject.Id + "\";";
+                    MySqlCommand cmd = new MySqlCommand(stmt);
+                    db.ExecuteQuery(cmd);
+                    this.subjects.Remove(subject);
+
+                    continue;
+                }
+            }
+        }
 
         private void AddClassroomCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {

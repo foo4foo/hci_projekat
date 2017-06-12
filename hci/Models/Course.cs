@@ -8,7 +8,13 @@ namespace hci.Models
 {
     public class Course
     {
+        private string dbID;
 
+        public string DbId
+        {
+            get { return dbID; }
+            set { dbID = value; }
+        }
         private string id;
         private string name;
         private string date;

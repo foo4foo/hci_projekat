@@ -16,6 +16,7 @@
         <CommandBinding Command="cmd:RoutedCommands.ViewSoftwareCommand" CanExecute="ViewSoftware_CanExecute" Executed="ViewSoftwareCommand_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.ViewSubjectsCommand" CanExecute="ViewSubjects_CanExecute" Executed="ViewSubjectsCommand_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.DemoModeCommand" CanExecute="DemoMode_CanExecute" Executed="DemoMode_Executed"></CommandBinding>
+        <CommandBinding Command="cmd:RoutedCommands.SaveAllCommand" CanExecute="SaveAllCommand_CanExecute" Executed="SaveAllCommand_Executed"></CommandBinding>
     </Window.CommandBindings>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
@@ -27,7 +28,7 @@
                     <MenuItem Header="_Predmet" Command="cmd:RoutedCommands.AddSubjectCommand" ToolTip="Dodaj novi predmet"></MenuItem>
                 </MenuItem>
 
-                <MenuItem Header="_Sačuvaj" ToolTip="Sačuvajte izmene"/>
+                <MenuItem Header="_Sačuvaj" Command="cmd:RoutedCommands.SaveAllCommand" ToolTip="Sačuvajte izmene"/>
                 <Separator />
                 <MenuItem Header="_Napusti program" Command="cmd:RoutedCommands.ExitCommand" />
             </MenuItem>
@@ -451,7 +452,7 @@
                     <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=Name}"></TextBox>
                     <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=Description}"></TextBox>
                     <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=Date}"></TextBox>
-                    <CheckBox Grid.Column="1" Grid.Row="4" IsChecked="{Binding Path=deleted}"/>
+                    <CheckBox Grid.Column="1" Grid.Row="4" IsChecked="{Binding Path=Deleted}"/>
                 </Grid>
 
                 <Grid Grid.Row="1"
@@ -526,7 +527,7 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                    <CheckBox Grid.Column="1" Grid.Row="12" IsChecked="{Binding Path=deleted}"/>
+                    <CheckBox Grid.Column="1" Grid.Row="12" IsChecked="{Binding Path=Deleted}"/>
                 </Grid>
 
                 <Grid Grid.Row="1" 
@@ -565,7 +566,7 @@
                     <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=Description}"></TextBox>
                     <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Path=Year}"></TextBox>
                     <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding Path=Price}"></TextBox>
-                    <CheckBox Grid.Column="1" Grid.Row="8" IsChecked="{Binding Path=deleted}"/>
+                    <CheckBox Grid.Column="1" Grid.Row="8" IsChecked="{Binding Path=Deleted}"/>
                 </Grid>
             </Grid>
             <Grid Grid.Column="1">

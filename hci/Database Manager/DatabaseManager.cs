@@ -17,6 +17,40 @@ namespace hci.Database_Manager
 
         public DatabaseManager() { }
 
+        public string get_id(MySqlCommand cmd)
+        {
+            string id = "";
+
+            using (MySqlConnection conn = new MySqlConnection(this.connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    cmd.Connection = conn;
+
+                    MySqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            id = reader.GetString(0);
+                        }
+                    }
+                }
+                catch (MySql.Data.MySqlClient.MySqlException ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                catch (System.InvalidOperationException ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+
+            return id;
+        }
+
         public void ExecuteQuery(MySqlCommand cmd)
         {
                 //upisi u mysql bazu
@@ -27,8 +61,6 @@ namespace hci.Database_Manager
                         conn.Open();
                         cmd.Connection = conn;
                         cmd.ExecuteNonQuery();
-
-                 
 
                         conn.Close();
                     }
@@ -66,7 +98,7 @@ namespace hci.Database_Manager
                             if (!reader.IsDBNull(0))
                             {
                                 Dictionary<string, string> dict = new Dictionary<string, string>();
-                                dict["constraintId"] = reader.GetString(0);
+                                dict["ID"] = reader.GetString(0);
                                 dict["softwareId"] = reader.GetString(1);
                                 dict["softwareName"] = reader.GetString(2);
                                 dict["softwareOs"] = reader.GetString(3);
@@ -124,10 +156,11 @@ namespace hci.Database_Manager
                         {
                             var course = new Course();
 
-                            course.Id = reader.GetString(0);
-                            course.Name = reader.GetString(1);
-                            course.Date = reader.GetString(2);
-                            course.Description = reader.GetString(3);
+                            course.DbId = reader.GetString(0);
+                            course.Id = reader.GetString(1);
+                            course.Name = reader.GetString(2);
+                            course.Date = reader.GetString(3);
+                            course.Description = reader.GetString(4);
 
                             collection.Add(course);
 
@@ -172,14 +205,15 @@ namespace hci.Database_Manager
                         {
                             var software = new Software();
 
-                            software.Id = reader.GetString(0);
-                            software.Name = reader.GetString(1);
-                            software.Os = reader.GetString(2);
-                            software.Developer = reader.GetString(3);
-                            software.Site = reader.GetString(4);
-                            software.Year = reader.GetInt32(5);
-                            software.Price = reader.GetDouble(6);
-                            software.Description = reader.GetString(7);
+                            software.DbId = reader.GetString(0);
+                            software.Id = reader.GetString(1);
+                            software.Name = reader.GetString(2);
+                            software.Os = reader.GetString(3);
+                            software.Developer = reader.GetString(4);
+                            software.Site = reader.GetString(5);
+                            software.Year = reader.GetInt32(6);
+                            software.Price = reader.GetDouble(7);
+                            software.Description = reader.GetString(8);
 
                             collection.Add(software);
 
@@ -276,17 +310,18 @@ namespace hci.Database_Manager
                         {
                             var subject = new Subject();
 
-                            subject.Id = reader.GetString(0);
-                            subject.Name = reader.GetString(1);
-                            subject.Description = reader.GetString(2);
-                            subject.Size = reader.GetInt32(3);
-                            subject.MinLength = reader.GetInt32(4);
-                            subject.NoOfClasses = reader.GetInt32(5);
-                            subject.NeedProjector = reader.GetBoolean(6);
-                            subject.NeedBoard = reader.GetBoolean(7);
-                            subject.NeedSmartBoard = reader.GetBoolean(8);
-                            subject.Os = reader.GetString(9);
-                            string smer = reader.GetString(10);
+                            subject.DbId = reader.GetString(0);
+                            subject.Id = reader.GetString(1);
+                            subject.Name = reader.GetString(2);
+                            subject.Description = reader.GetString(3);
+                            subject.Size = reader.GetInt32(4);
+                            subject.MinLength = reader.GetInt32(5);
+                            subject.NoOfClasses = reader.GetInt32(6);
+                            subject.NeedProjector = reader.GetBoolean(7);
+                            subject.NeedBoard = reader.GetBoolean(8);
+                            subject.NeedSmartBoard = reader.GetBoolean(9);
+                            subject.Os = reader.GetString(10);
+                            string smer = reader.GetString(11);
                             
                             ObservableCollection<Course> courses = GetCollectionCourses(new MySqlCommand("Select * from courses;"));
                             foreach (var kurs in courses)
@@ -343,13 +378,14 @@ namespace hci.Database_Manager
                         {
                             var classroom = new Classroom();
 
-                            classroom.Id = reader.GetString(0);
-                            classroom.Description = reader.GetString(1);
-                            classroom.Size = reader.GetInt32(2);
-                            classroom.HaveProjector = reader.GetBoolean(3);
-                            classroom.HaveBoard = reader.GetBoolean(4);
-                            classroom.HaveSmartBoard = reader.GetBoolean(5);
-                            classroom.OperatingSys = reader.GetString(6);
+                            classroom.DbId = reader.GetString(0);
+                            classroom.Id = reader.GetString(1);
+                            classroom.Description = reader.GetString(2);
+                            classroom.Size = reader.GetInt32(3);
+                            classroom.HaveProjector = reader.GetBoolean(4);
+                            classroom.HaveBoard = reader.GetBoolean(5);
+                            classroom.HaveSmartBoard = reader.GetBoolean(6);
+                            classroom.OperatingSys = reader.GetString(7);
                            
                             ObservableCollection<Software> softwares = GetNeededSoftware(new MySqlCommand("Select softwareId from softwareInClassroom where classroomId = '" + classroom.Id + "';"));
                             classroom.Softwares = softwares;

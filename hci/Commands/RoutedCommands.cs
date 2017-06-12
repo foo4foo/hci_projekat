@@ -9,6 +9,17 @@ namespace hci.Commands
 {
     public static class RoutedCommands
     {
+        public static readonly RoutedUICommand SaveAllCommand = new RoutedUICommand(
+            "Save",
+            "Save",
+            typeof(RoutedCommands),
+            new InputGestureCollection()
+            {
+                new KeyGesture(Key.S, ModifierKeys.Control)
+            }            
+            
+        );
+
         public static readonly RoutedUICommand ExitCommand = new RoutedUICommand(
             "Exit",
             "Exit",
