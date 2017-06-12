@@ -192,5 +192,9 @@ namespace hci.Input_Forms
             e.CanExecute = true;
         }
 
+        private void ApplicationHelpCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            ((MainWindow)Application.Current.MainWindow).ApplicationHelpCommand_Executed(sender, e);
+        }
     }
 }

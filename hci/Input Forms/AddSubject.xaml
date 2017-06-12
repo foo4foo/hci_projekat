@@ -6,11 +6,18 @@
         xmlns:local="clr-namespace:hci.Input_Forms"
         xmlns:cmd="clr-namespace:hci.Commands"
         mc:Ignorable="d"
+        xmlns:l="clr-namespace:HelpSistem"
+        l:HelpProvider.HelpKey="UnosPodataka"
         Title="Dodavanje predmeta" Height="500" Width="455">
     <Window.CommandBindings>
         <CommandBinding Command="cmd:RoutedCommands.SubjectAdded" CanExecute="SubjectAdded_CanExecute" Executed="SubjectAdded_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.SubjectClose" CanExecute="SubjectClose_CanExecute" Executed="SubjectClose_Executed"></CommandBinding>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="ApplicationHelpCommand_Executed" />
     </Window.CommandBindings>
+    <Window.InputBindings>
+        <KeyBinding Command="ApplicationCommands.Help" Key="F1" CommandParameter="{Binding RelativeSource={
+             RelativeSource AncestorType={x:Type Window}}}"></KeyBinding>
+    </Window.InputBindings>
     <Grid DockPanel.Dock="Bottom" Margin="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="200*"></RowDefinition>

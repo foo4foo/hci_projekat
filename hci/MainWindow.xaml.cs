@@ -23,6 +23,7 @@ using MySql.Data.MySqlClient;
 using System.Timers;
 using HelpSistem;
 
+
 namespace hci
 {
     /// <summary>
@@ -944,9 +945,20 @@ namespace hci
             e.Handled = KeyEnteredIsValid(e.Text);
         }
 
-        private void ApplicationHelpCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        public void ApplicationHelpCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            //IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            IInputElement focusedControl;
+            if (e.Parameter != null)
+            {
+                Console.WriteLine(e.Parameter.ToString());
+                focusedControl = FocusManager.GetFocusedElement((Window)e.Parameter);
+            }
+            else
+            {
+                Console.WriteLine("probably hci.MainWindow");
+                focusedControl = FocusManager.GetFocusedElement(this);
+            }
             if (focusedControl is DependencyObject)
             {
                 string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);

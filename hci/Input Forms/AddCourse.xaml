@@ -6,11 +6,18 @@
         xmlns:local="clr-namespace:hci.Input_Forms"
         xmlns:cmd="clr-namespace:hci.Commands"
         mc:Ignorable="d"
+        xmlns:l="clr-namespace:HelpSistem"
+        l:HelpProvider.HelpKey="UnosPodataka"
         Title="Dodavanje smera" Height="420" Width="455" ResizeMode="CanMinimize">
     <Window.CommandBindings>
         <CommandBinding Command="cmd:RoutedCommands.CourseAdded" CanExecute="CourseAdded_CanExecute" Executed="CourseAdded_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.CourseClose" CanExecute="CourseClose_CanExecute" Executed="CourseClose_Executed"></CommandBinding>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="ApplicationHelpCommand_Executed" />
     </Window.CommandBindings>
+    <Window.InputBindings>
+        <KeyBinding Command="ApplicationCommands.Help" Key="F1" CommandParameter="{Binding RelativeSource={
+             RelativeSource AncestorType={x:Type Window}}}"></KeyBinding>
+    </Window.InputBindings>
     <Grid DockPanel.Dock="Bottom" Margin="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
