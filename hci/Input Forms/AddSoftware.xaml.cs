@@ -94,11 +94,11 @@ namespace hci.Input_Forms
             {
                
 
-                Software s = new Software(_id, _name, _developer, _website, _desc, _os, _year, _price);
+                Software s = new Software(_id, _name, _developer, _website, _desc, _os, _year, _price, false);
 
 
-                MySqlCommand cmd = new MySqlCommand("insert into hci.softwares(softwareId,name,operatingSys,developer,site,year,price,description)"
-                  + "values ('" + _id + "','" + _name + "','" + _os + "','" + _developer + "','" + _website + "'," + _year + "," + _price + ",'" + _desc + "');");
+                MySqlCommand cmd = new MySqlCommand("insert into hci.softwares(softwareId,name,operatingSys,developer,site,year,price,description,deleted)"
+                  + "values ('" + _id + "','" + _name + "','" + _os + "','" + _developer + "','" + _website + "'," + _year + "," + _price + ",'" + _desc + "'," + false + ");");
 
                 db.ExecuteQuery(cmd);
                 MessageBox.Show("Software successfully added!");

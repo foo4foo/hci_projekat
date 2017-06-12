@@ -152,7 +152,8 @@ namespace hci.Models
             softwares.Add(data);
         }
 
-        public Classroom(string id, string description, int size, bool haveProjector, bool haveBoard, bool haveSmartBoard, string operatingSys, ObservableCollection<Software> softwares)
+        public Classroom(string id, string description, int size, bool haveProjector, bool haveBoard, 
+            bool haveSmartBoard, string operatingSys, ObservableCollection<Software> softwares, bool _deleted)
         {
             this.Id = id;
             this.Description = description;
@@ -162,6 +163,7 @@ namespace hci.Models
             this.HaveSmartBoard = haveSmartBoard;
             this.OperatingSys = operatingSys;
             this.Softwares = softwares;
+            this.Deleted = _deleted;
         }
            
         public Classroom() { }

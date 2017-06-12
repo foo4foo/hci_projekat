@@ -147,23 +147,26 @@ namespace hci
 
             foreach (var classroom in classrooms)
             {
-                foreach (var cSoftware in classroomSoftware)
+                if (!classroom.Deleted)
                 {
-                    if (classroom.DbId.Equals(cSoftware["ID"]))
+                    foreach (var cSoftware in classroomSoftware)
                     {
-                        var software = new Software();
-                        software.Id = cSoftware["softwareId"];
-                        software.Name = cSoftware["softwareName"];
-                        software.Description = cSoftware["softwareDescription"];
-                        software.Developer = cSoftware["softwareDeveloper"];
-                        software.Os = cSoftware["softwareOs"];
-                        software.Year = Convert.ToInt32(cSoftware["softwareYear"]);
-                        software.Site = cSoftware["softwareSite"];
-                        software.Price = Convert.ToDouble(cSoftware["softwarePrice"]);
+                        if (classroom.DbId.Equals(cSoftware["ID"]))
+                        {
+                            var software = new Software();
+                            software.Id = cSoftware["softwareId"];
+                            software.Name = cSoftware["softwareName"];
+                            software.Description = cSoftware["softwareDescription"];
+                            software.Developer = cSoftware["softwareDeveloper"];
+                            software.Os = cSoftware["softwareOs"];
+                            software.Year = Convert.ToInt32(cSoftware["softwareYear"]);
+                            software.Site = cSoftware["softwareSite"];
+                            software.Price = Convert.ToDouble(cSoftware["softwarePrice"]);
 
-                        classroom.TestS.Add(software.Name);
+                            classroom.TestS.Add(software.Name);
 
 
+                        }
                     }
                 }
             }
@@ -436,65 +439,73 @@ namespace hci
         {
             // prodji kroz sve 4 kolekcije i uradi update u bazi
             var db = new DatabaseManager();
-            foreach (var course in this.courses)
+
+            try
             {
-                if (course.Deleted)
+                foreach (var software in this.software)
                 {
-                    Console.WriteLine(course.Name);
-                    string stmt = "Delete from courses where courseId=\"" + course.Id + "\";";
+                    string stmt = "Update softwares set softwareId=\"" + software.Id + "\",name=\"" + software.Name +
+                                  "\",operatingSys=\""
+                                  + software.Os + "\",developer=\"" + software.Developer + "\",site=\"" +
+                                  software.Site + "\",year=" + software.Year
+                                  + ",price=" + software.Price + ",description=\"" + software.Description +
+                                  "\",deleted=" + software.Deleted
+                                  + " where ID=" + software.DbId + ";";
+                    Console.WriteLine(stmt);
                     MySqlCommand cmd = new MySqlCommand(stmt);
                     db.ExecuteQuery(cmd);
-                    this.courses.Remove(course);
-
-                    continue;
                 }
 
-                string stmt_upd = "Update courses set courseId=\""+ course.Id + 
-                    "\", name=\"" + course.Name + "\", date_=\"" + course.Date + 
-                    "\", description=\"" + course.Description +
-                    "\" where courseId=\"" + course.Id + "\"";
-                Console.WriteLine(stmt_upd);
-                MySqlCommand cmd_upd = new MySqlCommand(stmt_upd);
-                db.ExecuteQuery(cmd_upd);
+                foreach (var classroom in this.classrooms)
+                {
+                    string stmt = "Update classrooms set classroomId=\"" + classroom.Id + "\",description=\"" +
+                                  classroom.Description + "\",size=\""
+                                  + classroom.Size + "\",haveProjector=" + classroom.HaveProjector + ",haveBoard=" +
+                                  classroom.HaveBoard
+                                  + ",haveSmartBoard=" + classroom.HaveSmartBoard
+                                  + ",operatingSys=\"" + classroom.OperatingSys + "\",deleted=" + classroom.Deleted
+                                  + " where ID=" + classroom.DbId + ";";
+                    Console.WriteLine(stmt);
+                    MySqlCommand cmd = new MySqlCommand(stmt);
+                    db.ExecuteQuery(cmd);
+                }
+
+                foreach (var subject in this.subjects)
+                {
+                    string stmt = "Update subjects set subjectId=\"" + subject.Id + "\",description=\"" +
+                                  subject.Description + "\",size=\""
+                                  + subject.Size + "\",needProjector=" + subject.NeedProjector + ",needBoard=" +
+                                  subject.NeedBoard
+                                  + ",needSmartBoard=" + subject.NeedSmartBoard + ",name=\"" + subject.Name +
+                                  "\",minLength=\"" + subject.MinLength + "\""
+                                  + ",needOperatingSys=\"" + subject.Os + "\",deleted=" + subject.Deleted +
+                                  ",noOfClasses=\"" + subject.NoOfClasses + "\""
+                                  + " where ID=" + subject.DbId + ";";
+                    Console.WriteLine(stmt);
+                    MySqlCommand cmd = new MySqlCommand(stmt);
+                    db.ExecuteQuery(cmd);
+                }
+
+                foreach (var course in this.courses)
+                {
+                    string stmt = "Update courses set courseId=\"" + course.Id + "\",description=\"" +
+                                  course.Description
+                                  + "\",name=\"" + course.Name + "\",deleted=" + course.Deleted + ",date_=\"" +
+                                  course.Date + "\""
+                                  + " where ID=" + course.DbId + ";";
+                    Console.WriteLine(stmt);
+                    MySqlCommand cmd = new MySqlCommand(stmt);
+                    db.ExecuteQuery(cmd);
+                }
+
+                showClassroomTable();
+                showCourseTable();
+                showSoftwareTable();
+                showSubjectTable();
             }
-
-            foreach (var software in this.software)
+            catch (Exception ex)
             {
-                if (software.Deleted)
-                {
-                    string stmt = "Delete from softwares where softwareId=\"" + software.Id + "\";";
-                    MySqlCommand cmd = new MySqlCommand(stmt);
-                    db.ExecuteQuery(cmd);
-                    this.software.Remove(software);
-
-                    continue;
-                }
-            }
-
-            foreach (var classroom in this.classrooms)
-            {
-                if (classroom.Deleted)
-                {
-                    string stmt = "Delete from softwares where classroomId=\"" + classroom.Id + "\";";
-                    MySqlCommand cmd = new MySqlCommand(stmt);
-                    db.ExecuteQuery(cmd);
-                    this.classrooms.Remove(classroom);
-
-                    continue;
-                }
-            }
-
-            foreach (var subject in this.subjects)
-            {
-                if (subject.Deleted)
-                {
-                    string stmt = "Delete from subjects where subjectId=\"" + subject.Id + "\";";
-                    MySqlCommand cmd = new MySqlCommand(stmt);
-                    db.ExecuteQuery(cmd);
-                    this.subjects.Remove(subject);
-
-                    continue;
-                }
+                MessageBox.Show(ex.ToString());
             }
         }
 

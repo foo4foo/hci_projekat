@@ -83,7 +83,7 @@ namespace hci.Models
         private double price;
 
         public Software(string _id, string _name, string _developer, string _site, string _description,
-            string _os, int _year, double _price)
+            string _os, int _year, double _price, bool _deleted)
         {
             this.id = _id;
             this.name = _name;
@@ -93,6 +93,7 @@ namespace hci.Models
             this.os = _os;
             this.year = _year;
             this.price = _price;
+            this.Deleted = _deleted;
         }
 
         public Software() { }

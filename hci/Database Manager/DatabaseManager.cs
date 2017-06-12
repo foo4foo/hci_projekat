@@ -154,6 +154,9 @@ namespace hci.Database_Manager
                     {
                         while (reader.Read())
                         {
+                            if(reader.GetBoolean(5))
+                                continue;
+
                             var course = new Course();
 
                             course.DbId = reader.GetString(0);
@@ -161,6 +164,7 @@ namespace hci.Database_Manager
                             course.Name = reader.GetString(2);
                             course.Date = reader.GetString(3);
                             course.Description = reader.GetString(4);
+                            course.Deleted = reader.GetBoolean(5);
 
                             collection.Add(course);
 
@@ -203,6 +207,9 @@ namespace hci.Database_Manager
                     {
                         while (reader.Read())
                         {
+                            if(reader.GetBoolean(9))
+                                continue;
+
                             var software = new Software();
 
                             software.DbId = reader.GetString(0);
@@ -214,6 +221,7 @@ namespace hci.Database_Manager
                             software.Year = reader.GetInt32(6);
                             software.Price = reader.GetDouble(7);
                             software.Description = reader.GetString(8);
+                            software.Deleted = reader.GetBoolean(9);
 
                             collection.Add(software);
 
@@ -308,6 +316,9 @@ namespace hci.Database_Manager
                     {
                         while (reader.Read())
                         {
+                            if(reader.GetBoolean(12))
+                                continue;
+
                             var subject = new Subject();
 
                             subject.DbId = reader.GetString(0);
@@ -322,6 +333,7 @@ namespace hci.Database_Manager
                             subject.NeedSmartBoard = reader.GetBoolean(9);
                             subject.Os = reader.GetString(10);
                             string smer = reader.GetString(11);
+                            subject.Deleted = reader.GetBoolean(12);
                             
                             ObservableCollection<Course> courses = GetCollectionCourses(new MySqlCommand("Select * from courses;"));
                             foreach (var kurs in courses)
@@ -386,6 +398,10 @@ namespace hci.Database_Manager
                             classroom.HaveBoard = reader.GetBoolean(5);
                             classroom.HaveSmartBoard = reader.GetBoolean(6);
                             classroom.OperatingSys = reader.GetString(7);
+                            classroom.Deleted = reader.GetBoolean(8);
+
+                            if(classroom.Deleted)
+                                continue;
                            
                             ObservableCollection<Software> softwares = GetNeededSoftware(new MySqlCommand("Select softwareId from softwareInClassroom where classroomId = '" + classroom.Id + "';"));
                             classroom.Softwares = softwares;

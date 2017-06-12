@@ -79,12 +79,13 @@ namespace hci.Models
             }
         }
 
-        public Course(string id, string name, string date, string description)
+        public Course(string id, string name, string date, string description, bool _deleted)
         {
             this.Id = id;
             this.Name = name;
             this.Date = date;
             this.Description = description;
+            this.Deleted = _deleted;
         }
         public Course() { }
     }

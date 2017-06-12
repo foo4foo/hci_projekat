@@ -358,9 +358,6 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-
-
-
                         </DataGrid.Columns>
                     </DataGrid>
 
@@ -420,7 +417,7 @@
                             </ComboBox.ItemTemplate>
                         </ComboBox>
                     </Grid>
-                    <CheckBox Grid.Column="1" Grid.Row="8" IsChecked="{Binding Path=deleted}"/>
+                    <CheckBox Grid.Column="1" Grid.Row="8" IsChecked="{Binding Path=Deleted}"/>
                 </Grid>
 
                 <Grid Grid.Row="1"

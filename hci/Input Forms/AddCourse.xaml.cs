@@ -84,11 +84,11 @@ namespace hci.Input_Forms
             if (ok)
             {
            
-                Course c = new Course(_id, _name, _date, _desc);
+                Course c = new Course(_id, _name, _date, _desc, false);
 
 
-                MySqlCommand cmd = new MySqlCommand("insert into hci.courses(courseId, name, date_, description)"
-                  + "values ('" + _id + "','" + _name + "','" + _date + "','" + _desc + "');");
+                MySqlCommand cmd = new MySqlCommand("insert into hci.courses(courseId, name, date_, description, deleted)"
+                  + "values ('" + _id + "','" + _name + "','" + _date + "','" + _desc + "', " + false + ");");
 
                 db.ExecuteQuery(cmd);
                 MessageBox.Show("Course successfully added!");

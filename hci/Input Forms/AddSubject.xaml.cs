@@ -143,8 +143,9 @@ namespace hci.Input_Forms
                 ObservableCollection<Software> _softwares = new ObservableCollection<Software>();
 
                 var course_db_id = db.get_id(new MySqlCommand("Select ID from courses where courseId=\"" + c.Id + "\";"));
-                MySqlCommand cmd = new MySqlCommand("insert into hci.subjects(subjectId,name,description,size,minLength,noOfClasses,needProjector,needBoard,needSmartBoard,needOperatingSys, courseId)"
-                  + "values ('" + _id + "','" + _name + "','" + _desc + "'," + _size + "," + minLength + "," + noOfClasses + "," + _projector + "," + _board + "," + _smartBoard + ",'" + _os + "','" + course_db_id + "');");
+                MySqlCommand cmd = new MySqlCommand("insert into hci.subjects(subjectId,name,description,size,minLength,noOfClasses,needProjector,needBoard,needSmartBoard,needOperatingSys,courseId,deleted)"
+                  + "values ('" + _id + "','" + _name + "','" + _desc + "'," + _size + "," + minLength + "," + noOfClasses + "," + _projector + "," + _board + "," + _smartBoard + ",'" 
+                  + _os + "','" + course_db_id + "'," + false + ");");
 
                 db.ExecuteQuery(cmd);
 
@@ -161,7 +162,7 @@ namespace hci.Input_Forms
                     }
 
 
-                Subject s = new Subject(_id, _name, _desc, _size, minLength, noOfClasses, _projector, _board, _smartBoard, _os, c, _softwares);
+                Subject s = new Subject(_id, _name, _desc, _size, minLength, noOfClasses, _projector, _board, _smartBoard, _os, c, _softwares, false);
 
                 MessageBox.Show("Subject successfully added!");
 

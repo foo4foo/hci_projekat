@@ -112,6 +112,7 @@ namespace hci.Input_Forms
             else _smartBoard = false;
 
             bool ok = true;
+            bool deleted = false;
             ObservableCollection<Classroom> classrooms = db.GetCollectionClassrooms(new MySqlCommand("Select * from classrooms;"));
             foreach (var classroom in classrooms)
             {
@@ -136,11 +137,10 @@ namespace hci.Input_Forms
                 ObservableCollection<Software> _software = new ObservableCollection<Software>();
 
 
-                MySqlCommand cmd = new MySqlCommand("insert into hci.classrooms(classroomId,description,size,haveProjector,haveBoard,haveSmartBoard,operatingSys)"
-                  + "values ('" + _id + "','" + _desc + "'," + _size + "," + _projector + "," + _board + "," + _smartBoard + ",'" + _os + "');");
+                MySqlCommand cmd = new MySqlCommand("insert into hci.classrooms(classroomId,description,size,haveProjector,haveBoard,haveSmartBoard,operatingSys,deleted)"
+                  + "values ('" + _id + "','" + _desc + "'," + _size + "," + _projector + "," + _board + "," + _smartBoard + ",'" + _os + "'," + deleted + ");");
 
                 db.ExecuteQuery(cmd);
-
                 foreach (SelectableObject<Software> sftwObject in SoftwaresSelectedCollection)
                     if (sftwObject.IsSelected)
                     {
@@ -154,7 +154,7 @@ namespace hci.Input_Forms
                     }
 
 
-                Classroom c = new Classroom(_id, _desc, _size, _projector, _board, _smartBoard, _os, _software);
+                Classroom c = new Classroom(_id, _desc, _size, _projector, _board, _smartBoard, _os, _software, false);
 
 
                 MessageBox.Show("Classroom successfully added!");

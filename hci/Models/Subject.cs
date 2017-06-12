@@ -204,7 +204,10 @@ namespace hci.Models
             }
         }
 
-        public Subject(string id, string name, string description, int size, int minLength, int noOfClasses, bool needProjector, bool needBoard, bool needSmartBoard, string os, Course smer, ObservableCollection<Software> softwares)
+        public Subject(string id, string name, string description, int size, int minLength, 
+            int noOfClasses, bool needProjector, bool needBoard, 
+            bool needSmartBoard, string os, Course smer, 
+            ObservableCollection<Software> softwares, bool _deleted)
         {
             this.Id = id;
             this.Name = name;
@@ -218,6 +221,7 @@ namespace hci.Models
             this.Os = os;
             this.Smer = smer;
             this.Softwares = softwares;
+            this.Deleted = _deleted;
         }
 
         public Subject() { }
