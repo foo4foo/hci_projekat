@@ -67,7 +67,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="HelpViewer.xaml">
+    <Page Include="HelpSistem\HelpViewer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -97,8 +97,8 @@
     </Compile>
     <Compile Include="Commands\RoutedCommands.cs" />
     <Compile Include="Database Manager\DatabaseManager.cs" />
-    <Compile Include="HelpProvider.cs" />
-    <Compile Include="HelpViewer.xaml.cs">
+    <Compile Include="HelpSistem\HelpProvider.cs" />
+    <Compile Include="HelpSistem\HelpViewer.xaml.cs">
       <DependentUpon>HelpViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Input Forms\AddClassroom.xaml.cs">
