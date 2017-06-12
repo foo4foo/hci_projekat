@@ -151,9 +151,19 @@ namespace hci.Commands
          "Start demo mode",
          typeof(RoutedCommands),
          new InputGestureCollection()
-         {
-                new KeyGesture(Key.D, ModifierKeys.Control)
-         }
- );
+             {
+                    new KeyGesture(Key.D, ModifierKeys.Control)
+             }
+         );
+
+        public static readonly RoutedUICommand HelpIndexCommand = new RoutedUICommand(
+            "Help index",
+            "Help index",
+            typeof(RoutedCommands),
+            new InputGestureCollection()
+            {
+                new KeyGesture(Key.F1, ModifierKeys.Control)
+            }
+        );
     }
 }

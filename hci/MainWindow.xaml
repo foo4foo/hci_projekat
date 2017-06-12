@@ -18,7 +18,8 @@
         <CommandBinding Command="cmd:RoutedCommands.ViewSubjectsCommand" CanExecute="ViewSubjects_CanExecute" Executed="ViewSubjectsCommand_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.DemoModeCommand" CanExecute="DemoMode_CanExecute" Executed="DemoMode_Executed"></CommandBinding>
         <CommandBinding Command="cmd:RoutedCommands.SaveAllCommand" CanExecute="SaveAllCommand_CanExecute" Executed="SaveAllCommand_Executed"></CommandBinding>
-        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed" />
+        <CommandBinding Command="cmd:RoutedCommands.HelpIndexCommand" CanExecute="HelpIndexCommand_CanExecute" Executed="HelpIndexCommand_Executed"></CommandBinding>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="ApplicationHelpCommand_Executed" />
     </Window.CommandBindings>
     <Window.InputBindings>
         <KeyBinding Command="ApplicationCommands.Help" Key="F1"/>
@@ -47,7 +48,7 @@
             <MenuItem Header="_Pomoć">
                 <MenuItem Name="DemoMod" Header="_Demonstracioni mod" ToolTip="Pokreni demo mod" Command="cmd:RoutedCommands.DemoModeCommand" />
                 <Separator />
-                <MenuItem Header="_O nama" ToolTip="O timu" />
+                <MenuItem Header="_Pomoć" ToolTip="Prikaži integrisanu online pomoć" Command="cmd:RoutedCommands.HelpIndexCommand"/>
             </MenuItem>
         </Menu>
         <Grid DockPanel.Dock="Bottom" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">

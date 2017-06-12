@@ -944,7 +944,7 @@ namespace hci
             e.Handled = KeyEnteredIsValid(e.Text);
         }
 
-        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        private void ApplicationHelpCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
             if (focusedControl is DependencyObject)
@@ -953,6 +953,17 @@ namespace hci
                 Console.WriteLine(str);
                 HelpProvider.ShowHelp(str, this);
             }
+        }
+
+        private void HelpIndexCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+       
+        private void HelpIndexCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            HelpViewer HelpIndexViewer = new HelpViewer("index", (MainWindow)sender);
+            HelpIndexViewer.Show();
         }
     }
 }
