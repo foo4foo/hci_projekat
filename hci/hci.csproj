@@ -155,7 +155,11 @@
     <Resource Include="logo1.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Help\BrisanjePodataka.gif" />
     <Content Include="Help\BrisanjePodataka.htm" />
+    <Resource Include="Help\IzmenaPodataka.gif" />
+    <Resource Include="Help\PrikazPodataka.gif" />
+    <Resource Include="Help\UnosPodataka.gif" />
     <Content Include="Help\UnosPodataka.htm" />
     <Content Include="Help\index.htm" />
     <Content Include="Help\IzmenaPodataka.htm" />

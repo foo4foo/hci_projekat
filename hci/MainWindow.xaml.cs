@@ -959,12 +959,13 @@ namespace hci
                 Console.WriteLine("probably hci.MainWindow");
                 focusedControl = FocusManager.GetFocusedElement(this);
             }
-            if (focusedControl is DependencyObject)
+            string str = "index";
+            if (focusedControl != null && focusedControl is DependencyObject)
             {
-                string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
-                Console.WriteLine(str);
-                HelpProvider.ShowHelp(str, this);
+                str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
             }
+            Console.WriteLine(str);
+            HelpProvider.ShowHelp(str, this);
         }
 
         private void HelpIndexCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
