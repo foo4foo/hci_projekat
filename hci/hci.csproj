@@ -67,6 +67,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="HelpViewer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Input Forms\AddClassroom.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -93,6 +97,10 @@
     </Compile>
     <Compile Include="Commands\RoutedCommands.cs" />
     <Compile Include="Database Manager\DatabaseManager.cs" />
+    <Compile Include="HelpProvider.cs" />
+    <Compile Include="HelpViewer.xaml.cs">
+      <DependentUpon>HelpViewer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Input Forms\AddClassroom.xaml.cs">
       <DependentUpon>AddClassroom.xaml</DependentUpon>
     </Compile>
@@ -145,6 +153,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="logo1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Help\BrisanjePodataka.htm" />
+    <Content Include="Help\UnosPodataka.htm" />
+    <Content Include="Help\index.htm" />
+    <Content Include="Help\IzmenaPodataka.htm" />
+    <Content Include="Help\PrikazPodataka.htm" />
+    <Content Include="Help\error.htm" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

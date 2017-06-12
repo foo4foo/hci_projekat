@@ -21,6 +21,7 @@ using hci.Input_Forms;
 using hci.Models;
 using MySql.Data.MySqlClient;
 using System.Timers;
+using HelpSistem;
 
 namespace hci
 {
@@ -748,6 +749,18 @@ namespace hci
                 showCourseTable();
                 showSoftwareTable();
                 showSubjectTable();
+
+
+
+                tata.Children.Remove(MyGrid);
+                MyGrid.RowDefinitions.Clear();
+                MyGrid.ColumnDefinitions.Clear();
+                mama.Children.Remove(PredmetiZaDrop);
+                PredmetiZaDrop.RowDefinitions.Clear();
+                PredmetiZaDrop.ColumnDefinitions.Clear();
+                ver++;
+                MakeRaspored();
+
             }
             catch (Exception ex)
             {
@@ -918,7 +931,7 @@ namespace hci
             DemoLabel.Visibility = Visibility.Hidden;
             DemoButton.Visibility = Visibility.Hidden;
         }
-
+        
         private bool KeyEnteredIsValid(string key)
         {
             Regex regex;
@@ -929,6 +942,17 @@ namespace hci
         private void Price_OnPreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = KeyEnteredIsValid(e.Text);
+        }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
+                Console.WriteLine(str);
+                HelpProvider.ShowHelp(str, this);
+            }
         }
     }
 }
