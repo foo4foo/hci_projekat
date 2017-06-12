@@ -40,6 +40,8 @@ namespace hci
     
         private DatabaseManager db;
 
+        private int ver = 0;
+
         public ObservableCollection<int> Brojevi
         {
             get;
@@ -210,8 +212,8 @@ namespace hci
                     Grid.SetColumn(tb, x);
                     Grid.SetRow(tb, z);
                   
-                    string name = "cell_" + x + "_" + z;
-                    tb.Name = name;
+                //    string name = "cell_" + x + "_" + z;
+              //      tb.Name = name;
                     PredmetiZaDrop.Children.Add(tb);
                 }
             }
@@ -300,10 +302,22 @@ namespace hci
                     }
                     Grid.SetColumn(tb, x);
                     Grid.SetRow(tb, z);
-                    string name = "cell_" + x + "_" + z;
-                    tb.Name = name;
-                    MyGrid.RegisterName(tb.Name, tb);
-                   
+                    string namee = "cell_" + x + "_" + z;
+                    TextBox tb2 = (TextBox)this.MyGrid.FindName(namee);
+
+                    if (tb2 == null)
+                    {
+                        string name = "cell_" + x + "_" + z;
+                        tb.Name = name;
+                        MyGrid.RegisterName(tb.Name, tb);
+                    }
+                    else
+                    {
+                        string name = "cell" + ver + "_" + x + "_" + z;
+                        tb.Name = name;
+                        MyGrid.RegisterName(tb.Name, tb);
+                    }
+
                     MyGrid.Children.Add(tb);
                 }
             }
@@ -652,6 +666,14 @@ namespace hci
             showSoftwareTable();
             showSubjectTable();
 
+            tata.Children.Remove(MyGrid);
+            MyGrid.RowDefinitions.Clear();
+            MyGrid.ColumnDefinitions.Clear();
+            mama.Children.Remove(PredmetiZaDrop);
+            PredmetiZaDrop.RowDefinitions.Clear();
+            PredmetiZaDrop.ColumnDefinitions.Clear();
+            ver++;
+            MakeRaspored();
         }
 
         private void SaveAllCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)

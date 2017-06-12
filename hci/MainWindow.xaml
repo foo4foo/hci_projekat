@@ -589,7 +589,7 @@
                     <Label Name="prevuciteLabel" Content="(mišem prevucite željeni predmet u raspored)" FontSize="12" Margin="195,186,103,-5"/>
                     <Label Content="PREDMETI" FontSize="14" FontWeight="Bold" Margin="274,168,275,13"/>
                 </Grid>
-                <Grid Grid.Row="1">
+                <Grid Name="mama" Grid.Row="1">
                     <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                         <Grid    
                               
@@ -601,7 +601,7 @@
                 <Grid Grid.Row="2">
                     <Label Content="RASPORED" FontSize="20" FontWeight="Bold" Margin="253,38,262,10"/>
                 </Grid>
-                <Grid Grid.Row="3">
+                <Grid Name="tata" Grid.Row="3">
                     <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                         <Grid    
                               
