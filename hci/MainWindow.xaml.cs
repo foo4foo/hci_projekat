@@ -20,6 +20,7 @@ using hci.Input_Forms;
 using hci.Models;
 using MySql.Data.MySqlClient;
 using System.Timers;
+using HelpSistem;
 
 namespace hci
 {
@@ -858,6 +859,17 @@ namespace hci
             demo = false;
             DemoLabel.Visibility = Visibility.Hidden;
             DemoButton.Visibility = Visibility.Hidden;
+        }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
+                Console.WriteLine(str);
+                HelpProvider.ShowHelp(str, this);
+            }
         }
     }
 }
