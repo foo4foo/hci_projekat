@@ -40,7 +40,7 @@
 
             </MenuItem>
             <MenuItem Header="_Pomoć">
-                 <MenuItem Name="DemoMod" Header="_Demonstracioni mod" ToolTip="Pokreni demo mod" Command="cmd:RoutedCommands.DemoModeCommand" />
+                <MenuItem Name="DemoMod" Header="_Demonstracioni mod" ToolTip="Pokreni demo mod" Command="cmd:RoutedCommands.DemoModeCommand" />
                 <Separator />
                 <MenuItem Header="_O nama" ToolTip="O timu" />
             </MenuItem>
@@ -52,8 +52,9 @@
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="4*"></RowDefinition>
+                    <RowDefinition Height="3*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Label Name="labelUcionice" Width="100" Height="40" Margin="240,78,264.765,585" Content="UČIONICE" FontSize="16" FontWeight="Bold"/>
@@ -529,7 +530,7 @@
 
                 <Grid Grid.Row="1" 
                       DataContext="{Binding ElementName=softwareTable,Path=SelectedItem}"
-                      Name="editSoftware">
+                      Name="editSoftware" Margin="0,0,0,72">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -564,6 +565,13 @@
                     <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Path=Year}"></TextBox>
                     <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding Path=Price}"></TextBox>
                     <CheckBox Grid.Column="1" Grid.Row="8" IsChecked="{Binding Path=Deleted}"/>
+
+
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Button Margin="28,10,514,44" Background="White" Command="cmd:RoutedCommands.SaveAllCommand" ToolTip="Sačuvajte izmene">Sačuvaj izmene</Button>
+                    <Label Name="DemoLabel" Visibility="Collapsed" Content="Demonstracioni mod" FontSize="20" Margin="28,35,408,9" />
+                    <Button Name="DemoButton" Visibility="Collapsed" Click="DemoButton_Click" Background="White" Margin="256,40,236,10">STOP DEMO</Button>
                 </Grid>
             </Grid>
             <Grid Grid.Column="1">
@@ -572,24 +580,22 @@
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <DataGrid x:Name="Raspored"
-                              CanUserAddRows="False"
-                              CanUserDeleteRows="False"
-                              CanUserResizeColumns="False"
-                              CanUserResizeRows="False"
-                              IsReadOnly="True"
-                              dd:DragDrop.IsDragSource="True"
-                              dd:DragDrop.IsDropTarget="True"
-                              dd:DragDrop.UseDefaultEffectDataTemplate="True" >
 
-                    </DataGrid>
                 </Grid>
                 <Grid Grid.Row="1">
-                    <Label Name="DemoLabel" Visibility="Collapsed" Content="Demonstracioni mod" FontSize="20" Margin="406,245,10,45"/>
-                    <Button Name="DemoButton" Visibility="Collapsed" Margin="436,295,58,10"  Click="DemoButton_Click"> STOP DEMO</Button>
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                        <Grid     dd:DragDrop.IsDragSource="True"
+                              dd:DragDrop.IsDropTarget="True"
+                              dd:DragDrop.DropScrollingMode="VerticalOnly"
+                              dd:DragDrop.UseDefaultEffectDataTemplate="True"
+                              dd:DragDrop.DragDropCopyKeyState="ControlKey" Name="MyGrid" Grid.Row="1" >
+
+                        </Grid>
+                    </ScrollViewer>
+
                 </Grid>
             </Grid>
-            
+
         </Grid>
     </DockPanel>
 </Window>

@@ -112,7 +112,12 @@ namespace hci
             showCourseTable();
             showSoftwareTable();
             showSubjectTable();
-     
+
+            MakeRaspored(); //prepare table
+
+            string s = TableValue(0, 0, classrooms.Count + 1);  //read string from coordinates
+                                                                //Console.Write(s);
+
             editSmerovi.ItemsSource = courses;
             editSoftverZaPredmet.ItemsSource = SoftwaresSelectedCollection;
             editSoftverZaUcionicu.ItemsSource = SoftwaresSelectedCollection;
@@ -132,6 +137,95 @@ namespace hci
         {
             MessageBox.Show("Not yet implemented");
         }
+
+        public void MakeRaspored()
+        {
+
+            for (int x = 0; x < classrooms.Count + 1; x++)
+                MyGrid.ColumnDefinitions.Add(new ColumnDefinition());
+            for (int z = 0; z < 63; z++)
+            {
+                RowDefinition r = new RowDefinition();
+                if (z == 0)
+                    r.Height = new GridLength(2, GridUnitType.Star);
+                else r.Height = new GridLength(5, GridUnitType.Star);
+                MyGrid.RowDefinitions.Add(r);
+            }
+
+
+            // -------------- kolona za vreme ------------------
+            int j = 0;
+            int y = 0;
+
+            for (double i = 7.0; i <= 22;)
+            {
+                TextBox tb = new TextBox();
+                tb.FontWeight = FontWeights.Bold;
+                tb.IsReadOnly = true;
+                if (y == 0) { tb.Text = "Vreme / Učionice"; }
+
+
+                else
+                {
+                    double d = i + 0.15 * j;
+                    if (j == 0)
+                    {
+                        tb.Text = d + ".00 h";
+                    }
+                    else if (j == 2)
+                    {
+                        tb.Text = d + "0 h";
+                    }
+                    else
+                        tb.Text = d + " h";
+
+                    j++;
+
+                }
+                y++;
+                if (i == 22) { tb.Text = i + ".00 h"; Grid.SetRow(tb, y); MyGrid.Children.Add(tb); break; }
+                if (j == 4)
+                {
+                    j = 0;
+                    i += 1;
+                }
+                Grid.SetColumn(tb, 0);
+                Grid.SetRow(tb, y);
+                MyGrid.Children.Add(tb);
+            }
+
+            // --- kraj kolone za vreme ----
+
+
+
+            for (int x = 1; x < classrooms.Count + 1; x++)
+            {
+                for (int z = 1; z < 63; z++)
+                {
+                    TextBox tb = new TextBox();
+                    tb.FontWeight = FontWeights.Bold;
+                    tb.IsReadOnly = true;
+                    if (z == 1) tb.Text = classrooms[x - 1].Id;
+                    else
+                    {
+                        //tb.Text = "";
+                    }
+                    Grid.SetColumn(tb, x);
+                    Grid.SetRow(tb, z);
+                    string name = "cell_" + x + "_" + z;
+                    tb.Name = name;
+                    MyGrid.Children.Add(tb);
+                }
+            }
+
+        }
+
+        public string TableValue(int column, int row, int rows)
+        {
+            int i = row + column * rows;
+            return ((TextBox)MyGrid.Children[i]).Text;
+        }
+
 
         // metode za komandu
 
@@ -172,7 +266,7 @@ namespace hci
             }
 
             classroomTable.ItemsSource = this.classrooms;
-            Raspored.ItemsSource = new ObservableCollection<Classroom>();
+           
         }
 
         private void showCourseTable()
