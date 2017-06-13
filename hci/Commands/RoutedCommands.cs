@@ -36,7 +36,7 @@ namespace hci.Commands
             typeof(RoutedCommands),
             new InputGestureCollection()
             {
-                new KeyGesture(Key.C, ModifierKeys.Alt)
+                new KeyGesture(Key.C, ModifierKeys.Alt | ModifierKeys.Control)
             }
         );
 
@@ -47,7 +47,7 @@ namespace hci.Commands
              typeof(RoutedCommands),
              new InputGestureCollection()
              {
-                new KeyGesture(Key.S, ModifierKeys.Alt)
+                new KeyGesture(Key.S, ModifierKeys.Alt | ModifierKeys.Control)
              }
          );
 
@@ -58,7 +58,7 @@ namespace hci.Commands
              typeof(RoutedCommands),
              new InputGestureCollection()
              {
-                new KeyGesture(Key.R, ModifierKeys.Alt)
+                new KeyGesture(Key.R, ModifierKeys.Alt | ModifierKeys.Control)
              }
          );
 
@@ -68,7 +68,7 @@ namespace hci.Commands
            typeof(RoutedCommands),
            new InputGestureCollection()
            {
-                new KeyGesture(Key.A, ModifierKeys.Alt)
+                new KeyGesture(Key.A, ModifierKeys.Alt | ModifierKeys.Control)
            }
        );
 
@@ -125,25 +125,41 @@ namespace hci.Commands
         public static readonly RoutedUICommand ViewSoftwareCommand = new RoutedUICommand(
                 "View software",
                 "View software",
-                typeof(RoutedCommands)
+                typeof(RoutedCommands),
+                new InputGestureCollection()
+                {
+                    new KeyGesture(Key.S, ModifierKeys.Alt)
+                }
         );
 
         public static readonly RoutedUICommand ViewCoursesCommand = new RoutedUICommand(
                 "View courses",
                 "View courses",
-                typeof(RoutedCommands)
+                typeof(RoutedCommands),
+                new InputGestureCollection()
+                {
+                    new KeyGesture(Key.R, ModifierKeys.Alt)
+                }
         );
 
         public static readonly RoutedUICommand ViewSubjectsCommand = new RoutedUICommand(
                 "View subjects",
                 "View subjects",
-                typeof(RoutedCommands)
+                typeof(RoutedCommands),
+                new InputGestureCollection()
+                {
+                    new KeyGesture(Key.A, ModifierKeys.Alt)
+                }
         );
 
         public static readonly RoutedUICommand ViewClassroomsCommand = new RoutedUICommand(
                 "View classrooms",
                 "View classrooms",
-                typeof(RoutedCommands)
+                typeof(RoutedCommands),
+                new InputGestureCollection()
+                {
+                    new KeyGesture(Key.C, ModifierKeys.Alt)
+                }
         );
 
         public static readonly RoutedUICommand DemoModeCommand = new RoutedUICommand(
@@ -152,7 +168,7 @@ namespace hci.Commands
          typeof(RoutedCommands),
          new InputGestureCollection()
              {
-                    new KeyGesture(Key.D, ModifierKeys.Control)
+                    new KeyGesture(Key.A, ModifierKeys.Control)
              }
          );
 

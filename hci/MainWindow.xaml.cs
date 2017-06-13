@@ -467,18 +467,18 @@ namespace hci
 
         private void ViewClassroomsCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if (prikaziUcionice.IsChecked)
-            {
-
+            //if (prikaziUcionice.IsChecked)
+            //{
+                prikaziUcionice.IsChecked = true;
                 visibleClassroomsTable();
-            }
-            else
-            {
-                classroomTable.Visibility = Visibility.Collapsed;
-                labelUcionice.Visibility = Visibility.Collapsed;
+            //}
+            //else
+            //{
+            //    classroomTable.Visibility = Visibility.Collapsed;
+            //    labelUcionice.Visibility = Visibility.Collapsed;
 
 
-            }
+            //}
 
 
         }
@@ -509,16 +509,17 @@ namespace hci
         private void ViewSoftwareCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
 
-            if (prikaziSoftver.IsChecked)
-            {
+            //if (prikaziSoftver.IsChecked)
+            //{
+                prikaziSoftver.IsChecked = true;
                 visibleSoftwareTable();
-            }
-            else
-            {
-                softwareTable.Visibility = Visibility.Collapsed;
-                labelSoftveri.Visibility = Visibility.Collapsed;
+            //}
+            //else
+            //{
+            //    softwareTable.Visibility = Visibility.Collapsed;
+            //    labelSoftveri.Visibility = Visibility.Collapsed;
 
-            }
+            //}
 
 
         }
@@ -548,17 +549,17 @@ namespace hci
 
         private void ViewSubjectsCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-
-            if (prikaziPredmete.IsChecked)
-            {
+            //if (prikaziPredmete.IsChecked)
+            //{
+                prikaziPredmete.IsChecked = true;
                 visibleSubjectsTable();
-            }
-            else
-            {
-                subjectTable.Visibility = Visibility.Collapsed;
-                labelPredmeti.Visibility = Visibility.Collapsed;
+            //}
+            //else
+            //{
+            //    subjectTable.Visibility = Visibility.Collapsed;
+            //    labelPredmeti.Visibility = Visibility.Collapsed;
 
-            }
+            //}
 
 
         }
@@ -588,17 +589,17 @@ namespace hci
 
         private void ViewCoursesCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if (prikaziSmerove.IsChecked)
-            {
+            //if (prikaziSmerove.IsChecked)
+            //{
+                prikaziSmerove.IsChecked = true;
                 visibleCoursesTable();
+            //}
+            //else
+            //{
+            //    courseTable.Visibility = Visibility.Collapsed;
+            //    labelSmerovi.Visibility = Visibility.Collapsed;
 
-            }
-            else
-            {
-                courseTable.Visibility = Visibility.Collapsed;
-                labelSmerovi.Visibility = Visibility.Collapsed;
-
-            }
+            //}
 
         }
 
