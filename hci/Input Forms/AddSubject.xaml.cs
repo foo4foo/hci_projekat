@@ -127,6 +127,28 @@ namespace hci.Input_Forms
                     ok = false;
                     break;
                 }
+
+                if (_id.Length > 14)
+                {
+                    MessageBox.Show("Greška u dodavanju! Oznaka predmeta ne sme imati preko 15 karaktera.");
+                    ok = false;
+                    break;
+                }
+
+
+                if (_name.Length > 30)
+                {
+                    MessageBox.Show("Greška u dodavanju! Naziv predmeta je predugačak.");
+                    ok = false;
+                    break;
+                }
+
+                if (_desc.Length > 50)
+                {
+                    MessageBox.Show("Greška u dodavanju! Opis predmeta je predugačak.");
+                    ok = false;
+                    break;
+                }
             }
 
             if (ok)

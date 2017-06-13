@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\gogec\Desktop\hci\hci\obj\Debug\
+C:\Users\vladi\Desktop\hci_projekat\hci\obj\Debug\
 hci
 none
 false
 DEBUG;TRACE
-C:\Users\gogec\Desktop\hci\hci\App.xaml
+C:\Users\vladi\Desktop\hci_projekat\hci\App.xaml
 62046774768
 630457869
-221769915690
-17-833461598
+22378324017
+171244563721
 HelpSistem\HelpViewer.xaml;Input Forms\AddClassroom.xaml;Input Forms\AddSoftware.xaml;Input Forms\AddCourse.xaml;Input Forms\AddSubject.xaml;MainWindow.xaml;
 
-False
+True
 

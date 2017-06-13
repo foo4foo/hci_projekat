@@ -123,6 +123,20 @@ namespace hci.Input_Forms
                     break;
                 }
 
+                if(_id.Length > 14)
+                {
+                    MessageBox.Show("Greška u dodavanju! Oznaka učionice ne sme imati preko 15 karaktera.");
+                    ok = false;
+                    break;
+                }
+
+                if (_desc.Length > 60)
+                {
+                    MessageBox.Show("Greška u dodavanju! Opis učionice je predugačak.");
+                    ok = false;
+                    break;
+                }
+
                 if (classroom.Id.Equals(_id))
                 {
                     MessageBox.Show("Greška! Uneta oznaka učionice već postoji!");

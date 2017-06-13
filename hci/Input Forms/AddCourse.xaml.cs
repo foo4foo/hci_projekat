@@ -73,6 +73,29 @@ namespace hci.Input_Forms
                     ok = false;
                     break;
                 }
+
+
+                if (_id.Length > 14)
+                {
+                    MessageBox.Show("Greška u dodavanju! Oznaka smera ne sme imati preko 15 karaktera.");
+                    ok = false;
+                    break;
+                }
+
+
+                if (_name.Length > 30)
+                {
+                    MessageBox.Show("Greška u dodavanju! Naziv smera je predugačak.");
+                    ok = false;
+                    break;
+                }
+
+                if (_desc.Length > 50)
+                {
+                    MessageBox.Show("Greška u dodavanju! Opis smera je predugačak.");
+                    ok = false;
+                    break;
+                }
                 if (course.Name.Equals(_name))
                 {
                     MessageBox.Show("Greška! Uneti naziv smera već postoji!");

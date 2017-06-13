@@ -45,10 +45,10 @@
                 <MenuItem Name="prikaziSoftver" Header="S_oftver" Command="cmd:RoutedCommands.ViewSoftwareCommand"  IsCheckable = "True"   IsChecked = "False" ToolTip="Prikaz dostupnog softvera"></MenuItem>
 
             </MenuItem>
-            <MenuItem Header="_Pomoć">
+            <MenuItem Name="MenuItemPomoc" Header="_Pomoć">
                 <MenuItem Name="DemoMod" Header="_Demonstracioni mod" ToolTip="Pokreni demo mod" Command="cmd:RoutedCommands.DemoModeCommand" />
                 <Separator />
-                <MenuItem Header="_Pomoć" ToolTip="Prikaži integrisanu online pomoć" Command="cmd:RoutedCommands.HelpIndexCommand"/>
+                <MenuItem Name="Pomoc" Header="_Pomoć" ToolTip="Prikaži integrisanu online pomoć" Command="cmd:RoutedCommands.HelpIndexCommand"/>
             </MenuItem>
         </Menu>
         <Grid DockPanel.Dock="Bottom" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -572,8 +572,14 @@
 
                     <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=Id}" ></TextBox>
                     <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=Name}"></TextBox>
-                    <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=Os}"></TextBox>
-                    <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=Developer}"></TextBox>
+                    <ComboBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=Os}">
+                    <ComboBoxItem>Windows</ComboBoxItem>
+                    <ComboBoxItem>Linux</ComboBoxItem>
+                        <ComboBoxItem>Cross-platform</ComboBoxItem>
+                    </ComboBox>
+                    <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=Developer}">
+                        
+                    </TextBox>
                     <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=Site}"></TextBox>
                     <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=Description}"></TextBox>
                     <ComboBox Grid.Column="1" Grid.Row="6" Text="{Binding Path=Year}" Name="cbSoftware"></ComboBox>
@@ -600,6 +606,7 @@
                 <Grid Grid.Row="0">
                     <Label Name="prevuciteLabel" Content="(mišem prevucite željeni predmet u raspored)" FontSize="12" Margin="195,186,103,-5"/>
                     <Label Content="PREDMETI" FontSize="14" FontWeight="Bold" Margin="274,168,275,13"/>
+                    <Label Name="labelPomoc" Visibility="Collapsed" Content="F1 - POMOĆ ZA FOKUSIRANI ELEMENT" FontSize="14" FontWeight="Bold" Margin="350,10,10,167"/>
                 </Grid>
                 <Grid Name="mama" Grid.Row="1">
                     <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">

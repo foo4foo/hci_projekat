@@ -75,6 +75,43 @@ namespace hci.Input_Forms
                     ok = false;
                     break;
                 }
+
+                if (_id.Length > 14)
+                {
+                    MessageBox.Show("Greška u dodavanju! Oznaka softvera ne sme imati preko 15 karaktera.");
+                    ok = false;
+                    break;
+                }
+
+
+                if (_name.Length > 30)
+                {
+                    MessageBox.Show("Greška u dodavanju! Naziv softvera je predugačak.");
+                    ok = false;
+                    break;
+                }
+
+                if (_developer.Length > 50)
+                {
+                    MessageBox.Show("Greška u dodavanju! Naziv proizvođača je predugačak.");
+                    ok = false;
+                    break;
+                }
+
+                if (_website.Length > 30)
+                {
+                    MessageBox.Show("Greška u dodavanju! Naziv sajta je predugačak.");
+                    ok = false;
+                    break;
+                }
+
+                if (_desc.Length > 30)
+                {
+                    MessageBox.Show("Greška u dodavanju! Opis softvera je predugačak.");
+                    ok = false;
+                    break;
+                }
+
                 if (!(Double.TryParse(Price.Text, out _price)))
                 {
                     MessageBox.Show("Greška prilikom unosa cene! Unesite validan broj.");

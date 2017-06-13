@@ -108,7 +108,7 @@ namespace hci
             this.DataContext = this;
 
             db = new DatabaseManager();
-            ConsoleAllocator.ShowConsoleWindow();
+         //   ConsoleAllocator.ShowConsoleWindow();
             MySqlCommand cmd = new MySqlCommand("Select * from softwares;");
             var sc = db.GetCollectionSoftwares(cmd);
 
@@ -687,86 +687,197 @@ namespace hci
         {
             // prodji kroz sve 4 kolekcije i uradi update u bazi
             var db = new DatabaseManager();
-
-            try
+            bool ok = true;
+            foreach (var software in this.software)
             {
-                foreach (var software in this.software)
+                if (software.Id.Length > 14)
                 {
-                    string stmt = "Update softwares set softwareId=\"" + software.Id + "\",name=\"" + software.Name +
-                                  "\",operatingSys=\""
-                                  + software.Os + "\",developer=\"" + software.Developer + "\",site=\"" +
-                                  software.Site + "\",year=" + software.Year
-                                  + ",price=" + software.Price + ",description=\"" + software.Description +
-                                  "\",deleted=" + software.Deleted
-                                  + " where ID=" + software.DbId + ";";
-                    Console.WriteLine(stmt);
-                    MySqlCommand cmd = new MySqlCommand(stmt);
-                    db.ExecuteQuery(cmd);
+                    MessageBox.Show("Greška u dodavanju! Oznaka predmeta ne sme imati preko 15 karaktera.");
+                    ok = false;
+                    break;
                 }
 
-                foreach (var classroom in this.classrooms)
+                if (software.Name.Length > 30)
                 {
-                    string stmt = "Update classrooms set classroomId=\"" + classroom.Id + "\",description=\"" +
-                                  classroom.Description + "\",size=\""
-                                  + classroom.Size + "\",haveProjector=" + classroom.HaveProjector + ",haveBoard=" +
-                                  classroom.HaveBoard
-                                  + ",haveSmartBoard=" + classroom.HaveSmartBoard
-                                  + ",operatingSys=\"" + classroom.OperatingSys + "\",deleted=" + classroom.Deleted
-                                  + " where ID=" + classroom.DbId + ";";
-                    Console.WriteLine(stmt);
-                    MySqlCommand cmd = new MySqlCommand(stmt);
-                    db.ExecuteQuery(cmd);
+                    MessageBox.Show("Greška u dodavanju! Naziv softvera je predugačak.");
+                    ok = false;
+                    break;
                 }
 
-                foreach (var subject in this.subjects)
+                if (software.Name.Length > 50)
                 {
-                    string stmt = "Update subjects set subjectId=\"" + subject.Id + "\",description=\"" +
-                                  subject.Description + "\",size=\""
-                                  + subject.Size + "\",needProjector=" + subject.NeedProjector + ",needBoard=" +
-                                  subject.NeedBoard
-                                  + ",needSmartBoard=" + subject.NeedSmartBoard + ",name=\"" + subject.Name +
-                                  "\",minLength=\"" + subject.MinLength + "\""
-                                  + ",needOperatingSys=\"" + subject.Os + "\",deleted=" + subject.Deleted +
-                                  ",noOfClasses=\"" + subject.NoOfClasses + "\""
-                                  + " where ID=" + subject.DbId + ";";
-                    Console.WriteLine(stmt);
-                    MySqlCommand cmd = new MySqlCommand(stmt);
-                    db.ExecuteQuery(cmd);
+                    MessageBox.Show("Greška u dodavanju! Naziv proizvođača je predugačak.");
+                    ok = false;
+                    break;
                 }
 
-                foreach (var course in this.courses)
+                if (software.Site.Length > 30)
                 {
-                    string stmt = "Update courses set courseId=\"" + course.Id + "\",description=\"" +
-                                  course.Description
-                                  + "\",name=\"" + course.Name + "\",deleted=" + course.Deleted + ",date_=\"" +
-                                  course.Date + "\""
-                                  + " where ID=" + course.DbId + ";";
-                    Console.WriteLine(stmt);
-                    MySqlCommand cmd = new MySqlCommand(stmt);
-                    db.ExecuteQuery(cmd);
+                    MessageBox.Show("Greška u dodavanju! Naziv sajta je predugačak.");
+                    ok = false;
+                    break;
                 }
 
-                showClassroomTable();
-                showCourseTable();
-                showSoftwareTable();
-                showSubjectTable();
-
-
-
-                tata.Children.Remove(MyGrid);
-                MyGrid.RowDefinitions.Clear();
-                MyGrid.ColumnDefinitions.Clear();
-                mama.Children.Remove(PredmetiZaDrop);
-                PredmetiZaDrop.RowDefinitions.Clear();
-                PredmetiZaDrop.ColumnDefinitions.Clear();
-                ver++;
-                MakeRaspored();
-
+                if (software.Description.Length > 30)
+                {
+                    MessageBox.Show("Greška u dodavanju! Opis softvera je predugačak.");
+                    ok = false;
+                    break;
+                }
             }
-            catch (Exception ex)
+
+                foreach(var clas in this.classrooms)
             {
-                MessageBox.Show(ex.ToString());
+                if (clas.Id.Length > 14)
+                {
+                    MessageBox.Show("Greška u dodavanju! Oznaka učionice ne sme imati preko 15 karaktera.");
+                    ok = false;
+                    break;
+                }
+
+                if (clas.Description.Length > 60)
+                {
+                    MessageBox.Show("Greška u dodavanju! Opis učionice je predugačak.");
+                    ok = false;
+                    break;
+                }
             }
+
+                foreach(var kurs in this.courses)
+            {
+                if (kurs.Id.Length > 14)
+                {
+                    MessageBox.Show("Greška u dodavanju! Oznaka smera ne sme imati preko 15 karaktera.");
+                    ok = false;
+                    break;
+                }
+
+
+                if (kurs.Name.Length > 30)
+                {
+                    MessageBox.Show("Greška u dodavanju! Naziv smera je predugačak.");
+                    ok = false;
+                    break;
+                }
+
+                if (kurs.Description.Length > 50)
+                {
+                    MessageBox.Show("Greška u dodavanju! Opis smera je predugačak.");
+                    ok = false;
+                    break;
+                }
+            }
+                foreach(var pred in this.subjects)
+            {
+
+                if (pred.Id.Length > 14)
+                {
+                    MessageBox.Show("Greška u dodavanju! Oznaka predmeta ne sme imati preko 15 karaktera.");
+                    ok = false;
+                    break;
+                }
+
+
+                if (pred.Name.Length > 30)
+                {
+                    MessageBox.Show("Greška u dodavanju! Naziv predmeta je predugačak.");
+                    ok = false;
+                    break;
+                }
+
+                if (pred.Description.Length > 50)
+                {
+                    MessageBox.Show("Greška u dodavanju! Opis predmeta je predugačak.");
+                    ok = false;
+                    break;
+                }
+            }
+
+
+
+            if (ok)
+            {
+                try
+                {
+                    foreach (var software in this.software)
+                    {
+                        string stmt = "Update softwares set softwareId=\"" + software.Id + "\",name=\"" + software.Name +
+                                      "\",operatingSys=\""
+                                      + software.Os + "\",developer=\"" + software.Developer + "\",site=\"" +
+                                      software.Site + "\",year=" + software.Year
+                                      + ",price=" + software.Price + ",description=\"" + software.Description +
+                                      "\",deleted=" + software.Deleted
+                                      + " where ID=" + software.DbId + ";";
+                        Console.WriteLine(stmt);
+                        MySqlCommand cmd = new MySqlCommand(stmt);
+                        db.ExecuteQuery(cmd);
+                    }
+
+                    foreach (var classroom in this.classrooms)
+                    {
+                        string stmt = "Update classrooms set classroomId=\"" + classroom.Id + "\",description=\"" +
+                                      classroom.Description + "\",size=\""
+                                      + classroom.Size + "\",haveProjector=" + classroom.HaveProjector + ",haveBoard=" +
+                                      classroom.HaveBoard
+                                      + ",haveSmartBoard=" + classroom.HaveSmartBoard
+                                      + ",operatingSys=\"" + classroom.OperatingSys + "\",deleted=" + classroom.Deleted
+                                      + " where ID=" + classroom.DbId + ";";
+                        Console.WriteLine(stmt);
+                        MySqlCommand cmd = new MySqlCommand(stmt);
+                        db.ExecuteQuery(cmd);
+                    }
+
+                    foreach (var subject in this.subjects)
+                    {
+                        string stmt = "Update subjects set subjectId=\"" + subject.Id + "\",description=\"" +
+                                      subject.Description + "\",size=\""
+                                      + subject.Size + "\",needProjector=" + subject.NeedProjector + ",needBoard=" +
+                                      subject.NeedBoard
+                                      + ",needSmartBoard=" + subject.NeedSmartBoard + ",name=\"" + subject.Name +
+                                      "\",minLength=\"" + subject.MinLength + "\""
+                                      + ",needOperatingSys=\"" + subject.Os + "\",deleted=" + subject.Deleted +
+                                      ",noOfClasses=\"" + subject.NoOfClasses + "\""
+                                      + " where ID=" + subject.DbId + ";";
+                        Console.WriteLine(stmt);
+                        MySqlCommand cmd = new MySqlCommand(stmt);
+                        db.ExecuteQuery(cmd);
+                    }
+
+                    foreach (var course in this.courses)
+                    {
+                        string stmt = "Update courses set courseId=\"" + course.Id + "\",description=\"" +
+                                      course.Description
+                                      + "\",name=\"" + course.Name + "\",deleted=" + course.Deleted + ",date_=\"" +
+                                      course.Date + "\""
+                                      + " where ID=" + course.DbId + ";";
+                        Console.WriteLine(stmt);
+                        MySqlCommand cmd = new MySqlCommand(stmt);
+                        db.ExecuteQuery(cmd);
+                    }
+
+                  
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+            showClassroomTable();
+            showCourseTable();
+            showSoftwareTable();
+            showSubjectTable();
+
+
+
+            tata.Children.Remove(MyGrid);
+            MyGrid.RowDefinitions.Clear();
+            MyGrid.ColumnDefinitions.Clear();
+            mama.Children.Remove(PredmetiZaDrop);
+            PredmetiZaDrop.RowDefinitions.Clear();
+            PredmetiZaDrop.ColumnDefinitions.Clear();
+            ver++;
+            MakeRaspored();
         }
 
         private void AddClassroomCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -901,6 +1012,26 @@ namespace hci
                     prevuciteLabel.FontSize = 12;
                     prevuciteLabel.FontWeight = FontWeights.Normal;
                     if (!demo) break;
+                    blinkMenuItem(MenuItemPomoc, 3);
+                    if (!demo) break;
+                    await Task.Delay(1800);
+                    MenuItemPomoc.IsSubmenuOpen = true;
+                    blinkMenuItem(Pomoc, 4);
+                    for (int i = 0; i < 5; i++)
+                    {
+        
+                        labelPomoc.FontWeight = FontWeights.Bold;
+                        labelPomoc.FontSize = 14;
+                        labelPomoc.Visibility = Visibility.Visible;
+                        await Task.Delay(300);
+                        labelPomoc.Visibility = Visibility.Collapsed;
+                        await Task.Delay(300);
+                    }
+                    if (!demo) break;
+                    MenuItemPomoc.IsSubmenuOpen = false;
+                    await Task.Delay(1000);
+                    if (!demo) break;
+
 
                 }
             }
